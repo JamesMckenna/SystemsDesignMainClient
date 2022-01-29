@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     // route level code-splitting and lazy-loaded when the route is visited
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    component: () => import(/* webpackChunkName: "home" */ '../views/Main.vue'),
     meta: { requiresAuth: false }
   },
   {

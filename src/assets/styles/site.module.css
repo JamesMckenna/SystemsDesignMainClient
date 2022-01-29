@@ -1,0 +1,155 @@
+/*1px = 0.0625rem, 2px = 0.125rem, 3px = 0.1875rem, 4px = 0.25rem, 5px = 0.3125rem, 8px = 0.5rem, 10px = 0.625rem, 12px = 0.75rem, 14px = 0.875rem, 16px = 1rem (base), 18px = 1.125rem, 20px = 1.25rem, 24px = 1.5rem, 30px = 1.875rem, 32px = 2rem*/
+.col-1 {width: 8.33333%;}
+.col-2 {width: 16.66667%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33%;}
+.col-5 {width: 41.66667%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33333%;}
+.col-8 {width: 66.66667%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33333%;}
+.col-11 {width: 91.66667%;}
+.col-12 {width: 100%;}
+
+/*--------------Helpers--------------------------------*/
+.autoMargin {margin: auto auto;}
+.inLineBlock {display: inline-block;}
+.inlineFlex {display: inline-flex;}
+.textCenter {text-align: center;}
+.text-danger {color: rgb(255, 0, 0);}
+.floatLeft {float: left;}
+.floatRight {float: right;}
+
+
+:root {
+    --h-tag-colour: #696986;
+    --shadow-text-offset: .03125rem .03125rem .03125rem #FFF;
+    --ndd-bg-colour: #dcdcdc;
+    --nav-box-shadow: 0.125rem 0.125rem 0.125rem .0625rem #696986;
+    --a-hover-colour: #FFF;
+    --navlink-gradient-hov-1: rgba(125,185,232,0.01);
+    --navlink-gradient-hov-2: rgba(105,105,134,0.1);
+    --navlink-gradient-hov-3: rgba(105,105,134,1);
+    --navlink-gradient-active-1: rgba(0,0,0,0.3);
+    --navlink-gradient-active-2: rgba(0,0,0,0);
+   
+}
+
+@font-face{
+    font-family: 'Hind_Vadndara';
+    src: url('../fonts/Hind_Vadodara/HindVadodara-Light.ttf');
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--h-tag-colour);
+    text-shadow: var(--shadow-text-offset);
+    text-decoration: underline;
+    margin-top: -0.83rem; /* reverse user agent*/
+    margin-bottom: -0.83rem; /* reverse user agent*/
+    font-family: Hind_Vadndara;
+}
+
+a {
+    font-family: Hind_Vadndara;
+    color: var(--h-tag-colour);
+    text-shadow: var(--shadow-text-offset);
+}
+
+
+ul {
+    margin: 0rem; /* reverse user agent*/
+}
+li{
+    display:block;
+}
+
+html {
+    min-height: 100vh;
+    margin: auto auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0.01) 0%, rgba(127,127,127,.5) 40%, rgba(127,127,127,0.01) 50%, rgba(127,127,127,.5) 60%, rgba(255,255,255,0.01) 100%);
+    background: -o-linear-gradient(left, rgba(255,255,255,0.01) 0%, rgba(127,127,127,.5) 40%, rgba(127,127,127,0.01) 50%, rgba(127,127,127,.5) 60%, rgba(255,255,255,0.01) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0.01) 0%, rgba(127,127,127,.5) 40%, rgba(127,127,127,0.01) 50%, rgba(127,127,127,.5) 60%, rgba(255,255,255,0.01) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03ffffff', endColorstr='#03ffffff',GradientType=1 );
+}
+
+body{
+    box-sizing: border-box;
+    position:relative;
+    margin: auto auto;
+}
+
+p {
+    text-indent: 5%;
+    line-height: 200%;
+}
+canvas {
+    margin-top: 10vh;
+    width: 100%;
+    height: 80vh;   
+}
+
+/*colour hex value #696986*/
+/**-------- Start BALL CSS ----------------------------**/
+.ballPosition {
+    animation: ballPosition 5s infinite alternate;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    position: fixed;
+    left: 50%;
+    z-index: -100;
+}
+
+.ballFlash {
+    position: relative;
+    left: -1rem;
+    width: 2rem;
+    height: 2rem;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7f7f7f+0,000000+100&1+0,0+100 */
+    background: -moz-radial-gradient(center, ellipse cover, rgba(127,127,127,.25) 0%, rgba(255,255,255,0.1) 90%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(127,127,127,.25) 0%,rgba(255,255,255,0.1) 90%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, rgba(127,127,127,.25) 0%,rgba(255,255,255,0.1) 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7f7f7f', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    animation: ballFlash 2s infinite alternate;
+    z-index: -100;
+}
+
+@keyframes ballPosition {
+    0% {top: 2vh;}
+    100% {top: 99vh;}}
+
+@keyframes ballFlash {
+    50% {
+        opacity: 0.2;
+    }
+}
+/**-------- End BALL CSS ----------------------------**/
+
+
+/*--------------------------320px----------------------*/
+@media (min-width: 20rem) {
+}
+/*-------------------------420px------------------------*/
+@media (min-width: 26.25rem) {
+}
+/*--- Nav from desktop to mobile -640px- login links moved with js-------------------*/
+@media (min-width: 40rem){
+
+}
+/*-------------------728px----------------------------------*/
+@media (min-width: 45.5rem) {
+}
+
+/*-------------------------960 px-----------------------*/
+@media (min-width: 60rem) {
+
+}
+
+/*--------------------------------1280 px---------------*/
+@media (min-width: 80rem) {
+}

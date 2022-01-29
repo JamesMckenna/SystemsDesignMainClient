@@ -1,38 +1,23 @@
 <template>
   <site-nav />
-  <component v-bind:is="'site-header'" v-if="header"></component>
+  <site-header v-bind:is="'site-header'" v-if="header.render" />
   <router-view v-on:renderHeader="renderHeader" />
   <site-footer />
 </template>
 
-<script lang=ts>
-import { defineComponent, Ref, ref } from 'vue'
+<script lang="ts" setup>
+import { reactive } from 'vue'
 import SiteHeader from '@/components/main-components/SiteHeader.vue'
 import SiteNav from '@/components/main-components/SiteNav.vue'
 import SiteFooter from '@/components/main-components/SiteFooter.vue'
 import '@/assets/styles/reset.module.css'
 import '@/assets/styles/site.module.css'
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    'site-header': SiteHeader,
-    'site-nav': SiteNav,
-    'site-footer': SiteFooter
-  },
+const header = reactive({ render: true })
 
-  setup () {
-    const header: Ref<boolean> = ref(true)
-
-    return { header }
-  },
-
-  methods: {
-    renderHeader (val: boolean): void {
-      this.header = val
-    }
-  }
-})
+function renderHeader (val: boolean): void {
+  header.render = val
+}
 </script>
 
 <style>
