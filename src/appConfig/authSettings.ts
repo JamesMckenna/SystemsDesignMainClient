@@ -1,7 +1,7 @@
-import { WebStorageStateStore } from 'oidc-client'
+import { WebStorageStateStore, UserManagerSettings } from 'oidc-client'
 
-const config = () => {
-  return {
+const config: UserManagerSettings = {
+
     metadata: {
       issuer: process.env.VUE_APP_IS4_BASE_URL,
       authorization_endpoint: process.env.VUE_APP_IS4_BASE_URL + '/connect/authorize',
@@ -12,8 +12,8 @@ const config = () => {
       introspection_endpoint: process.env.VUE_APP_IS4_BASE_URLL + '/connect/introspect',
       revocation_endpoint: process.env.VUE_APP_IS4_BASE_URL + '/connect/revocation',
       token_endpoint: process.env.VUE_APP_IS4_BASE_URL + '/connect/token',
-      prompt: 'none'
     },
+    prompt: 'none',
     authority: process.env.VUE_APP_IS4_BASE_URL,
     client_id: 'MainClient',
     redirect_uri: process.env.VUE_APP_BASE_URL + '/callback.html',
@@ -29,7 +29,7 @@ const config = () => {
 
     filterProtocolClaims: true,
 
-    revokeAccessTokenOnSignOut: true,
+    revokeAccessTokenOnSignout: true,
     staleStateAge: 300,
     silent_redirect_uri: process.env.VUE_APP_BASE_URL + '/silent-refresh.html',
 
@@ -38,7 +38,6 @@ const config = () => {
     // TODO: Implement this - should be able to access userStore as console.log(this.$userManager.settings.userStore.get("oidc.user:" + process.env.VUE_APP_IS4_BASE_URL + ":" + process.env.VUE_APP_MAIN_CLIENT));
     // InMemoryWebStorage has a getItem(), setItem() that returns as promise.
     // userStore: new WebStorageStateStore({ store: new InMemoryWebStorage() })
-  }
 }
 
-export default config()
+export default config
