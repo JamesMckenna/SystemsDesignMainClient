@@ -22,13 +22,11 @@
               <a role="button" v-else aria-label="Login Account">Log In<i class="down"></i></a>
             </div>
             <div>
-              <ul v-if="isLoggedIn" id="login" class="loginIsClosed" data-mobile>
-                <li data-move><a @click="redirect" aria-label="Account"><u>Account</u></a></li>
-                <li data-move><a @click="store.dispatch('logout', null, { root: true })" aria-label="Log Out"><u>Log Out</u></a></li>
-              </ul>
-              <ul v-if="!isLoggedIn" id="login" class="loginIsClosed" data-mobile>
-                <li data-move><a :href="registerAccount" aria-label="Sign Up"><u>Sign Up</u></a></li>
-                <li data-move><a @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
+              <ul id="login" class="loginIsClosed" data-mobile>
+                <li v-if="isLoggedIn" data-move><a @click="redirect" aria-label="Account"><u>Account</u></a></li>
+                <li v-else data-move><a :href="registerAccount" aria-label="Sign Up"><u>Sign Up</u></a></li>
+                <li v-if="isLoggedIn" data-move><a @click="store.dispatch('logout', null, { root: true })" aria-label="Log Out"><u>Log Out</u></a></li>
+                <li v-else data-move><a @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
               </ul>
             </div>
           </div>
@@ -72,12 +70,11 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, onUnmounted, reactive, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { store } from "@/store/index";
 
 let stateStore = reactive({ store });
-
 let isLoggedIn = ref(false);
 let mainNav: HTMLElement;
 let mq: MediaQueryList;
@@ -191,7 +188,7 @@ const mainNavBtn = (evt: Event): void => {
     navLinks.setAttribute("data-ndd", "closed");
   }
 
-  if (navLinks.classList.contains("mainNavIsOpen") === true) {
+  if (navLinks.classList.contains("mainNavIsOpen")) {
     //start css animation
     navLinks.className = "mainNavIsClosed";
   } else {
@@ -201,9 +198,7 @@ const mainNavBtn = (evt: Event): void => {
   }
 
   //change css property style='display: "display-type" '
-  navLinks.addEventListener(
-    "animationend",
-    (evt) => {
+  navLinks.addEventListener("animationend", (evt) => {
       if (navLinks.classList.contains("mainNavIsClosed")) {
         navLinksWrap.style.display = "none";
       }
@@ -222,33 +217,16 @@ const openLogin = (evt: Event): void => {
     mainNavBtn(evt);
   }
 
-  const displayState = login.classList.contains("loginIsClosed");
   if (login.classList.contains("loginIsClosed")) {
     login.style.display = "block";
     //start css animation
     login.className = "loginIsOpen";
-    console.log(`openLogin called if statement`);
-    console.log(`openLogin called if statement ${login.style.display}`);
   } else {
+    //login.style.display = "none";
     //start css animation
     login.className = "loginIsClosed";
-    console.log(`openLogin called else statement`);
-    console.log(`openLogin called else statement ${login.style.display}`);
   }
-  //change css property style='display: "display-type" '
-  login.addEventListener(
-    "animationend",
-    (evt) => {
-      console.log(`openLogin eventListener ${login.classList}`);
-      if (login.classList.contains("loginIsClosed")) {
-        login.style.display = "none";
-      }
-      console.log(`openLogin eventListener ${login.style.display}`);
-    },
-    true
-  );
-  console.log(`openLogin called classList ${login.classList}`);
-  console.log(`openLogin called display ${login.style.display}`);
+
   evt.stopPropagation();
 };
 
@@ -260,65 +238,60 @@ const openLogin = (evt: Event): void => {
  * should not need to touch this method
  */
 const nddOpenClose = (evt: Event): void => {
-  // <a> that activates open/close
-  const target = evt.target! as Element;
-  // <div> element we actually want to target
-  const sibling = target.nextElementSibling;
-  console.log("CALLED");
-  console.log(JSON.stringify(target));
-  console.log(JSON.stringify(sibling));
+
+  //if login links open, close
+  if (login.classList.contains("loginIsOpen")) {
+    openLogin(evt);
+  }
+
+  // <a> that activates open/close, <div> element we actually want to target
+  const sibling = (evt.target! as Element).nextElementSibling;
+
   // return if not ndd link that was clicked
-  if (sibling === null) {
-    return;
+  if (sibling === null) return;
+
+  const nddId = sibling.getAttribute("id");
+  const ndd = document.getElementById(nddId!);
+  let currentlyOpen = navLinks.getAttribute("data-ndd");
+
+  if (ndd === null) return;
+  
+  if (currentlyOpen == nddId) {
+    ndd.className = "nddIsClosed";
+    navLinks.setAttribute("data-ndd", "closed");
+  } else if (currentlyOpen == "closed") {
+    ndd.style.display = "flex";
+    ndd.className = "nddIsOpen";
+    navLinks.setAttribute("data-ndd", nddId!);
+  } else if (currentlyOpen != "closed") {
+    let close = document.getElementById(currentlyOpen!)!;
+    close.className = "nddIsClosed";
+
+    let open = document.getElementById(nddId!);
+    ndd.style.display = "flex";
+    ndd.className = "nddIsOpen";
+
+    navLinks.setAttribute("data-ndd", nddId!);
   } else {
-    const nddId = sibling.getAttribute("id");
-    const ndd = document.getElementById(nddId!);
-    let currentlyOpen = navLinks.getAttribute("data-ndd");
+    let close = document.getElementById(currentlyOpen!)!;
+    close.className = "nddIsClosed";
+    navLinks.setAttribute("data-ndd", "closed");
+  }
 
-    if (ndd === null) {
-      return;
-    } else if (currentlyOpen == nddId) {
-      ndd.className = "nddIsClosed";
-      navLinks.setAttribute("data-ndd", "closed");
-    } else if (currentlyOpen == "closed") {
-      ndd.style.display = "flex";
-      ndd.className = "nddIsOpen";
-      navLinks.setAttribute("data-ndd", nddId!);
-    } else if (currentlyOpen != "closed") {
-      let close = document.getElementById(currentlyOpen!)!;
-      close.className = "nddIsClosed";
 
-      let open = document.getElementById(nddId!);
-      ndd.style.display = "flex";
-      ndd.className = "nddIsOpen";
 
-      navLinks.setAttribute("data-ndd", nddId!);
-    } else {
-      let close = document.getElementById(currentlyOpen!)!;
-      close.className = "nddIsClosed";
-      navLinks.setAttribute("data-ndd", "closed");
-    }
-
-    //if login links open, close
-    if (login.classList.contains("loginIsOpen")) {
-      openLogin(evt);
-    }
-
-    // set ndd display to none after close animation finishes
-    if (ndd != null) {
-      ndd.addEventListener("animationend", (evt) => {
-        if (ndd.classList.contains("nddIsClosed")) {
-          ndd.style.display = "none";
-        }
-      });
-    }
+  // set ndd display to none after close animation finishes
+  if (ndd != null) {
+    ndd.addEventListener("animationend", (evt) => {
+      if (ndd.classList.contains("nddIsClosed")) {
+        ndd.style.display = "none";
+      }
+    });
   }
   evt.stopPropagation();
 };
 
-watch(
-  () => store.getters.getLoggedIn,
-  () => {
+watch(() => store.getters.getLoggedIn,() => {
     console.log(`from watcher ${store.getters.getLoggedIn}`);
     isLoggedIn.value = store.getters.getLoggedIn;
     console.log(`from watcher2 ${isLoggedIn.value}`);
@@ -340,6 +313,13 @@ onMounted(() => {
   navLinksWrap.addEventListener("click", mainNavBtn, false);
   navLinks.addEventListener("click", nddOpenClose, false);
   loginBtn.addEventListener("click", openLogin, false);
+  login.addEventListener("animationend", (evt) => {
+      if (login.classList.contains("loginIsClosed")) {
+        login.style.display = "none";
+      } 
+    },
+    true
+  );
 
   // setTimeout(() => {
   //     ustore.dispatch("setLoggedInState")
@@ -352,6 +332,16 @@ onMounted(() => {
   console.log(`isLoggedIn ${JSON.stringify(isLoggedIn)}`);
   //this.isLoggedIn = store.getters.getLoggedIn;
   console.log(stateStore);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", scrollStopped);
+  window.removeEventListener("load", resizeListener);
+  window.removeEventListener("resize", resizeListener);
+  mainNav.removeEventListener("click", mainNavBtn);
+  navLinksWrap.removeEventListener("click", mainNavBtn);
+  navLinks.removeEventListener("click", nddOpenClose);
+  loginBtn.removeEventListener("click", openLogin);
 });
 </script>
 
@@ -606,10 +596,10 @@ onMounted(() => {
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   -o-animation-fill-mode: forwards;
-  animation-duration: 400ms;
-  -webkit-animation-duration: 400ms;
-  -moz-animation-duration: 400ms;
-  -o-animation-duration: 400ms;
+  animation-duration: 500ms;
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration: 500ms;
+  -o-animation-duration: 500ms;
   animation-timing-function: ease-in-out;
   -webkit-animation-timing-function: ease-in-out;
   -moz-animation-timing-function: ease-in-out;
@@ -895,6 +885,7 @@ li:active {
   border-style: inset;
   border-width: 0.1rem;
   box-shadow: var(--boxshadow);
+  display: none;
 }
 #login > li {
   /* allows me to use margin auto in child element see #login > li > a*/
@@ -1000,7 +991,7 @@ i {
   #login {
     max-width: 9rem;
     padding: 0em;
-    display: none;
+    /*display: none;*/
   }
 
   #login > li {
