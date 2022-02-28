@@ -35,33 +35,25 @@
       <hr />
       <div id="navLinksWrap">
         <ul id="navLinks" class="isClosed" data-ndd="closed" title="main navigation links">
-          <li>
-            <div class="nddWrap">
-              <a role="button">Home<i class="down"></i></a>
-              <div id="ndd1">
-                <ul class="navDropDowns">
-                  <li data-move><router-link to="/" aria-label="Home">Home</router-link></li>
-                  <li data-move><router-link to="/About" aria-label="About">About</router-link></li>
-                  <li data-move><router-link to="/Contact" aria-label="Contact">Contact</router-link></li>
-                </ul>
-              </div>
-            </div>
+          <li class="nddWrap">
+            <a role="button">Home<i class="down"></i></a>
+            <ul class="ndd navDropDowns nddIsClosed">
+              <li><router-link to="/" aria-label="Home">Home</router-link></li>
+              <li><router-link to="/About" aria-label="About">About</router-link></li>
+              <li><router-link to="/Contact" aria-label="Contact">Contact</router-link></li>
+            </ul>
           </li>
           <!-- <li v-show="isLoggedIn"><router-link to="/Blogs" aria-label="Blogs">Blogs</router-link></li> -->
           <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
           <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
           <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-          <li>
-            <div class="nddWrap">
-              <a class="" role="button" aria-label="Placeholder">Placeholder<i class="down"></i></a>
-              <div id="ndd2" class="">
-                <ul class="navDropDowns" data-mobile>
-                  <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-                  <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-                  <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-                </ul>
-              </div>
-            </div>
+          <li class="nddWrap">
+            <a class="" role="button" aria-label="Placeholder">Placeholder<i class="down"></i></a>
+            <ul class="ndd navDropDowns nddIsClosed">
+              <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
+              <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
+              <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -198,13 +190,13 @@ const mainNavBtn = (evt: Event): void => {
   }
 
   //change css property style='display: "display-type" '
-  navLinks.addEventListener("animationend", (evt) => {
-      if (navLinks.classList.contains("mainNavIsClosed")) {
-        navLinksWrap.style.display = "none";
-      }
-    },
-    true
-  );
+  // navLinks.addEventListener("animationend", (evt) => {
+  //     if (navLinks.classList.contains("mainNavIsClosed")) {
+  //       navLinksWrap.style.display = "none";
+  //     }
+  //   },
+  //   true
+  // );
   evt.stopPropagation();
 };
 
@@ -222,10 +214,17 @@ const openLogin = (evt: Event): void => {
     //start css animation
     login.className = "loginIsOpen";
   } else {
-    //login.style.display = "none";
     //start css animation
     login.className = "loginIsClosed";
   }
+
+  // login.addEventListener("animationend", (evt) => {
+  //     if (login.classList.contains("loginIsClosed")) {
+  //       login.style.display = "none";
+  //     } 
+  //   },
+  //   true
+  // );
 
   evt.stopPropagation();
 };
@@ -244,57 +243,17 @@ const nddOpenClose = (evt: Event): void => {
     openLogin(evt);
   }
 
-  // <a> that activates open/close, <div> element we actually want to target
-  const sibling = (evt.target! as Element).nextElementSibling;
-
-  // return if not ndd link that was clicked
-  if (sibling === null) return;
-
-  const nddId = sibling.getAttribute("id");
-  const ndd = document.getElementById(nddId!);
-  let currentlyOpen = navLinks.getAttribute("data-ndd");
-
-  if (ndd === null) return;
-  
-  if (currentlyOpen == nddId) {
-    ndd.className = "nddIsClosed";
-    navLinks.setAttribute("data-ndd", "closed");
-  } else if (currentlyOpen == "closed") {
-    ndd.style.display = "flex";
-    ndd.className = "nddIsOpen";
-    navLinks.setAttribute("data-ndd", nddId!);
-  } else if (currentlyOpen != "closed") {
-    let close = document.getElementById(currentlyOpen!)!;
-    close.className = "nddIsClosed";
-
-    let open = document.getElementById(nddId!);
-    ndd.style.display = "flex";
-    ndd.className = "nddIsOpen";
-
-    navLinks.setAttribute("data-ndd", nddId!);
-  } else {
-    let close = document.getElementById(currentlyOpen!)!;
-    close.className = "nddIsClosed";
-    navLinks.setAttribute("data-ndd", "closed");
-  }
-
-
-
-  // set ndd display to none after close animation finishes
-  if (ndd != null) {
-    ndd.addEventListener("animationend", (evt) => {
-      if (ndd.classList.contains("nddIsClosed")) {
-        ndd.style.display = "none";
-      }
-    });
-  }
+  (evt.target instanceof HTMLAnchorElement && evt.target.getAttribute("role") === "button") 
+    ?((evt.target as Element).nextElementSibling!.classList.contains("nddIsOpen"))
+      ? (evt.target as Element).nextElementSibling!.className = "ndd navDropDowns nddIsClosed"
+      : (evt.target as Element).nextElementSibling!.className = "ndd navDropDowns nddIsOpen"
+    : (evt.target as HTMLElement).parentElement!.parentElement!.className = "ndd navDropDowns nddIsClosed";
+    
   evt.stopPropagation();
 };
 
 watch(() => store.getters.getLoggedIn,() => {
-    console.log(`from watcher ${store.getters.getLoggedIn}`);
     isLoggedIn.value = store.getters.getLoggedIn;
-    console.log(`from watcher2 ${isLoggedIn.value}`);
   }
 );
 
@@ -313,25 +272,6 @@ onMounted(() => {
   navLinksWrap.addEventListener("click", mainNavBtn, false);
   navLinks.addEventListener("click", nddOpenClose, false);
   loginBtn.addEventListener("click", openLogin, false);
-  login.addEventListener("animationend", (evt) => {
-      if (login.classList.contains("loginIsClosed")) {
-        login.style.display = "none";
-      } 
-    },
-    true
-  );
-
-  // setTimeout(() => {
-  //     ustore.dispatch("setLoggedInState")
-  // }, 3000)
-
-  //console.log(process.env.VUE_APP_IS4_BASE_URL);
-  console.log(store);
-  var testing = store.state;
-  console.log(testing);
-  console.log(`isLoggedIn ${JSON.stringify(isLoggedIn)}`);
-  //this.isLoggedIn = store.getters.getLoggedIn;
-  console.log(stateStore);
 });
 
 onUnmounted(() => {
@@ -752,21 +692,19 @@ onUnmounted(() => {
   margin-right: auto;
   text-align: center;
 }
+
 .nddWrap {
   position: static;
   margin: auto;
 }
+
 .nddWrap > a {
   text-decoration: underline;
 }
-#ndd1,
-#ndd2 {
+
+.ndd {
   position: absolute;
-  display: none;
-  margin-left: 0rem;
-  margin-right: 0rem;
-  margin-top: 0rem;
-  margin-bottom: 0rem;
+  margin: auto;
   left: calc(50% - 6rem);
   z-index: 505;
 }
@@ -1142,33 +1080,9 @@ i {
     }
   }
 
-  /* --- ndd - remember to add any new nav dropdown id's here ---- */
-  #ndd1,
-  #ndd2 {
+  .ndd {
     position: absolute;
-    display: none;
-    margin-right: 0;
-    margin-top: 1em;
-    margin-bottom: 0em;
     left: initial;
-    width: 9em;
-  }
-
-  #ndd1 {
-    margin-left: -2.625em;
-  }
-
-  #ndd2 {
-    margin-left: -1.625em;
-  }
-
-  .navDropDowns {
-    width: 9em;
-    border-radius: 0.1875rem;
-  }
-
-  .navDropDowns > li {
-    margin: 1rem 0 1rem 0;
   }
 }
 /*---------------------728px-----------------------------*/
