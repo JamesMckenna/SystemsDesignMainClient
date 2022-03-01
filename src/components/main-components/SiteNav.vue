@@ -3,9 +3,9 @@
     <nav id="mainNav" class="mainNavAnimation">
       <hr />
       <div id="navContainer">
-        <div id="mainNavBtn">
+        <div id="openCloseNavBtn">
           <button id="navBtn" title="Open Close nav button" aria-label="Open Close nav button" type="button">
-            <span role="img" aria-label="[Nav button image]" title="Nav button image" id="mainNavBtnImg"></span>
+            <span role="img" aria-label="[Nav button image]" title="Nav button image" id="openCloseNavImg"></span>
           </button>
         </div>
         <div id="wrapTitle">
@@ -34,10 +34,10 @@
       </div>
       <hr />
       <div id="navLinksWrap">
-        <ul id="navLinks" class="isClosed" data-ndd="closed" title="main navigation links">
+        <ul id="navLinks" class="mainNavIsClosed" title="main navigation links">
           <li class="nddWrap">
             <a role="button">Home<i class="down"></i></a>
-            <ul class="ndd navDropDowns nddIsClosed">
+            <ul class="navDropDowns nddIsClosed ndd-border ndd-shadow">
               <li><router-link to="/" aria-label="Home">Home</router-link></li>
               <li><router-link to="/About" aria-label="About">About</router-link></li>
               <li><router-link to="/Contact" aria-label="Contact">Contact</router-link></li>
@@ -49,7 +49,7 @@
           <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
           <li class="nddWrap">
             <a class="" role="button" aria-label="Placeholder">Placeholder<i class="down"></i></a>
-            <ul class="ndd navDropDowns nddIsClosed">
+            <ul class="navDropDowns nddIsClosed ndd-border ndd-shadow">
               <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
               <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
               <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
@@ -96,7 +96,7 @@ const scrollStopped = (evt: Event): void => {
   }
   //if nav bar open, close it
   if (navLinks.classList.contains("mainNavIsOpen")) {
-    mainNavBtn(evt);
+    //openCloseNav(evt);
   }
   //Hide up animation
   if (sy > 80) {
@@ -163,50 +163,30 @@ const resizeListener = (evt: Event): void => {
   evt.stopPropagation();
 };
 
-/**
- *toggle main navigation bar open/closed
- */
-const mainNavBtn = (evt: Event): void => {
-  //if login links open, close
-  if (login.classList.contains("loginIsOpen")) {
-    openLogin(evt);
-  }
-
-  // if a ndd is open, close it
-  if (navLinks.getAttribute("data-ndd") != "closed") {
-    let currentlyOpen = navLinks.getAttribute("data-ndd");
-    let close = document.getElementById(currentlyOpen!)!;
-    close.style.display = "none";
-    navLinks.setAttribute("data-ndd", "closed");
-  }
-
-  if (navLinks.classList.contains("mainNavIsOpen")) {
-    //start css animation
+const openCloseNav = (evt: Event): void => {
+  if (navLinks.classList.contains("mainNavIsOpen")) {  
     navLinks.className = "mainNavIsClosed";
   } else {
     navLinksWrap.style.display = "flex";
-    //start css animation
     navLinks.className = "mainNavIsOpen";
   }
 
-  //change css property style='display: "display-type" '
-  // navLinks.addEventListener("animationend", (evt) => {
-  //     if (navLinks.classList.contains("mainNavIsClosed")) {
-  //       navLinksWrap.style.display = "none";
-  //     }
-  //   },
-  //   true
-  // );
+  if(navLinks.classList.contains("mainNavIsOpen")){
+    navLinksWrap.addEventListener("animationend", openCloseNavEventListener, true);
+  }
   evt.stopPropagation();
 };
+const openCloseNavEventListener = () => {
+  if (navLinks.classList.contains("mainNavIsClosed")) {
+    navLinksWrap.style.display = "none";
+    navLinksWrap.removeEventListener('animationend', openCloseNavEventListener, true);
+  }
+}
 
-/**
- * btn to open and close log in and register links
- */
 const openLogin = (evt: Event): void => {
-  //if main nav open, close it
+
   if (navLinks.classList.contains("mainNavIsOpen") && login.hasAttribute("data-mobile")) {
-    mainNavBtn(evt);
+    //openCloseNav(evt);
   }
 
   if (login.classList.contains("loginIsClosed")) {
@@ -229,28 +209,40 @@ const openLogin = (evt: Event): void => {
   evt.stopPropagation();
 };
 
-/**
- * this method was built for future main nav dropdowns
- * if more links are needed, simple to copy/paste a new dropdown into place,
- * change the id attribute, see .css #ndd selector and add new dd to get styles and animation
- * and eventlistener to open/close main nav dd's are already in place
- * should not need to touch this method
- */
 const nddOpenClose = (evt: Event): void => {
-
+  
   //if login links open, close
   if (login.classList.contains("loginIsOpen")) {
     openLogin(evt);
   }
 
-  (evt.target instanceof HTMLAnchorElement && evt.target.getAttribute("role") === "button") 
-    ?((evt.target as Element).nextElementSibling!.classList.contains("nddIsOpen"))
-      ? (evt.target as Element).nextElementSibling!.className = "ndd navDropDowns nddIsClosed"
-      : (evt.target as Element).nextElementSibling!.className = "ndd navDropDowns nddIsOpen"
-    : (evt.target as HTMLElement).parentElement!.parentElement!.className = "ndd navDropDowns nddIsClosed";
-    
+  let ulDropDown: Element;
+  if(evt.target instanceof HTMLAnchorElement && evt.target.getAttribute("role") === "button"){
+    ulDropDown = (evt.target as Element).nextElementSibling!;
+    if(ulDropDown.classList.contains("nddIsOpen")){
+      ulDropDown.classList.remove("nddIsOpen");
+      ulDropDown.classList.add("nddIsClosed");
+    }else{
+      ulDropDown.classList.remove("nddIsClosed");
+      ulDropDown.classList.add("nddIsOpen");
+    }
+  } else{
+    ulDropDown = (evt.target as HTMLElement).parentElement!.parentElement!
+    ulDropDown.classList.remove("nddIsOpen");
+    ulDropDown.classList.add("nddIsClosed");
+  }
+
+  if(ulDropDown.classList.contains("nddIsOpen")){
+    ulDropDown.addEventListener("animationend", nddOpenCloseEventListener, true);
+  }
   evt.stopPropagation();
 };
+const nddOpenCloseEventListener = (evt: Event) => {
+  if ((evt.target! as HTMLElement).classList.contains('nddIsClosed')) {
+    openCloseNav(evt);
+    (evt.target! as HTMLElement).removeEventListener("animationend", nddOpenCloseEventListener, true)
+  }
+}
 
 watch(() => store.getters.getLoggedIn,() => {
     isLoggedIn.value = store.getters.getLoggedIn;
@@ -258,7 +250,7 @@ watch(() => store.getters.getLoggedIn,() => {
 );
 
 onMounted(() => {
-  mainNav = document.getElementById("mainNavBtn")!;
+  mainNav = document.getElementById("openCloseNavBtn")!;
   mq = window.matchMedia("(min-width: 40em)")!;
   navLinksWrap = document.getElementById("navLinksWrap")!;
   loginBtn = document.getElementById("loginBtn")!;
@@ -268,8 +260,8 @@ onMounted(() => {
   window.addEventListener("scroll", scrollStopped, true);
   window.addEventListener("load", resizeListener, true);
   window.addEventListener("resize", resizeListener, true);
-  mainNav.addEventListener("click", mainNavBtn, true);
-  navLinksWrap.addEventListener("click", mainNavBtn, false);
+  mainNav.addEventListener("click", openCloseNav, true);
+  //navLinksWrap.addEventListener("click", openCloseNav, false);
   navLinks.addEventListener("click", nddOpenClose, false);
   loginBtn.addEventListener("click", openLogin, false);
 });
@@ -278,8 +270,8 @@ onUnmounted(() => {
   window.removeEventListener("scroll", scrollStopped);
   window.removeEventListener("load", resizeListener);
   window.removeEventListener("resize", resizeListener);
-  mainNav.removeEventListener("click", mainNavBtn);
-  navLinksWrap.removeEventListener("click", mainNavBtn);
+  mainNav.removeEventListener("click", openCloseNav);
+  //navLinksWrap.removeEventListener("click", openCloseNav);
   navLinks.removeEventListener("click", nddOpenClose);
   loginBtn.removeEventListener("click", openLogin);
 });
@@ -342,8 +334,6 @@ onUnmounted(() => {
   margin-right: auto;
 }
 .mainNavAnimation {
-  position: relative;
-  z-index: 500;
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
   text-decoration: none;
@@ -383,6 +373,7 @@ onUnmounted(() => {
 #navContainer {
   margin-top: 1rem;
   margin-bottom: 1rem;
+  align-items: baseline;
 }
 .navUpAni {
   animation: forwards;
@@ -423,7 +414,7 @@ onUnmounted(() => {
 #navLinksWrap > #navLinks > li {
   margin-top: 0.1875rem;
 }
-#mainNavBtn {
+#openCloseNavBtn {
   position: relative;
   margin-top: 0.25rem;
   margin-bottom: auto;
@@ -444,7 +435,7 @@ onUnmounted(() => {
   z-index: inherit;
   box-shadow: var(--boxshadow);
 }
-#mainNavBtnImg {
+#openCloseNavImg {
   width: 1.75rem;
   height: 1.75rem;
   background-image: url("/images/menu.png");
@@ -527,6 +518,23 @@ onUnmounted(() => {
   -moz-animation-timing-function: ease-in-out;
   -o-animation-timing-function: ease-in-out;
 }
+
+/************************ START navDropDown & nddOpenClose animation ******************************/
+.nddWrap{
+  align-items: baseline;
+}
+.navDropDowns {
+  position: absolute;
+  max-width: 12rem;
+  height: 0rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: var(--ndd-bg-colour);
+  z-index: 505;
+}
+.navDropDowns > li {
+  margin: 1em 0 1em 0;
+}
 .nddIsClosed {
   animation-name: nddClose;
   -webkit-animation-name: nddClose;
@@ -544,11 +552,30 @@ onUnmounted(() => {
   -webkit-animation-timing-function: ease-in-out;
   -moz-animation-timing-function: ease-in-out;
   -o-animation-timing-function: ease-in-out;
-  transform-origin: left top;
-  -webkit-transform-origin: left top;
-  -moz-transform-origin: left top;
-  -o-transform-origin: left top;
-  -ms-transform-origin: left top;
+  transform-origin: center top;
+  -webkit-transform-origin: center top;
+  -moz-transform-origin: center top;
+  -o-transform-origin: center top;
+  -ms-transform-origin: center top;
+}
+@keyframes nddClose {
+  0% {
+    width: 12rem;
+    height: auto;
+    margin-top: 1rem;
+    left: calc(50% - 6rem);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    width: 0%;
+    height: 0;
+    margin-top: -1rem;
+    transform: scale(0);
+    left: 50%;
+    opacity: 0;
+  }
 }
 .nddIsOpen {
   animation-name: nddOpen;
@@ -573,6 +600,39 @@ onUnmounted(() => {
   -o-transform-origin: center top;
   -ms-transform-origin: center top;
 }
+@keyframes nddOpen {
+  0% {
+    width: 0%;
+    height: 0;
+    margin-top: -1rem;
+    transform: scale(0);
+    left: 50%;
+    opacity: 0;
+  }
+
+  100% {
+    width: 12rem;
+    height: auto;
+    margin-top: 1rem;
+    transform: scale(1);
+    left: calc(50% - 6rem);
+    opacity: 1;
+  }
+}
+
+.ndd-shadow {
+  box-shadow: var(--boxshadow);
+}
+.ndd-border {
+  border-color: var(--ndd-bg-colour);
+  border-style: inset;
+  border-width: 0.1rem;
+  border-radius: 0.1875rem;
+}
+
+/************************ END navDropDown & nddOpenClose animation ******************************/
+
+
 @keyframes mainNavOpen {
   0% {
     width: 0%;
@@ -631,40 +691,8 @@ onUnmounted(() => {
     opacity: 0;
   }
 }
-@keyframes nddOpen {
-  0% {
-    width: 0%;
-    margin-top: -1rem;
-    transform: scale(0);
-    left: 50%;
-    opacity: 0;
-  }
 
-  100% {
-    width: 12rem;
-    margin-top: 1rem;
-    transform: scale(1);
-    left: calc(50% - 6rem);
-    opacity: 1;
-  }
-}
-@keyframes nddClose {
-  0% {
-    margin-top: 1rem;
-    width: 100%;
-    left: calc(50% - 6rem);
-    transform: scale(1);
-    opacity: 1;
-  }
 
-  100% {
-    margin-top: 0rem;
-    width: 0%;
-    left: 50%;
-    transform: scale(0);
-    opacity: 0;
-  }
-}
 /*-----end nav and drop down animations  -------*/
 
 #navLinks {
@@ -693,41 +721,8 @@ onUnmounted(() => {
   text-align: center;
 }
 
-.nddWrap {
-  position: static;
-  margin: auto;
-}
 
-.nddWrap > a {
-  text-decoration: underline;
-}
 
-.ndd {
-  position: absolute;
-  margin: auto;
-  left: calc(50% - 6rem);
-  z-index: 505;
-}
-.navDropDowns {
-  width: 12rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-right: 0;
-  padding-left: 0;
-  margin-left: 0rem;
-  margin-right: 0rem;
-  margin-top: 0rem;
-  margin-bottom: 0rem;
-  background-color: var(--ndd-bg-colour);
-  border-color: var(--ndd-bg-colour);
-  border-style: inset;
-  border-width: 0.1rem;
-  border-radius: 0.1875rem;
-  box-shadow: var(--boxshadow);
-}
-.navDropDowns > li {
-  margin: 1em 0 1em 0;
-}
 /* --- start  hover styles <li> and <a>-------*/
 #login > div > a:hover,
 a:hover {
@@ -890,7 +885,7 @@ i {
     margin-right: 1rem;
   }
 
-  #mainNavBtn {
+  #openCloseNavBtn {
     margin-left: 1rem;
     margin-right: 0rem;
     width: 8rem;
@@ -1045,22 +1040,32 @@ i {
     }
   }
 
-  .nddIsClosed {
-    transform-origin: center top;
-    -webkit-transform-origin: center top;
-    -moz-transform-origin: center top;
-    -o-transform-origin: center top;
-    -ms-transform-origin: center top;
-  }
+  /************************ START navDropDown & nddOpenClose animation ******************************/
   @keyframes nddOpen {
     0% {
-      margin-top: -1rem;
+      position: relative;
+    }
+
+    1% {
+      position: absolute;
+      width: 0%;
+      height: 0rem;
+      margin-top: 0rem;
+      margin-left: 0%;
+      margin-right: 0%;
+      margin-bottom: 0;
       transform: scale(0);
       opacity: 0;
     }
 
     100% {
-      margin-top: 1rem;
+      position: absolute;
+      width: 100%;
+      height: auto;
+      margin-top: 4rem;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 0;
       transform: scale(1);
       opacity: 1;
     }
@@ -1068,22 +1073,28 @@ i {
 
   @keyframes nddClose {
     0% {
-      margin-top: 1rem;
+      position: absolute;
+      width: 100%;
+      height: auto;
+      margin-top: 4rem;
       transform: scale(1);
       opacity: 1;
     }
 
+    99%{
+      position: absolute;
+    }
+
     100% {
+      position: relative;
+      width: 0%;
+      height: 0rem;
       margin-top: 0rem;
       transform: scale(0);
       opacity: 0;
     }
   }
-
-  .ndd {
-    position: absolute;
-    left: initial;
-  }
+  /************************ END navDropDown & nddOpenClose animation ******************************/
 }
 /*---------------------728px-----------------------------*/
 @media (min-width: 45.5rem) {
