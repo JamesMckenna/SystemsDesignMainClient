@@ -35,7 +35,7 @@
       <hr />
       <div id="navLinksWrap">
         <ul id="navLinks" class="mainNavIsClosed" title="main navigation links">
-          <li class="nddWrap">
+          <li>
             <a role="button">Home<i class="down"></i></a>
             <ul class="navDropDowns nddIsClosed ndd-border ndd-shadow">
               <li><router-link to="/" aria-label="Home">Home</router-link></li>
@@ -47,7 +47,7 @@
           <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
           <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
           <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-          <li class="nddWrap">
+          <li>
             <a class="" role="button" aria-label="Placeholder">Placeholder<i class="down"></i></a>
             <ul class="navDropDowns nddIsClosed ndd-border ndd-shadow">
               <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
@@ -96,7 +96,7 @@ const scrollStopped = (evt: Event): void => {
   }
   //if nav bar open, close it
   if (navLinks.classList.contains("mainNavIsOpen")) {
-    //openCloseNav(evt);
+    openCloseNav(evt);
   }
   //Hide up animation
   if (sy > 80) {
@@ -164,7 +164,8 @@ const resizeListener = (evt: Event): void => {
 };
 
 const openCloseNav = (evt: Event): void => {
-  if (navLinks.classList.contains("mainNavIsOpen")) {  
+  if (navLinks.classList.contains("mainNavIsOpen")) {
+    closeOpenNDD();  
     navLinks.className = "mainNavIsClosed";
   } else {
     navLinksWrap.style.display = "flex";
@@ -209,6 +210,26 @@ const openLogin = (evt: Event): void => {
   evt.stopPropagation();
 };
 
+
+const closeOpenNDD = (ndd?: HTMLElement): void => {
+
+    //if previously open ndd not event target, close it without triggering css animation
+    const allNavDropDowns = document.querySelectorAll(".navDropDowns");
+    allNavDropDowns.forEach(element => {
+      if(ndd != null){
+        if(element != ndd && element.classList.contains("nddIsOpen")){
+          element.classList.remove("nddIsOpen");
+          element.classList.add("nddIsClosed");
+          (element as HTMLElement).style.display = "none";
+        }
+      } else{
+        element.classList.remove("nddIsOpen");
+        element.classList.add("nddIsClosed");
+        (element as HTMLElement).style.display = "none";
+      }
+    });
+}
+
 const nddOpenClose = (evt: Event): void => {
   
   //if login links open, close
@@ -217,30 +238,36 @@ const nddOpenClose = (evt: Event): void => {
   }
 
   let ulDropDown: Element;
-  if(evt.target instanceof HTMLAnchorElement && evt.target.getAttribute("role") === "button"){
-    ulDropDown = (evt.target as Element).nextElementSibling!;
-    if(ulDropDown.classList.contains("nddIsOpen")){
+  if(evt.target instanceof HTMLAnchorElement && evt.target.getAttribute("role") === "button") { 
+    ulDropDown = (evt.target as HTMLElement).nextElementSibling!;
+
+    closeOpenNDD(ulDropDown as HTMLElement);
+
+    if(ulDropDown.classList.contains("nddIsOpen")) {
       ulDropDown.classList.remove("nddIsOpen");
       ulDropDown.classList.add("nddIsClosed");
-    }else{
+    }else {
       ulDropDown.classList.remove("nddIsClosed");
       ulDropDown.classList.add("nddIsOpen");
+      (ulDropDown as HTMLElement).style.display = "block";
     }
-  } else{
+  } else {
+    //evt.target is an <a> tag within the dropdown
     ulDropDown = (evt.target as HTMLElement).parentElement!.parentElement!
     ulDropDown.classList.remove("nddIsOpen");
     ulDropDown.classList.add("nddIsClosed");
   }
 
-  if(ulDropDown.classList.contains("nddIsOpen")){
+  if (ulDropDown.classList.contains("nddIsOpen")) { 
     ulDropDown.addEventListener("animationend", nddOpenCloseEventListener, true);
   }
+
   evt.stopPropagation();
 };
 const nddOpenCloseEventListener = (evt: Event) => {
   if ((evt.target! as HTMLElement).classList.contains('nddIsClosed')) {
     openCloseNav(evt);
-    (evt.target! as HTMLElement).removeEventListener("animationend", nddOpenCloseEventListener, true)
+    (evt.target! as HTMLElement).removeEventListener("animationend", nddOpenCloseEventListener, true);
   }
 }
 
@@ -520,9 +547,6 @@ onUnmounted(() => {
 }
 
 /************************ START navDropDown & nddOpenClose animation ******************************/
-.nddWrap{
-  align-items: baseline;
-}
 .navDropDowns {
   position: absolute;
   max-width: 12rem;
@@ -1062,7 +1086,7 @@ i {
       position: absolute;
       width: 100%;
       height: auto;
-      margin-top: 4rem;
+      margin-top: 3rem;
       margin-left: auto;
       margin-right: auto;
       margin-bottom: 0;
@@ -1076,7 +1100,7 @@ i {
       position: absolute;
       width: 100%;
       height: auto;
-      margin-top: 4rem;
+      margin-top: 3rem;
       transform: scale(1);
       opacity: 1;
     }
