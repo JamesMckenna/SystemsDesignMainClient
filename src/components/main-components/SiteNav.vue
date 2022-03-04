@@ -17,18 +17,14 @@
         </div>
         <div id="loginLinks">
           <div id="loginBtn" title="Login and Account links">
-            <div>
-              <a role="button" v-if="isLoggedIn" aria-label="Logout Account">Hi<i class="down"></i></a>
-              <a role="button" v-else aria-label="Login Account">Log In<i class="down"></i></a>
-            </div>
-            <div>
-              <ul id="login" class="loginIsClosed" data-mobile>
-                <li v-if="isLoggedIn" data-move><a @click="redirect" aria-label="Account"><u>Account</u></a></li>
-                <li v-else data-move><a :href="registerAccount" aria-label="Sign Up"><u>Sign Up</u></a></li>
-                <li v-if="isLoggedIn" data-move><a @click="store.dispatch('logout', null, { root: true })" aria-label="Log Out"><u>Log Out</u></a></li>
-                <li v-else data-move><a @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
-              </ul>
-            </div>
+            <a role="button" v-if="isLoggedIn" aria-label="Logout Account">Hi<i class="down"></i></a>
+            <a role="button" v-else aria-label="Login Account">Log In<i class="down"></i></a>
+            <ul id="login" data-mobile class="navDropDowns nddIsClosed ndd-border ndd-shadow" style="display: none;">
+              <li v-if="isLoggedIn" data-move><a @click="redirect" aria-label="Account"><u>Account</u></a></li>
+              <li v-else data-move><a :href="registerAccount" aria-label="Sign Up"><u>Sign Up</u></a></li>
+              <li v-if="isLoggedIn" data-move><a @click="store.dispatch('logout', null, { root: true })" aria-label="Log Out"><u>Log Out</u></a></li>
+              <li v-else data-move><a @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -37,19 +33,19 @@
         <ul id="navLinks" class="mainNavIsClosed" title="main navigation links">
           <li>
             <a role="button">Home<i class="down"></i></a>
-            <ul class="navDropDowns nddIsClosed ndd-border ndd-shadow">
+            <ul class="navDropDowns nddIsClosed ndd-border ndd-shadow" style="display: none;">
               <li><router-link to="/" aria-label="Home">Home</router-link></li>
               <li><router-link to="/About" aria-label="About">About</router-link></li>
               <li><router-link to="/Contact" aria-label="Contact">Contact</router-link></li>
             </ul>
           </li>
           <!-- <li v-show="isLoggedIn"><router-link to="/Blogs" aria-label="Blogs">Blogs</router-link></li> -->
-          <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-          <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-          <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
+          <li><router-link to="" aria-label="Placeholder">Placeholder</router-link></li>
+          <li><router-link to="" aria-label="Placeholder">Placeholder</router-link></li>
+          <li><router-link to="" aria-label="Placeholder">Placeholder</router-link></li>
           <li>
             <a class="" role="button" aria-label="Placeholder">Placeholder<i class="down"></i></a>
-            <ul class="navDropDowns nddIsClosed ndd-border ndd-shadow">
+            <ul class="navDropDowns nddIsClosed ndd-border ndd-shadow" style="display: none;">
               <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
               <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
               <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
@@ -75,7 +71,6 @@ let loginBtn: HTMLElement;
 let login: HTMLElement;
 let navLinks: HTMLElement;
 let scrollLastStopped: number = 0;
-let scrollCurrentStopped: number = 0;
 const registerAccount = process.env.VUE_APP_REGISTER_ACCOUNT;
 const ustore = useStore();
 
@@ -90,42 +85,20 @@ const scrollStopped = (evt: Event): void => {
   const nav = document!.getElementById("animateNavWithThisDiv")!;
   let sy = window.scrollY;
   let timer: number = -1;
-  //if login open, close it
-  if (login.classList.contains("loginIsOpen")) {
-    openLogin(evt);
-  }
-  //if nav bar open, close it
-  if (navLinks.classList.contains("mainNavIsOpen")) {
-    openCloseNav(evt);
-  }
-  //Hide up animation
-  if (sy > 80) {
-    nav.className = "navUpAni";
-  }
-  //Bring down animation
-  if (sy < scrollLastStopped) {
-    nav.className = "navDownAni";
-  }
-  //resets timer while scrolling
-  if (timer != -1) {
-    clearTimeout(timer);
-  }
-  //when scrolling stops, start timer....if no scroll event after 300ms get y scroll position to see if user next scroll up or down
+
+  if (navLinks.classList.contains("mainNavIsOpen")) openCloseNav(evt);
+
+  if (sy > 80) nav.className = "navUpAni";
+
+  if (sy < scrollLastStopped) nav.className = "navDownAni";
+
+  if (timer != -1) clearTimeout(timer);
+
   timer = window.setTimeout(() => {
-    scrollCurrentStopped = window.scrollY;
-    scrollLastStopped = showHideNav(scrollCurrentStopped);
+    scrollLastStopped = window.scrollY;
   }, 300);
 };
 
-const showHideNav = (scrollCurrentStopped: number): number => {
-  return scrollCurrentStopped;
-};
-
-/**
- *Move login links to and from main navigation list
- *Move logo div for cleaner layout
- *@ 40em appro: 640 px font size 16
- */
 const resizeListener = (evt: Event): void => {
   let newParent;
   let loginBtn;
@@ -165,14 +138,14 @@ const resizeListener = (evt: Event): void => {
 
 const openCloseNav = (evt: Event): void => {
   if (navLinks.classList.contains("mainNavIsOpen")) {
-    closeOpenNDD();  
+    closeOpenNDDs();  
     navLinks.className = "mainNavIsClosed";
   } else {
     navLinksWrap.style.display = "flex";
     navLinks.className = "mainNavIsOpen";
   }
 
-  if(navLinks.classList.contains("mainNavIsOpen")){
+  if (navLinks.classList.contains("mainNavIsOpen")) {
     navLinksWrap.addEventListener("animationend", openCloseNavEventListener, true);
   }
   evt.stopPropagation();
@@ -184,82 +157,58 @@ const openCloseNavEventListener = () => {
   }
 }
 
-const openLogin = (evt: Event): void => {
-
-  if (navLinks.classList.contains("mainNavIsOpen") && login.hasAttribute("data-mobile")) {
-    //openCloseNav(evt);
-  }
-
-  if (login.classList.contains("loginIsClosed")) {
-    login.style.display = "block";
-    //start css animation
-    login.className = "loginIsOpen";
-  } else {
-    //start css animation
-    login.className = "loginIsClosed";
-  }
-
-  // login.addEventListener("animationend", (evt) => {
-  //     if (login.classList.contains("loginIsClosed")) {
-  //       login.style.display = "none";
-  //     } 
-  //   },
-  //   true
-  // );
-
-  evt.stopPropagation();
-};
-
-
-const closeOpenNDD = (ndd?: HTMLElement): void => {
-
-    //if previously open ndd not event target, close it without triggering css animation
-    const allNavDropDowns = document.querySelectorAll(".navDropDowns");
-    allNavDropDowns.forEach(element => {
-      if(ndd != null){
-        if(element != ndd && element.classList.contains("nddIsOpen")){
-          element.classList.remove("nddIsOpen");
-          element.classList.add("nddIsClosed");
-          (element as HTMLElement).style.display = "none";
-        }
-      } else{
+const closeOpenNDDs = (clickedElement?: HTMLElement): void => {
+  const allNavDropDowns = document.querySelectorAll(".navDropDowns");
+  allNavDropDowns.forEach(element => {
+    if (clickedElement!= null) {
+      if (element != clickedElement && element.classList.contains("nddIsOpen")) {
         element.classList.remove("nddIsOpen");
         element.classList.add("nddIsClosed");
-        (element as HTMLElement).style.display = "none";
       }
-    });
+    } else {
+      element.classList.remove("nddIsOpen");
+      element.classList.add("nddIsClosed");
+      (element as HTMLElement).style.display = "none";
+    }
+  });
 }
 
 const nddOpenClose = (evt: Event): void => {
-  
-  //if login links open, close
-  if (login.classList.contains("loginIsOpen")) {
-    openLogin(evt);
+  let ulDropDown: Element;
+  if ((evt.target as HTMLElement).className === "down") {
+    ulDropDown = (evt.target as HTMLElement).parentElement!.nextElementSibling!;
+    closeOpenNDDs(ulDropDown as HTMLElement);
+  } else if (evt.target instanceof HTMLAnchorElement 
+          && evt.target.getAttribute("role") === "button") { 
+    ulDropDown = (evt.target as HTMLElement).nextElementSibling!;
+    closeOpenNDDs(ulDropDown as HTMLElement);
+  } else if ((evt.target as HTMLElement).parentElement!.parentElement! instanceof HTMLUListElement 
+          && (evt.target as HTMLElement).parentElement!.parentElement!.classList.contains("navDropDowns")) {
+    ulDropDown = (evt.target as HTMLElement).parentElement!.parentElement!
+    closeOpenNDDs(ulDropDown as HTMLElement);
+  } else {
+    if (!(evt.target as HTMLElement).hasAttribute("class")
+      && (evt.target instanceof HTMLAnchorElement)) {
+      ulDropDown = (evt.target as HTMLElement).lastChild as HTMLElement;
+      closeOpenNDDs(ulDropDown as HTMLElement);
+    } else {
+      closeOpenNDDs(evt.target as HTMLElement);
+      openCloseNav(evt);
+      return;
+    }
   }
 
-  let ulDropDown: Element;
-  if(evt.target instanceof HTMLAnchorElement && evt.target.getAttribute("role") === "button") { 
-    ulDropDown = (evt.target as HTMLElement).nextElementSibling!;
+  if (ulDropDown.classList.contains("nddIsOpen") && !ulDropDown.hasAttribute("data-mobile")) {
+    ulDropDown.addEventListener("animationend", nddOpenCloseEventListener, true);
+  }
 
-    closeOpenNDD(ulDropDown as HTMLElement);
-
-    if(ulDropDown.classList.contains("nddIsOpen")) {
-      ulDropDown.classList.remove("nddIsOpen");
-      ulDropDown.classList.add("nddIsClosed");
-    }else {
-      ulDropDown.classList.remove("nddIsClosed");
-      ulDropDown.classList.add("nddIsOpen");
-      (ulDropDown as HTMLElement).style.display = "block";
-    }
-  } else {
-    //evt.target is an <a> tag within the dropdown
-    ulDropDown = (evt.target as HTMLElement).parentElement!.parentElement!
+  if (ulDropDown.classList.contains("nddIsOpen")) {
     ulDropDown.classList.remove("nddIsOpen");
     ulDropDown.classList.add("nddIsClosed");
-  }
-
-  if (ulDropDown.classList.contains("nddIsOpen")) { 
-    ulDropDown.addEventListener("animationend", nddOpenCloseEventListener, true);
+  } else {
+    ulDropDown.classList.remove("nddIsClosed");
+    ulDropDown.classList.add("nddIsOpen");
+    (ulDropDown as HTMLElement).style.display = "block";
   }
 
   evt.stopPropagation();
@@ -288,19 +237,17 @@ onMounted(() => {
   window.addEventListener("load", resizeListener, true);
   window.addEventListener("resize", resizeListener, true);
   mainNav.addEventListener("click", openCloseNav, true);
-  //navLinksWrap.addEventListener("click", openCloseNav, false);
   navLinks.addEventListener("click", nddOpenClose, false);
-  loginBtn.addEventListener("click", openLogin, false);
+  loginBtn.addEventListener("click", nddOpenClose, false);
 });
 
 onUnmounted(() => {
-  window.removeEventListener("scroll", scrollStopped);
-  window.removeEventListener("load", resizeListener);
-  window.removeEventListener("resize", resizeListener);
-  mainNav.removeEventListener("click", openCloseNav);
-  //navLinksWrap.removeEventListener("click", openCloseNav);
-  navLinks.removeEventListener("click", nddOpenClose);
-  loginBtn.removeEventListener("click", openLogin);
+  window.removeEventListener("scroll", scrollStopped, true);
+  window.removeEventListener("load", resizeListener, true);
+  window.removeEventListener("resize", resizeListener, true);
+  mainNav.removeEventListener("click", openCloseNav, true);
+  navLinks.removeEventListener("click", nddOpenClose, false);
+  loginBtn.removeEventListener("click", nddOpenClose, false);
 });
 </script>
 
@@ -509,43 +456,6 @@ onUnmounted(() => {
   -moz-animation-timing-function: ease-in-out;
   -o-animation-timing-function: ease-in-out;
 }
-.loginIsClosed {
-  animation-name: loginClose;
-  -webkit-animation-name: loginClose;
-  -moz-animation-name: loginClose;
-  -o-animation-name: loginClose;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-  -moz-animation-fill-mode: forwards;
-  -o-animation-fill-mode: forwards;
-  animation-duration: 400ms;
-  -webkit-animation-duration: 400ms;
-  -moz-animation-duration: 400ms;
-  -o-animation-duration: 400ms;
-  animation-timing-function: ease-in-out;
-  -webkit-animation-timing-function: ease-in-out;
-  -moz-animation-timing-function: ease-in-out;
-  -o-animation-timing-function: ease-in-out;
-}
-.loginIsOpen {
-  animation-name: loginOpen;
-  -webkit-animation-name: loginOpen;
-  -moz-animation-name: loginOpen;
-  -o-animation-name: loginOpen;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-  -moz-animation-fill-mode: forwards;
-  -o-animation-fill-mode: forwards;
-  animation-duration: 500ms;
-  -webkit-animation-duration: 500ms;
-  -moz-animation-duration: 500ms;
-  -o-animation-duration: 500ms;
-  animation-timing-function: ease-in-out;
-  -webkit-animation-timing-function: ease-in-out;
-  -moz-animation-timing-function: ease-in-out;
-  -o-animation-timing-function: ease-in-out;
-}
-
 /************************ START navDropDown & nddOpenClose animation ******************************/
 .navDropDowns {
   position: absolute;
@@ -689,34 +599,6 @@ onUnmounted(() => {
     display: none;
   }
 }
-@keyframes loginOpen {
-  0% {
-    width: 0;
-    margin-top: -2rem;
-    opacity: 0;
-  }
-
-  100% {
-    width: 100%;
-    margin-top: 1rem;
-    opacity: 1;
-  }
-}
-@keyframes loginClose {
-  0% {
-    width: 100%;
-    margin-top: 1rem;
-    opacity: 1;
-  }
-
-  100% {
-    width: 0%;
-    margin-top: -2rem;
-    opacity: 0;
-  }
-}
-
-
 /*-----end nav and drop down animations  -------*/
 
 #navLinks {
@@ -830,29 +712,6 @@ li:active {
   text-decoration: underline;
   z-index: 501;
 }
-#login {
-  max-width: 12rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-right: 0;
-  padding-left: 0;
-  margin: auto;
-  background-color: var(--ndd-bg-colour);
-  border-color: var(--ndd-bg-colour);
-  border-style: inset;
-  border-width: 0.1rem;
-  box-shadow: var(--boxshadow);
-  display: none;
-}
-#login > li {
-  /* allows me to use margin auto in child element see #login > li > a*/
-  display: flex;
-  align-content: center;
-  margin: 1em auto 1rem auto;
-}
-#login > li > a {
-  margin: auto;
-}
 /*---- Start dropdown arrow css-----*/
 i {
   border: solid black;
@@ -941,31 +800,6 @@ i {
     text-align: center;
   }
 
-  div #login {
-    width: 9rem;
-  }
-
-  #login {
-    max-width: 9rem;
-    padding: 0em;
-    /*display: none;*/
-  }
-
-  #login > li {
-    display: flex;
-    align-content: center;
-  }
-
-  #login > li > a {
-    position: relative;
-    width: 7rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-    text-align: center;
-  }
-
   #navLinks {
     padding: 0rem;
     display: inline-flex;
@@ -1032,38 +866,6 @@ i {
       display: none;
     }
   }
-
-  @keyframes loginOpen {
-    0% {
-      width: 0;
-
-      font-size: 0;
-      opacity: 0;
-    }
-
-    100% {
-      width: 9em;
-
-      font-size: 100%;
-      opacity: 1;
-    }
-  }
-
-  @keyframes loginClose {
-    0% {
-      width: 9em;
-
-      font-size: 100%;
-      opacity: 1;
-    }
-
-    100% {
-      width: 0em;
-      font-size: 0%;
-      opacity: 0;
-    }
-  }
-
   /************************ START navDropDown & nddOpenClose animation ******************************/
   @keyframes nddOpen {
     0% {
