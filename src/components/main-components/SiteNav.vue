@@ -78,10 +78,7 @@ const redirect = () => {
   window.location.assign(process.env.VUE_APP_IDMANAGEMENT_BASE_URL + "/Account/Login");
 };
 
-/**
- * Hide/Show nav bar
- */
-const scrollStopped = (evt: Event): void => {
+const showHideNav = (evt: Event): void => {
   const nav = document!.getElementById("animateNavWithThisDiv")!;
   let sy = window.scrollY;
   let timer: number = -1;
@@ -233,7 +230,7 @@ onMounted(() => {
   login = document.getElementById("login")!;
   navLinks = document.getElementById("navLinks")!;
 
-  window.addEventListener("scroll", scrollStopped, true);
+  window.addEventListener("scroll", showHideNav, true);
   window.addEventListener("load", resizeListener, true);
   window.addEventListener("resize", resizeListener, true);
   mainNav.addEventListener("click", openCloseNav, true);
@@ -242,7 +239,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  window.removeEventListener("scroll", scrollStopped, true);
+  window.removeEventListener("scroll", showHideNav, true);
   window.removeEventListener("load", resizeListener, true);
   window.removeEventListener("resize", resizeListener, true);
   mainNav.removeEventListener("click", openCloseNav, true);
