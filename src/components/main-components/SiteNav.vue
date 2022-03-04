@@ -1,11 +1,17 @@
 <template>
-  <div id="animateNavWithThisDiv">
+  <div id="navWrap">
     <nav id="mainNav" class="mainNavAnimation">
       <hr />
       <div id="navContainer">
         <div id="openCloseNavBtn">
           <button id="navBtn" title="Open Close nav button" aria-label="Open Close nav button" type="button">
-            <span role="img" aria-label="[Nav button image]" title="Nav button image" id="openCloseNavImg"></span>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
+              <g>
+                <path d="M15,30h120c8.284,0,15-6.716,15-15s-6.716-15-15-15H15C6.716,0,0,6.716,0,15S6.716,30,15,30z"/>
+                <path d="M135,60H15C6.716,60,0,66.716,0,75s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,60,135,60z"/>
+                <path d="M135,120H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,120,135,120z"/>
+              </g>
+            </svg>
           </button>
         </div>
         <div id="wrapTitle">
@@ -79,7 +85,7 @@ const redirect = () => {
 };
 
 const showHideNav = (evt: Event): void => {
-  const nav = document!.getElementById("animateNavWithThisDiv")!;
+  const nav = document!.getElementById("navWrap")!;
   let sy = window.scrollY;
   let timer: number = -1;
 
@@ -336,7 +342,7 @@ onUnmounted(() => {
   top: 0;
   width: 100vw;
 }
-#animateNavWithThisDiv {
+#navWrap {
   position: fixed;
   top: 0;
   z-index: 500;
@@ -398,21 +404,15 @@ onUnmounted(() => {
 #navBtn {
   position: relative;
   border-radius: 0.1875rem;
+  width: 2rem;
+  height: 2rem;
   margin-left: auto;
   margin-right: auto;
-  padding: 0; /*remove user agent*/
+  padding: 0.1875rem;
   background-color: transparent;
   display: inline-flex;
   z-index: inherit;
   box-shadow: var(--boxshadow);
-}
-#openCloseNavImg {
-  width: 1.75rem;
-  height: 1.75rem;
-  background-image: url("/images/menu.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: transparent;
 }
 
 /*----- start nav and drop down animations -------*/
