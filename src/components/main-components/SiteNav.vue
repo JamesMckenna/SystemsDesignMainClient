@@ -1,25 +1,25 @@
 <template>
   <div id="navWrap">
-    <nav id="mainNav" class="mainNavAnimation">
+    <nav class="mainNav mainNavAnimation">
       <hr />
       <div id="navContainer">
-        <div id="openCloseNavBtn">
-          <button id="navBtn" title="Open Close nav button" aria-label="Open Close nav button" type="button">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
-              <g>
-                <path d="M15,30h120c8.284,0,15-6.716,15-15s-6.716-15-15-15H15C6.716,0,0,6.716,0,15S6.716,30,15,30z"/>
-                <path d="M135,60H15C6.716,60,0,66.716,0,75s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,60,135,60z"/>
-                <path d="M135,120H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,120,135,120z"/>
-              </g>
-            </svg>
-          </button>
-        </div>
+        
+        <button id="navBtn" class="navButton" title="Open Close nav button" aria-label="Open Close nav button" type="button">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
+            <g>
+              <path d="M15,30h120c8.284,0,15-6.716,15-15s-6.716-15-15-15H15C6.716,0,0,6.716,0,15S6.716,30,15,30z"/>
+              <path d="M135,60H15C6.716,60,0,66.716,0,75s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,60,135,60z"/>
+              <path d="M135,120H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,120,135,120z"/>
+            </g>
+          </svg>
+        </button>
+        
         <div id="wrapTitle">
-          <span id="logoFlip" role="img" aria-label="[Image of The Thinker Statue]"></span>
+          <img id="logoFlip" src="@/assets/images/theThinkerIconFlip.png" aria-label="[Image of The Thinker Statue]"/>
           <h1 id="wrapTitleH1">
             <router-link id="mainH1Anchor" title="Website title and home link" to="/">Systems Design</router-link>
           </h1>
-          <span id="logo"></span>
+          <img id="logo" src="@/assets/images/theThinkerIcon.png" aria-label="[Image of The Thinker Statue]"/>
         </div>
         <div id="loginLinks">
           <div id="loginBtn" title="Login and Account links">
@@ -70,7 +70,7 @@ import { store } from "@/store/index";
 
 let stateStore = reactive({ store });
 let isLoggedIn = ref(false);
-let mainNav: HTMLElement;
+let navBtn: HTMLElement;
 let mq: MediaQueryList;
 let navLinksWrap: HTMLElement;
 let loginBtn: HTMLElement;
@@ -229,7 +229,7 @@ watch(() => store.getters.getLoggedIn,() => {
 );
 
 onMounted(() => {
-  mainNav = document.getElementById("openCloseNavBtn")!;
+  navBtn = document.getElementById("navBtn")!;
   mq = window.matchMedia("(min-width: 40em)")!;
   navLinksWrap = document.getElementById("navLinksWrap")!;
   loginBtn = document.getElementById("loginBtn")!;
@@ -239,7 +239,7 @@ onMounted(() => {
   window.addEventListener("scroll", showHideNav, true);
   window.addEventListener("load", resizeListener, true);
   window.addEventListener("resize", resizeListener, true);
-  mainNav.addEventListener("click", openCloseNav, true);
+  navBtn.addEventListener("click", openCloseNav, true);
   navLinks.addEventListener("click", nddOpenClose, false);
   loginBtn.addEventListener("click", nddOpenClose, false);
 });
@@ -248,7 +248,7 @@ onUnmounted(() => {
   window.removeEventListener("scroll", showHideNav, true);
   window.removeEventListener("load", resizeListener, true);
   window.removeEventListener("resize", resizeListener, true);
-  mainNav.removeEventListener("click", openCloseNav, true);
+  navBtn.removeEventListener("click", openCloseNav, true);
   navLinks.removeEventListener("click", nddOpenClose, false);
   loginBtn.removeEventListener("click", nddOpenClose, false);
 });
@@ -334,7 +334,7 @@ onUnmounted(() => {
 }
 
 /*------------- NAV -------------*/
-#mainNav {
+.mainNav {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -391,7 +391,7 @@ onUnmounted(() => {
 #navLinksWrap > #navLinks > li {
   margin-top: 0.1875rem;
 }
-#openCloseNavBtn {
+.navButton {
   position: relative;
   margin-top: 0.25rem;
   margin-bottom: auto;
@@ -764,13 +764,11 @@ i {
     margin-left: 1rem;
     margin-right: 1rem;
   }
-
-  #openCloseNavBtn {
+  .navButton {
     margin-left: 1rem;
     margin-right: 0rem;
     width: 8rem;
   }
-
   #loginLinks {
     position: relative;
     z-index: 501;
