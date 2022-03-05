@@ -1,11 +1,11 @@
 <template>
-  <div id="navWrap">
-    <nav class="mainNav mainNavAnimation">
+  <div >
+    <nav id="navWrap" class="mainNav mainNavAnimation">
       <hr />
-      <div id="navContainer">
+      <div class="navContainer">
         
-        <button id="navBtn" class="navButton" title="Open Close nav button" aria-label="Open Close nav button" type="button">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
+        <button id="navBtn" class="navButton themeBorder themeShadow" title="Open Close nav button" aria-label="Open Close nav button" type="button">
+          <svg class="menuSVG" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
             <g>
               <path d="M15,30h120c8.284,0,15-6.716,15-15s-6.716-15-15-15H15C6.716,0,0,6.716,0,15S6.716,30,15,30z"/>
               <path d="M135,60H15C6.716,60,0,66.716,0,75s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,60,135,60z"/>
@@ -14,29 +14,33 @@
           </svg>
         </button>
         
-        <div id="wrapTitle">
+        <section id="wrapTitle">
           <img id="logoFlip" src="@/assets/images/theThinkerIconFlip.png" aria-label="[Image of The Thinker Statue]"/>
           <h1 id="wrapTitleH1">
             <router-link id="mainH1Anchor" title="Website title and home link" to="/">Systems Design</router-link>
           </h1>
           <img id="logo" src="@/assets/images/theThinkerIcon.png" aria-label="[Image of The Thinker Statue]"/>
-        </div>
-        <div id="loginLinks">
+        </section>
+
+        <section id="loginLinks">
           <div id="loginBtn" title="Login and Account links">
             <a role="button" v-if="isLoggedIn" aria-label="Logout Account">Hi<i class="down"></i></a>
             <a role="button" v-else aria-label="Login Account">Log In<i class="down"></i></a>
-            <ul id="login" data-mobile class="navDropDowns nddIsClosed ndd-border ndd-shadow" style="display: none;">
+            <ul id="login" data-mobile class="navDropDowns nddIsClosed themeBorder themeShadow" style="display: none;">
               <li v-if="isLoggedIn" data-move><a @click="redirect" aria-label="Account"><u>Account</u></a></li>
               <li v-else data-move><a :href="registerAccount" aria-label="Sign Up"><u>Sign Up</u></a></li>
               <li v-if="isLoggedIn" data-move><a @click="store.dispatch('logout', null, { root: true })" aria-label="Log Out"><u>Log Out</u></a></li>
               <li v-else data-move><a @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
             </ul>
           </div>
-        </div>
+        </section>
+        
       </div>
+
       <hr />
-      <div id="navLinksWrap">
-        <ul id="navLinks" class="mainNavIsClosed" title="main navigation links">
+
+      <section id="navLinksWrap">
+        <ul id="navLinks" class="navLinksIsClosed" title="main navigation links">
           <li>
             <a role="button">Home<i class="down"></i></a>
             <ul class="navDropDowns nddIsClosed ndd-border ndd-shadow" style="display: none;">
@@ -58,7 +62,8 @@
             </ul>
           </li>
         </ul>
-      </div>
+      </section>
+
     </nav>
   </div>
 </template>
@@ -89,11 +94,17 @@ const showHideNav = (evt: Event): void => {
   let sy = window.scrollY;
   let timer: number = -1;
 
-  if (navLinks.classList.contains("mainNavIsOpen")) openCloseNav(evt);
+  if (navLinks.classList.contains("navLinksIsOpen")) openCloseNav(evt);
 
-  if (sy > 80) nav.className = "navUpAni";
+  if (sy > 80) { 
+    nav.classList.remove("navDownAni");
+    nav.classList.add("navUpAni");
+  }
 
-  if (sy < scrollLastStopped) nav.className = "navDownAni";
+  if (sy < scrollLastStopped) {
+    nav.classList.remove("navUpAni");
+    nav.classList.add("navDownAni");
+  }
 
   if (timer != -1) clearTimeout(timer);
 
@@ -140,21 +151,21 @@ const resizeListener = (evt: Event): void => {
 };
 
 const openCloseNav = (evt: Event): void => {
-  if (navLinks.classList.contains("mainNavIsOpen")) {
+  if (navLinks.classList.contains("navLinksIsOpen")) {
     closeOpenNDDs();  
-    navLinks.className = "mainNavIsClosed";
+    navLinks.className = "navLinksIsClosed";
   } else {
     navLinksWrap.style.display = "flex";
-    navLinks.className = "mainNavIsOpen";
+    navLinks.className = "navLinksIsOpen";
   }
 
-  if (navLinks.classList.contains("mainNavIsOpen")) {
+  if (navLinks.classList.contains("navLinksIsOpen")) {
     navLinksWrap.addEventListener("animationend", openCloseNavEventListener, true);
   }
   evt.stopPropagation();
 };
 const openCloseNavEventListener = () => {
-  if (navLinks.classList.contains("mainNavIsClosed")) {
+  if (navLinks.classList.contains("navLinksIsClosed")) {
     navLinksWrap.style.display = "none";
     navLinksWrap.removeEventListener('animationend', openCloseNavEventListener, true);
   }
@@ -281,7 +292,7 @@ onUnmounted(() => {
   margin-right: auto;
   align-items: center;
 }
-#navContainer {
+.navContainer {
   position: relative;
   z-index: inherit;
   width: 96%;
@@ -340,14 +351,15 @@ onUnmounted(() => {
   transform: translateX(-50%);
   z-index: 400;
   top: 0;
-  width: 100vw;
+  width: 100%;
 }
 #navWrap {
   position: fixed;
   top: 0;
   z-index: 500;
 }
-#navContainer {
+
+.navContainer {
   margin-top: 1rem;
   margin-bottom: 1rem;
   align-items: baseline;
@@ -393,31 +405,18 @@ onUnmounted(() => {
 }
 .navButton {
   position: relative;
-  margin-top: 0.25rem;
-  margin-bottom: auto;
-  margin-left: 1rem;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  width: 2rem;
-}
-#navBtn {
-  position: relative;
-  border-radius: 0.1875rem;
   width: 2rem;
   height: 2rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0.25rem auto auto auto;
   padding: 0.1875rem;
-  background-color: transparent;
   display: inline-flex;
-  z-index: inherit;
-  box-shadow: var(--boxshadow);
+  align-items: center;
 }
-
+.menuSvg {
+  width: 2rem;
+}
 /*----- start nav and drop down animations -------*/
-.mainNavIsClosed {
-  margin: auto;
+.navLinksIsClosed {
   animation-name: mainNavClose;
   -webkit-animation-name: mainNavClose;
   -moz-animation-name: mainNavClose;
@@ -435,7 +434,7 @@ onUnmounted(() => {
   -moz-animation-timing-function: ease-in-out;
   -o-animation-timing-function: ease-in-out;
 }
-.mainNavIsOpen {
+.navLinksIsOpen {
   animation-name: mainNavOpen;
   -webkit-animation-name: mainNavOpen;
   -moz-animation-name: mainNavOpen;
@@ -764,11 +763,8 @@ i {
     margin-left: 1rem;
     margin-right: 1rem;
   }
-  .navButton {
-    margin-left: 1rem;
-    margin-right: 0rem;
-    width: 8rem;
-  }
+
+
   #loginLinks {
     position: relative;
     z-index: 501;
@@ -929,7 +925,7 @@ i {
 /*--------------------------------1328 px---------------*/
 @media (min-width: 83rem) {
   /*---- Title and Header css ---------*/
-  #mainNav {
+  .mainNav {
     max-width: 83rem;
   }
 }
