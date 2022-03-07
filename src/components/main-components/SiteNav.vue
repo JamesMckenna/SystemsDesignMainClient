@@ -3,7 +3,7 @@
     <hr class="hr-tag" />
     <div class="nav-container theme-border theme-shadow">
 
-      <div>
+      <div class="wrap-nav-btn">
         <button id="navBtn" class="nav-btn theme-border theme-shadow" title="Open / Close Nav" aria-label="Open / Close Nav" type="button">
           <svg class="nav-btn_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
             <g>
@@ -40,7 +40,7 @@
 
     <hr class="hr-tag" />
 
-    <section id="navLinksWrap" class="nav-links-wrap">
+    <div id="navLinksWrap" class="nav-links-wrap">
       <ul id="navLinks" class="nav-links nav-links--is--closed theme-border theme-shadow" title="main navigation links">
         <li>
           <a role="button">Home<i class="down-arrow"></i></a>
@@ -63,7 +63,7 @@
           </ul>
         </li>
       </ul>
-    </section>
+    </div>
   </nav>
 </template>
 
