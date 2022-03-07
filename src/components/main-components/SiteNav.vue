@@ -2,26 +2,28 @@
   <nav id="nav" class="main-nav main--nav--ani">
     <hr class="hr-tag" />
     <div class="nav-container theme-border theme-shadow">
-      
-      <button id="navBtn" class="nav-btn theme-border theme-shadow" title="Open / Close Nav" aria-label="Open / Close Nav" type="button">
-        <svg class="nav-btn_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
-          <g>
-            <path d="M15,30h120c8.284,0,15-6.716,15-15s-6.716-15-15-15H15C6.716,0,0,6.716,0,15S6.716,30,15,30z"/>
-            <path d="M135,60H15C6.716,60,0,66.716,0,75s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,60,135,60z"/>
-            <path d="M135,120H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,120,135,120z"/>
-          </g>
-        </svg>
-      </button>
-      
-      <section id="wrapTitle" class="wrap-title">
+
+      <div>
+        <button id="navBtn" class="nav-btn theme-border theme-shadow" title="Open / Close Nav" aria-label="Open / Close Nav" type="button">
+          <svg class="nav-btn_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
+            <g>
+              <path d="M15,30h120c8.284,0,15-6.716,15-15s-6.716-15-15-15H15C6.716,0,0,6.716,0,15S6.716,30,15,30z"/>
+              <path d="M135,60H15C6.716,60,0,66.716,0,75s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,60,135,60z"/>
+              <path d="M135,120H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h120c8.284,0,15-6.716,15-15S143.284,120,135,120z"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+
+      <div id="wrapTitle" class="wrap-title">
         <img class="logo-flip" src="@/assets/images/theThinkerIconFlip.png" aria-label="[Image of The Thinker Statue]"/>
         <h1 class="wrap-title_h1">
           <router-link class="title-h1-anchor" title="Website Title and Link to Homepage" to="/">Systems Design</router-link>
         </h1>
         <img id="logo" class="logo" src="@/assets/images/theThinkerIcon.png" aria-label="[Image of The Thinker Statue]"/>
-      </section>
+      </div>
 
-      <section id="loginLinks" class="login-links">
+      <div id="loginLinks" class="login-links">
         <div id="loginBtn" class="login-btn" title="Open / Close Login and Account Links">
           <a role="button" class="login-btn_a" v-if="isLoggedIn" aria-label="Open / Close Logout and Account Links">Hi<i class="down-arrow"></i></a>
           <a role="button" class="login-btn_a" v-else aria-label="Login and Account Links">Log In<i class="down-arrow"></i></a>
@@ -32,7 +34,7 @@
             <li v-else data-move><a @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
           </ul>
         </div>
-      </section>
+      </div>
       
     </div>
 
