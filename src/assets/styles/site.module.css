@@ -23,72 +23,128 @@
 
 
 :root {
+    --bgcolor1: chartreuse;
+    --bgcolor2: white;
+    --bgcolor3: yellow;
+  
     --h-tag-colour: #696986;
-    --shadow-text-offset: .03125rem .03125rem .03125rem #FFF;
-    --ndd-bg-colour: #dcdcdc;
-    --nav-box-shadow: 0.125rem 0.125rem 0.125rem .0625rem #696986;
-    --a-hover-colour: #FFF;
-    --navlink-gradient-hov-1: rgba(125,185,232,0.01);
-    --navlink-gradient-hov-2: rgba(105,105,134,0.1);
-    --navlink-gradient-hov-3: rgba(105,105,134,1);
-    --navlink-gradient-active-1: rgba(0,0,0,0.3);
-    --navlink-gradient-active-2: rgba(0,0,0,0);
-   
+    --shadow-text-offset: 0.0625rem 0.0625rem 0.0625rem #fff;
+    --bg-colour-1: #dcdcdc;
+    --boxshadow: 0.125rem 0.125rem 0.125rem 0.0625rem #696986;
+    --boxshadow-right: -0.125rem  0.125rem 0.125rem 0.0625rem #696986;
+  
+    --borderradius: 0.1875rem;
+    --borderstyle: inset;
+    --borderwidth: 0.1rem;
+    --bordercolor: var(--bg-colour-1);
+  
+    --a-hover-colour: #fff;
+    --navlink-gradient-hov-1: rgba(125, 185, 232, 0.01);
+    --navlink-gradient-hov-2: rgba(105, 105, 134, 0.1);
+    --navlink-gradient-hov-3: rgba(105, 105, 134, 1);
+    --navlink-gradient-active-1: rgba(0, 0, 0, 0.3);
+    --navlink-gradient-active-2: rgba(0, 0, 0, 0);
+  
+    font-family: Hind_Vadndara;
 }
 
-@font-face{
-    font-family: 'Hind_Vadndara';
-    src: url('../fonts/Hind_Vadodara/HindVadodara-Light.ttf');
+.theme-shadow {
+    box-shadow: var(--boxshadow);
+}
+  
+.theme-shadow-right {
+    box-shadow: var(--boxshadow-right);
+}
+  
+.theme-border {
+    border-radius: var(--borderradius);
+    border-style: var(--borderstyle);
+    border-width: var(--borderwidth);
+    border-color: var(--bordercolor);
+}
+  
+.theme-button {
+    margin: 0.25rem;
+    background: var(--bgcolor2);
+    color: var(--h-tag-colour);
+    cursor: pointer;
+}
+  
+.theme-button:hover,
+svg:hover {
+    fill: white;
+}
+  
+.theme-button:hover {
+    color: white;
+    background: linear-gradient(
+      to right,
+      var(--navlink-gradient-hov-1) 0%,
+      var(--navlink-gradient-hov-2) 50%,
+      var(--navlink-gradient-hov-3) 100%
+    );
+}
+
+@font-face {
+    font-family: "Hind_Vadndara";
+    src: url("../fonts/Hind_Vadodara/HindVadodara-Light.ttf") format("truetype");
+    src: url("../fonts/Hind_Vadodara/HindVadodara-Bold.ttf") format("truetype");
+    src: url("../fonts/Hind_Vadodara/HindVadodara-Medium.ttf") format("truetype");
+    src: url("../fonts/Hind_Vadodara/HindVadodara-Regular.ttf") format("truetype");
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Italic.ttf") format("truetype"),
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--h-tag-colour);
     text-shadow: var(--shadow-text-offset);
     text-decoration: underline;
-    margin-top: -0.83rem; /* reverse user agent*/
-    margin-bottom: -0.83rem; /* reverse user agent*/
-    font-family: Hind_Vadndara;
+    font-weight: bold;
+    text-align: center;
 }
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
 
 a {
-    font-family: Hind_Vadndara;
     color: var(--h-tag-colour);
     text-shadow: var(--shadow-text-offset);
 }
 
-
-ul {
-    margin: 0rem; /* reverse user agent*/
+a:hover {
+    color: white;
+    text-shadow: none;
 }
+
 li{
     display:block;
 }
 
 html {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
     min-height: 100vh;
     margin: auto auto;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background: -webkit-linear-gradient(left, rgba(255,255,255,0.01) 0%, rgba(127,127,127,.5) 40%, rgba(127,127,127,0.01) 50%, rgba(127,127,127,.5) 60%, rgba(255,255,255,0.01) 100%);
-    background: -o-linear-gradient(left, rgba(255,255,255,0.01) 0%, rgba(127,127,127,.5) 40%, rgba(127,127,127,0.01) 50%, rgba(127,127,127,.5) 60%, rgba(255,255,255,0.01) 100%);
-    background: linear-gradient(to right, rgba(255,255,255,0.01) 0%, rgba(127,127,127,.5) 40%, rgba(127,127,127,0.01) 50%, rgba(127,127,127,.5) 60%, rgba(255,255,255,0.01) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03ffffff', endColorstr='#03ffffff',GradientType=1 );
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.01) 0%,
+      rgba(127, 127, 127, 0.5) 40%,
+      rgba(127, 127, 127, 0.01) 50%,
+      rgba(127, 127, 127, 0.5) 60%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
 }
 
-body{
+body {
     box-sizing: border-box;
-    position:relative;
-    margin: auto auto;
-}
-
-p {
-    text-indent: 5%;
-    line-height: 200%;
-}
-canvas {
-    margin-top: 10vh;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 80vh;   
+    box-shadow: 0 0 200px rgba(0, 0, 0, 0.5) inset; /* vinyette */
 }
 
 /*colour hex value #696986*/
@@ -150,6 +206,6 @@ canvas {
 
 }
 
-/*--------------------------------1280 px---------------*/
-@media (min-width: 80rem) {
+/*--------------------------------1328 px---------------*/
+@media (min-width: 83rem) {
 }
