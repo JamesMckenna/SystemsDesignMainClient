@@ -3,7 +3,7 @@
     <hr class="hr-tag" />
     <div class="nav-container theme-border theme-shadow">
 
-      <div class="wrap-nav-btn">
+      <div class="auto-margin">
         <button id="navBtn" class="nav-btn theme-border theme-shadow" title="Open / Close Nav" aria-label="Open / Close Nav" type="button">
           <svg class="nav-btn_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
             <g>
@@ -23,15 +23,15 @@
         <img id="logo" class="logo" src="@/assets/images/theThinkerIcon.png" aria-label="[Image of The Thinker Statue]"/>
       </div>
 
-      <div id="loginLinks" class="login-links">
+      <div id="loginLinks" class="wrap-login-links auto-margin">
         <div id="loginBtn" class="login-btn" title="Open / Close Login and Account Links">
           <a role="button" class="login-btn_a" v-if="isLoggedIn" aria-label="Open / Close Logout and Account Links">Hi<i class="down-arrow"></i></a>
           <a role="button" class="login-btn_a" v-else aria-label="Login and Account Links">Log In<i class="down-arrow"></i></a>
           <ul id="login" data-mobile class="nav-drop-downs ndd--is--closed theme-border theme-shadow" style="display: none;">
-            <li v-if="isLoggedIn" data-move><a @click="redirect" aria-label="Account"><u>Account</u></a></li>
-            <li v-else data-move><a :href="registerAccount" aria-label="Sign Up"><u>Sign Up</u></a></li>
-            <li v-if="isLoggedIn" data-move><a @click="store.dispatch('logout', null, { root: true })" aria-label="Log Out"><u>Log Out</u></a></li>
-            <li v-else data-move><a @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
+            <li v-if="isLoggedIn" data-move class="nav-drop-downs_li"><a class="center-anchor" @click="redirect" aria-label="Account"><u>Account</u></a></li>
+            <li v-else data-move class="nav-drop-downs_li"><a class="center-anchor" :href="registerAccount" aria-label="Sign Up"><u>Sign Up</u></a></li>
+            <li v-if="isLoggedIn" data-move class="nav-drop-downs_li"><a class="center-anchor" @click="store.dispatch('logout', null, { root: true })" aria-label="Log Out"><u>Log Out</u></a></li>
+            <li v-else data-move class="nav-drop-downs_li"><a class="center-anchor" @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
           </ul>
         </div>
       </div>
@@ -40,26 +40,26 @@
 
     <hr class="hr-tag" />
 
-    <div id="navLinksWrap" class="nav-links-wrap">
+    <div id="navLinksWrap" class="wrap-nav-links">
       <ul id="navLinks" class="nav-links nav-links--is--closed theme-border theme-shadow" title="main navigation links">
-        <li>
+        <li class="auto-margin">
           <a role="button">Home<i class="down-arrow"></i></a>
           <ul class="nav-drop-downs ndd--is--closed theme-border theme-shadow" style="display: none;">
-            <li><router-link to="/" aria-label="Home">Home</router-link></li>
-            <li><router-link to="/About" aria-label="About">About</router-link></li>
-            <li><router-link to="/Contact" aria-label="Contact">Contact</router-link></li>
+            <li class="nav-drop-downs_li"><router-link to="/" aria-label="Home">Home</router-link></li>
+            <li class="nav-drop-downs_li"><router-link to="/About" aria-label="About">About</router-link></li>
+            <li class="nav-drop-downs_li"><router-link to="/Contact" aria-label="Contact">Contact</router-link></li>
           </ul>
         </li>
-        <!-- <li v-show="isLoggedIn"><router-link to="/Blogs" aria-label="Blogs">Blogs</router-link></li> -->
-        <li><router-link to="" aria-label="Placeholder">Placeholder</router-link></li>
-        <li><router-link to="" aria-label="Placeholder">Placeholder</router-link></li>
-        <li><router-link to="" aria-label="Placeholder">Placeholder</router-link></li>
-        <li>
+        <!-- <li v-show="isLoggedIn" class="auto-margin"><router-link to="/Blogs" aria-label="Blogs">Blogs</router-link></li> -->
+        <li class="auto-margin"><router-link to="" aria-label="Placeholder">Placeholder</router-link></li>
+        <li class="auto-margin"><router-link to="" aria-label="Placeholder">Placeholder</router-link></li>
+        <li class="auto-margin"><router-link to="" aria-label="Placeholder">Placeholder</router-link></li>
+        <li class="auto-margin">
           <a class="" role="button" aria-label="Placeholder">Placeholder<i class="down-arrow"></i></a>
-          <ul class="nav-drop-downs ndd--is--closed theme-border theme-shadow" style="display: none;">
-            <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-            <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-            <li><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
+          <ul class="nav-drop-downs auto-margin ndd--is--closed theme-border theme-shadow" style="display: none;">
+            <li class="nav-drop-downs_li"><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
+            <li class="nav-drop-downs_li"><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
+            <li class="nav-drop-downs_li"><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
           </ul>
         </li>
       </ul>
@@ -111,7 +111,7 @@ const resizeListener = (evt: Event): void => {
     login.removeAttribute("data-mobile");
     document.getElementById("loginLinks")!.appendChild(logoImg);
     navLinksWrap.style.display = "none";
-    navLinks.appendChild(loginBtn);
+    navLinks.prepend(loginBtn);
   }
 
   //if larger than 40em

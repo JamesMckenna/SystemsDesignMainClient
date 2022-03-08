@@ -1,26 +1,10 @@
 @import "./site.module.css";
 
-.logo, .logo-flip {
-    position: relative;
-    display: inline-flex;
-    width: 2rem;
-}
-
-.wrap-title {
-    position: relative;
-    z-index: inherit;
-    display: inline-flex;
-    margin: 0.1875rem auto 0rem auto;
-    align-items: center;
-}
-
 .nav-container {
     position: relative;
-    z-index: inherit;
     width: 96%;
-    margin: auto;
+    margin: 1rem auto;
     display: flex;
-    flex-wrap: nowrap;
     align-items: center;
     background-color: var(--bg-colour-1);
 }
@@ -29,33 +13,35 @@
     margin: -0.25rem auto;
 }
 
+.wrap-title {
+    position: relative;
+    display: inline-flex;
+    margin: auto auto;
+    align-items: center;
+}
 .wrap-title_h1 {
     position: relative;
-    z-index: inherit;
     margin-left: 0.3125rem;
     display: inline-flex;
     padding-bottom: 1%;
 }
-
 .title-h1-anchor {
     width: inherit;
     height: inherit;
     margin-left: auto;
     margin-right: auto;
 }
-
-.main--nav--ani {
-    animation: main--nav--ani 5s infinite alternate;
+.logo, .logo-flip {
+    position: relative;
+    display: inline-flex;
+    width: 2rem;
 }
 
+.main--nav--ani { animation: main--nav--ani 5s infinite alternate; }
+
 @keyframes main--nav--ani {
-    from {
-      box-shadow: 0.0625rem 0.0625rem 0.625rem 0.1875rem rgb(105, 105, 134) inset;
-    }
-  
-    to {
-      box-shadow: 0rem 0rem 0rem -0.025rem rgb(105, 105, 134) inset;
-    }
+    from { box-shadow: 0.0625rem 0.0625rem 0.625rem 0.1875rem rgb(105, 105, 134) inset; }
+    to { box-shadow: 0rem 0rem 0rem -0.025rem rgb(105, 105, 134) inset; }
 }
   
 .main-nav {
@@ -63,10 +49,6 @@
     margin: 1rem auto;
     z-index: 500;
     width: 100%;
-}
-  
-.nav-container {
-    margin: 1rem auto; 
 }
 
 .nav--up--ani {
@@ -85,33 +67,21 @@
 }
 
 @keyframes nav--up {
-    0% {
-      top: 0;
-    }
-    100% {
-      top: -10rem;
-    }
+    0% { top: 0; }
+    100% { top: -10rem; }
 }
 @keyframes nav--down {
-    0% {
-      top: -10rem;
-    }
-    100% {
-      top: 0rem;
-    }
+    0% { top: -10rem; }
+    100% { top: 0rem; }
 }
 
-.nav-links-wrap{
+.wrap-nav-links{
     position: relative;
     widows: 96%;
     margin: 0.5rem 1rem;
     display: none;
 }
-
-.nav-links > li {
-    margin: 0.1875rem auto;
-} 
-  
+ 
 .nav-btn {
     position: relative;
     width: 2rem;
@@ -129,60 +99,73 @@
 .nav-links--is--closed {
     animation-name: main--nav--close;
     animation-fill-mode: forwards;
-    animation-duration: 400ms;
+    animation-duration: 500ms;
     animation-timing-function: ease-in-out;
-    transform-origin: center top;
+    transform-origin: 50vw top;
 }
 .nav-links--is--open {
     animation-name: main--nav--open;
     animation-fill-mode: forwards;
     animation-duration: 500ms;
     animation-timing-function: ease-in-out;
-    transform-origin: center top;
+    transform-origin: 50vw top;
 }
 @keyframes main--nav--open {
     0% {
       width: 0%;
-      height: 0vh;
-      display: flex;
+      height: 0%;
       opacity: 0;
+      transform: scaleX(0);
+      transform: scaleY(0);
     }
-  
+
+    25% {
+        opacity: 0.01;
+    }
+
     100% {
-      width: 98%;
-      height: 80vh;
-      margin-bottom: 3rem;
-      display: flex;
-      opacity: 1;
-    }
-}
-@keyframes main--nav--close {
-    0% {
       width: 96%;
-      height: 80vh;
-  
+      height: 100%;
       opacity: 1;
+      margin: 0rem auto 1rem auto;
+      transform: scaleX(1);
+      transform: scaleY(1);
     }
-  
+  }
+
+  @keyframes main--nav--close {
+    0% {
+        width: 96%;
+        height: 100%;
+        opacity: 1;
+        margin: 0rem auto 1rem auto;
+        transform: scaleX(1);
+        transform: scaleY(1);
+    }
+
+    75% {
+        opacity: 0.01;
+    }
+
     100% {
-      width: 0%;
-      height: 0vh;
-      opacity: 0;
-      display: none;
+        width: 0%;
+        height: 0%;
+        left: 50vw;
+        opacity: 0;
+        transform: scaleX(0);
+        transform: scaleY(0);
     }
-}
+  }
 /************************ START navDropDown & nddOpenClose animation ******************************/
 .nav-drop-downs {
     position: absolute;
     max-width: 12rem;
-    height: 0rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
     background-color: var(--bg-colour-1);
-    z-index: 505;
+    display: none;
+    z-index: 510;
 }
-.nav-drop-downs > li {
-    margin: 1em 0 1em 0;
+.nav-drop-downs_li {
+    margin: 1rem auto;
 }
 .ndd--is--closed {
     animation-name: ndd--close;
@@ -242,9 +225,7 @@
     position: relative;
     display: block;
     margin: 1rem 0rem 0rem 0rem;
-    padding-top: 1rem 0rem 0rem 0rem;
     background-color: var(--bg-colour-1);
-    z-index: 400;
 }
 
 .nav-links > li {
@@ -255,7 +236,6 @@
 }
   
 /* --- start hover styles <li> and <a>-------*/
-#login > div > a:hover,
 a:hover {
     color: var(--a-hover-colour);
     font-weight: normal;
@@ -283,39 +263,25 @@ li:active {
 /* --- end  hover styles on <li> and <a>-------*/
   
 /*---------login links--------------*/
-.login-links {
+.wrap-login-links {
     position: relative;
     display: flex;
-    width: 2rem;
-    height: 2rem;
-    margin: 0rem auto;
-    z-index: 501;
+}
+ 
+.login-btn_a {
+    display: block;
+    text-align: center;
 }
 
-.login-btn {
-    position: relative;
-    z-index: 501;
-    height: 2em;
-}
-  
-.login-btn_a {
-    position: relative;
-    display: inherit;
-    transform: translateX(50%);
-    margin-left: -3rem;
-    margin-right: auto;
-    margin-top: 0rem;
-    margin-bottom: 1rem;
-    text-decoration: underline;
-    z-index: 501;
+.center-anchor{
+    display: block;
+    text-align: center;
 }
 
 .down-arrow {
     border: solid black;
     border-width: 0 0.0325rem 0.0325rem 0;
-    margin-left: 0.5rem;
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
+    margin: 0.25rem 0rem 0.25rem 0.5rem;
     display: inline-block;
     padding: 0.25rem;
     transform: rotate(45deg);
@@ -323,25 +289,17 @@ li:active {
   
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
-    /*---- Title and Header css ---------*/
     .wrap-title_h1 {
       font-size: 1.625rem;
     }
   
     .logo-flip {
       display: none;
-    } 
-  
-    .logo {
-        width: 1.625rem;
-        height: 1.625rem;
-        display: inline-flex;
     }
-  
-    /*---- At this screen width, .login-links contains logo.jpg and NOT login links. --*/
-    /* .login-links {
-      margin-top: 0.3125rem;
-    } */
+
+    .login-btn {
+        margin: 1rem 0rem 0rem 0rem;
+    } 
 }
 /*-------------------------420px------------------------*/
 @media (min-width: 26.25rem) {
@@ -361,9 +319,8 @@ li:active {
     }
   
   
-    .login-links {
+    .wrap-login-links {
       position: relative;
-      z-index: 501;
       margin-left: 0;
       margin-right: 1rem;
       width: 9rem;
@@ -516,8 +473,7 @@ li:active {
     }
 }
 /*-------------------------960 px-----------------------*/
-@media (min-width: 60rem) {
- }
+@media (min-width: 60rem) {}
 /*--------------------------------1328 px---------------*/
 @media (min-width: 83rem) {
     .main-nav {
