@@ -6,16 +6,20 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { onMounted, reactive } from 'vue'
 import SiteHeader from '@/components/main-components/SiteHeader.vue'
 import SiteNav from '@/components/main-components/SiteNav.vue'
 import SiteFooter from '@/components/main-components/SiteFooter.vue'
 
 const header = reactive({ render: true })
-
+const title = "Systems Design DOT rocks"
 function renderHeader (val: boolean): void {
   header.render = val
 }
+
+onMounted(() => {
+  (document.getElementsByTagName("title")[0] as HTMLElement).innerHTML = title;
+});
 </script>
 
 <style>
