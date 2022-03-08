@@ -1,482 +1,482 @@
 @import "./site.module.css";
 
 .nav-container {
-    position: relative;
-    width: 96%;
-    margin: 1rem auto;
-    display: flex;
-    align-items: center;
-    background-color: var(--bg-colour-1);
+  position: relative;
+  width: 96%;
+  margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-colour-1);
 }
 
 .hr-tag {
-    margin: -0.25rem auto;
+  margin: -0.25rem auto;
 }
 
 .wrap-title {
-    position: relative;
-    display: inline-flex;
-    margin: auto auto;
-    align-items: center;
+  position: relative;
+  display: inline-flex;
+  margin: auto auto;
+  align-items: center;
 }
 .wrap-title_h1 {
-    position: relative;
-    margin-left: 0.3125rem;
-    display: inline-flex;
-    padding-bottom: 1%;
+  position: relative;
+  margin-left: 0.3125rem;
+  display: inline-flex;
+  padding-bottom: 1%;
 }
 .title-h1-anchor {
-    width: inherit;
-    height: inherit;
-    margin-left: auto;
-    margin-right: auto;
+  width: inherit;
+  height: inherit;
+  margin-left: auto;
+  margin-right: auto;
 }
 .logo, .logo-flip {
-    position: relative;
-    display: inline-flex;
-    width: 2rem;
+  position: relative;
+  display: inline-flex;
+  width: 2rem;
 }
 
 .main--nav--ani { animation: nav--ani--glow 5s infinite alternate; }
 
 @keyframes nav--ani--glow {
-    from { box-shadow: 0.0625rem 0.0625rem 0.625rem 0.1875rem rgb(105, 105, 134) inset; }
-    to { box-shadow: 0rem 0rem 0rem -0.025rem rgb(105, 105, 134) inset; }
+  from { box-shadow: 0.0625rem 0.0625rem 0.625rem 0.1875rem rgb(105, 105, 134) inset; }
+  to { box-shadow: 0rem 0rem 0rem -0.025rem rgb(105, 105, 134) inset; }
 }
   
 .main-nav {
-    position: fixed;
-    margin: 1rem auto;
-    z-index: 500;
-    width: 100%;
+  position: fixed;
+  margin: 1rem auto;
+  z-index: 500;
+  width: 100%;
 }
 
 .nav--up--ani {
-    animation: forwards;
-    animation-name: nav--up;
-    animation-duration: 800ms;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
+  animation: forwards;
+  animation-name: nav--up;
+  animation-duration: 800ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 }
 .nav--down--ani {
-    animation: forwards;
-    animation-name: nav--down, nav--ani--glow;
-    animation-duration: 500ms;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
+  animation: forwards;
+  animation-name: nav--down, nav--ani--glow;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 }
 
 @keyframes nav--up {
-    0% { top: 0; }
-    100% { top: -10rem; }
+  0% { top: 0; }
+  100% { top: -10rem; }
 }
 @keyframes nav--down {
-    0% { top: -10rem; }
-    100% { top: 0rem; }
+  0% { top: -10rem; }
+  100% { top: 0rem; }
 }
 
 .wrap-nav-links{
-    position: relative;
-    widows: 96%;
-    margin: 0.5rem 1rem;
-    display: none;
+  position: relative;
+  widows: 96%;
+  margin: 0.5rem 1rem;
+  display: none;
 }
  
 .nav-btn {
-    position: relative;
-    width: 2rem;
-    height: 2rem;
-    margin: 0.25rem auto auto auto;
-    padding: 0.1875rem;
-    display: inline-flex;
-    align-items: center;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  margin: 0.25rem auto auto auto;
+  padding: 0.1875rem;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-btn_svg {
-    width: 2rem;
+  width: 2rem;
 }
 
 .nav-links--is--closed {
-    animation-name: main--nav--close;
-    animation-fill-mode: forwards;
-    animation-duration: 500ms;
-    animation-timing-function: ease-in-out;
-    transform-origin: 50vw top;
+  animation-name: main--nav--close;
+  animation-fill-mode: forwards;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  transform-origin: 50vw top;
 }
 .nav-links--is--open {
-    animation-name: main--nav--open;
-    animation-fill-mode: forwards;
-    animation-duration: 500ms;
-    animation-timing-function: ease-in-out;
-    transform-origin: 50vw top;
+  animation-name: main--nav--open;
+  animation-fill-mode: forwards;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  transform-origin: 50vw top;
 }
 @keyframes main--nav--open {
-    0% {
-      width: 0%;
-      height: 0%;
-      opacity: 0;
-      transform: scaleX(0);
-      transform: scaleY(0);
-    }
+  0% {
+    width: 0%;
+    height: 0%;
+    opacity: 0;
+    transform: scaleX(0);
+    transform: scaleY(0);
+  }
 
-    25% {
-        opacity: 0.01;
-    }
+  25% {
+    opacity: 0.01;
+  }
 
-    100% {
-      width: 96%;
-      height: 100%;
-      opacity: 1;
-      margin: 0.5rem auto 1rem auto;
-      transform: scaleX(1);
-      transform: scaleY(1);
-    }
+  100% {
+    width: 96%;
+    height: 100%;
+    opacity: 1;
+    margin: 0.5rem auto 1rem auto;
+    transform: scaleX(1);
+    transform: scaleY(1);
+  }
 }
 
 @keyframes main--nav--close {
-    0% {
-        width: 96%;
-        height: 100%;
-        opacity: 1;
-        margin: 0rem auto 1rem auto;
-        transform: scaleX(1);
-        transform: scaleY(1);
-    }
+  0% {
+    width: 96%;
+    height: 100%;
+    opacity: 1;
+    margin: 0rem auto 1rem auto;
+    transform: scaleX(1);
+    transform: scaleY(1);
+  }
 
-    75% {
-        opacity: 0.01;
-    }
+  75% {
+    opacity: 0.01;
+  }
 
-    100% {
-        width: 0%;
-        height: 0%;
-        left: 50vw;
-        opacity: 0;
-        transform: scaleX(0);
-        transform: scaleY(0);
-    }
+  100% {
+    width: 0%;
+    height: 0%;
+    left: 50vw;
+    opacity: 0;
+    transform: scaleX(0);
+    transform: scaleY(0);
+  }
 }
 /************************ START navDropDown & nddOpenClose animation ******************************/
 .nav-drop-downs {
-    position: absolute;
-    max-width: 12rem;
-    background-color: var(--bg-colour-1);
-    display: none;
-    z-index: 510;
+  position: absolute;
+  max-width: 12rem;
+  background-color: var(--bg-colour-1);
+  display: none;
+  z-index: 510;
 }
 .nav-drop-downs_li {
-    margin: 1rem auto;
+  margin: 1rem auto;
 }
 .ndd--is--closed {
-    animation-name: ndd--close;
-    animation-fill-mode: forwards;
-    animation-duration: 500ms;
-    animation-timing-function: ease-in-out;
-    transform-origin: center top;
+  animation-name: ndd--close;
+  animation-fill-mode: forwards;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  transform-origin: center top;
 }
 @keyframes ndd--close {
-    0% {
-      width: 12rem;
-      height: auto;
-      margin-top: 1rem;
-      left: calc(50% - 6rem);
-      transform: scale(1);
-      opacity: 1;
-    }
-  
-    100% {
-      width: 0%;
-      height: 0;
-      margin-top: -1rem;
-      transform: scale(0);
-      left: 50%;
-      opacity: 0;
-    }
+  0% {
+    width: 12rem;
+    height: auto;
+    margin-top: 1rem;
+    left: calc(50% - 6rem);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    width: 0%;
+    height: 0;
+    margin-top: -1rem;
+    transform: scale(0);
+    left: 50%;
+    opacity: 0;
+  }
 }
 .ndd--is--open {
-    animation-name: ndd--open;
-    animation-fill-mode: forwards;
-    animation-duration: 500ms;
-    animation-timing-function: ease-in-out;
-    transform-origin: center top;
+  animation-name: ndd--open;
+  animation-fill-mode: forwards;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  transform-origin: center top;
 }
 @keyframes ndd--open {
-    0% {
-      width: 0%;
-      height: 0;
-      margin-top: -1rem;
-      transform: scale(0);
-      left: 50%;
-      opacity: 0;
-    }
-  
-    100% {
-      width: 12rem;
-      height: auto;
-      margin-top: 1rem;
-      transform: scale(1);
-      left: calc(50% - 6rem);
-      opacity: 1;
-    }
+  0% {
+    width: 0%;
+    height: 0;
+    margin-top: -1rem;
+    transform: scale(0);
+    left: 50%;
+    opacity: 0;
+  }
+
+  100% {
+    width: 12rem;
+    height: auto;
+    margin-top: 1rem;
+    transform: scale(1);
+    left: calc(50% - 6rem);
+    opacity: 1;
+  }
 }
 /************************ END navDropDown & ndd--openClose animation ******************************/
  
 .nav-links {
-    position: relative;
-    display: block;
-    margin: 1rem 0rem 0rem 0rem;
-    background-color: var(--bg-colour-1);
+  position: relative;
+  display: block;
+  margin: 1rem 0rem 0rem 0rem;
+  background-color: var(--bg-colour-1);
 }
 
 .nav-links > li {
-    width: 100%;
-    min-height: 1.5rem;
-    margin: 1.5rem auto 1.5rem auto;
-    text-align: center;
+  width: 100%;
+  min-height: 1.5rem;
+  margin: 1.5rem auto 1.5rem auto;
+  text-align: center;
 }
   
 /* --- start hover styles <li> and <a>-------*/
 a:hover {
-    color: var(--a-hover-colour);
-    font-weight: normal;
+  color: var(--a-hover-colour);
+  font-weight: normal;
 }
 .nav-btn:hover,
 .login-btn:hover,
 li:hover {
-    background: linear-gradient( 
-      to right,
-      var(--navlink-gradient-hov-1) 0%,
-      var(--navlink-gradient-hov-2) 50%,
-      var(--navlink-gradient-hov-3) 100%
-    );
+  background: linear-gradient( 
+    to right,
+    var(--navlink-gradient-hov-1) 0%,
+    var(--navlink-gradient-hov-2) 50%,
+    var(--navlink-gradient-hov-3) 100%
+  );
 }
   
 .nav-btn:active,
 .login-btn:active,
 li:active {
-    background: linear-gradient(
-      to right,
-      var(--navlink-gradient-active-1) 50%,
-      var(--navlink-gradient-active-2) 100%
-    );
+  background: linear-gradient(
+    to right,
+    var(--navlink-gradient-active-1) 50%,
+    var(--navlink-gradient-active-2) 100%
+  );
 }
 /* --- end  hover styles on <li> and <a>-------*/
   
 /*---------login links--------------*/
 .wrap-login-links {
-    position: relative;
-    display: flex;
+  position: relative;
+  display: flex;
 }
  
 .login-btn_a {
-    display: block;
-    text-align: center;
+  display: block;
+  text-align: center;
 }
 
 .center-anchor{
-    display: block;
-    text-align: center;
+  display: block;
+  text-align: center;
 }
 
 .down-arrow {
-    border: solid black;
-    border-width: 0 0.0325rem 0.0325rem 0;
-    margin: 0.25rem 0rem 0.25rem 0.5rem;
-    display: inline-block;
-    padding: 0.25rem;
-    transform: rotate(45deg);
+  border: solid black;
+  border-width: 0 0.0325rem 0.0325rem 0;
+  margin: 0.25rem 0rem 0.25rem 0.5rem;
+  display: inline-block;
+  padding: 0.25rem;
+  transform: rotate(45deg);
 }
   
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
-    .wrap-title_h1 {
-      font-size: 1.625rem;
-    }
-  
-    .logo-flip {
-      display: none;
-    }
+  .wrap-title_h1 {
+    font-size: 1.625rem;
+  }
 
-    .login-btn {
-        margin: 1rem 0rem 0rem 0rem;
-    } 
+  .logo-flip {
+    display: none;
+  }
+
+  .login-btn {
+    margin: 1rem 0rem 0rem 0rem;
+  } 
 }
 /*-------------------------420px------------------------*/
 @media (min-width: 26.25rem) {
 }
 /*--- Nav from desktop to mobile -640px- login links moved with js-------------------*/
 @media (min-width: 40rem) {
-    li {
-      text-decoration: none;
+  li {
+    text-decoration: none;
+  }
+
+  .logo,
+  .logo-flip {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    margin: auto 1rem;
+  }
+
+
+  .wrap-login-links {
+    position: relative;
+    margin-left: 0;
+    margin-right: 1rem;
+    width: 9rem;
+    line-height: 1.75rem;
+  }
+
+  #loginBtn {
+    margin-top: 0.125rem;
+    margin-bottom: auto;
+    width: 9rem;
+  }
+
+  #loginBtn > div > a {
+    position: relative;
+    width: 7rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    transform: none;
+    text-align: center;
+  }
+
+  .nav-links {
+    padding: 0rem;
+    display: inline-flex;
+    width: 96%;
+    align-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-style: inset;
+    border-width: 0.15rem;
+    border-radius: 0.1875rem;
+  }
+
+  .nav-links > li {
+    display: inline-flex;
+    align-content: center;
+    width: 100%;
+    min-height: 1.5rem;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .nav-links li a {
+    position: relative;
+    align-self: center;
+    margin: auto;
+  }
+
+  @keyframes main--nav--open {
+    0% {
+      width: 0%;
+      height: 0%;
+      opacity: 0;
     }
-  
-    .logo,
-    .logo-flip {
-      display: inline-flex;
-      width: 2rem;
-      height: 2rem;
-      margin: auto 1rem;
-    }
-  
-  
-    .wrap-login-links {
-      position: relative;
-      margin-left: 0;
-      margin-right: 1rem;
-      width: 9rem;
-      line-height: 1.75rem;
-    }
-  
-    #loginBtn {
-      margin-top: 0.125rem;
-      margin-bottom: auto;
-      width: 9rem;
-    }
-  
-    #loginBtn > div > a {
-      position: relative;
-      width: 7rem;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 0;
-      margin-bottom: 0;
-      transform: none;
-      text-align: center;
-    }
-  
-    .nav-links {
-      padding: 0rem;
-      display: inline-flex;
+
+    100% {
       width: 96%;
-      align-content: center;
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: 1rem;
+      height: 100%;
+      opacity: 1;
       margin-bottom: 1rem;
-      border-style: inset;
-      border-width: 0.15rem;
-      border-radius: 0.1875rem;
-    }
-  
-    .nav-links > li {
-      display: inline-flex;
-      align-content: center;
-      width: 100%;
-      min-height: 1.5rem;
-      margin-bottom: 0rem;
-      margin-top: 0rem;
       margin-left: auto;
       margin-right: auto;
-      text-align: center;
+      margin-top: 0rem;
     }
-  
-    .nav-links li a {
+  }
+
+  @keyframes main--nav--close {
+    0% {
+      width: 96%;
+      height: 100%;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    100% {
+      width: 0%;
+      height: 0%;
+      visibility: visible;
+      opacity: 0;
+      display: none;
+    }
+  }
+  /************************ START navDropDown & ndd--openClose animation ******************************/
+  @keyframes ndd--open {
+    0% {
       position: relative;
-      align-self: center;
-      margin: auto;
     }
-  
-    @keyframes main--nav--open {
-      0% {
-        width: 0%;
-        height: 0%;
-        opacity: 0;
-      }
-  
-      100% {
-        width: 96%;
-        height: 100%;
-        opacity: 1;
-        margin-bottom: 1rem;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 0rem;
-      }
+
+    1% {
+      position: absolute;
+      width: 0%;
+      height: 0rem;
+      margin-top: 0rem;
+      margin-left: 0%;
+      margin-right: 0%;
+      margin-bottom: 0;
+      transform: scale(0);
+      opacity: 0;
     }
-  
-    @keyframes main--nav--close {
-      0% {
-        width: 96%;
-        height: 100%;
-        visibility: visible;
-        opacity: 1;
-      }
-  
-      100% {
-        width: 0%;
-        height: 0%;
-        visibility: visible;
-        opacity: 0;
-        display: none;
-      }
+
+    100% {
+      position: absolute;
+      width: 100%;
+      height: auto;
+      margin-top: 3rem;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 0;
+      transform: scale(1);
+      opacity: 1;
     }
-    /************************ START navDropDown & ndd--openClose animation ******************************/
-    @keyframes ndd--open {
-      0% {
-        position: relative;
-      }
-  
-      1% {
-        position: absolute;
-        width: 0%;
-        height: 0rem;
-        margin-top: 0rem;
-        margin-left: 0%;
-        margin-right: 0%;
-        margin-bottom: 0;
-        transform: scale(0);
-        opacity: 0;
-      }
-  
-      100% {
-        position: absolute;
-        width: 100%;
-        height: auto;
-        margin-top: 3rem;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 0;
-        transform: scale(1);
-        opacity: 1;
-      }
+  }
+
+  @keyframes ndd--close {
+    0% {
+      position: absolute;
+      width: 100%;
+      height: auto;
+      margin-top: 3rem;
+      transform: scale(1);
+      opacity: 1;
     }
-  
-    @keyframes ndd--close {
-      0% {
-        position: absolute;
-        width: 100%;
-        height: auto;
-        margin-top: 3rem;
-        transform: scale(1);
-        opacity: 1;
-      }
-  
-      99%{
-        position: absolute;
-      }
-  
-      100% {
-        position: relative;
-        width: 0%;
-        height: 0rem;
-        margin-top: 0rem;
-        transform: scale(0);
-        opacity: 0;
-      }
+
+    99%{
+      position: absolute;
     }
-    /************************ END navDropDown & ndd--openClose animation ******************************/
+
+    100% {
+      position: relative;
+      width: 0%;
+      height: 0rem;
+      margin-top: 0rem;
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+  /************************ END navDropDown & ndd--openClose animation ******************************/
 }
 /*---------------------728px-----------------------------*/
 @media (min-width: 45.5rem) {
-    .wrap-title_h1 {
-      font-size: 2rem;
-    }
+  .wrap-title_h1 {
+    font-size: 2rem;
+  }
 }
 /*-------------------------960 px-----------------------*/
 @media (min-width: 60rem) {}
 /*--------------------------------1328 px---------------*/
 @media (min-width: 83rem) {
-    .main-nav {
-      max-width: 83rem;
-    }
+  .main-nav {
+    max-width: 83rem;
+  }
 }
