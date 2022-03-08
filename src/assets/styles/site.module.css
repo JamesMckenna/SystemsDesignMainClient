@@ -13,14 +13,13 @@
 .col-12 {width: 100%;}
 
 /*--------------Helpers--------------------------------*/
-.autoMargin {margin: auto auto;}
+.auto-margin {margin: auto auto;}
 .inLineBlock {display: inline-block;}
 .inlineFlex {display: inline-flex;}
 .textCenter {text-align: center;}
 .text-danger {color: rgb(255, 0, 0);}
 .floatLeft {float: left;}
 .floatRight {float: right;}
-
 
 :root {
     --bgcolor1: chartreuse;
@@ -118,7 +117,7 @@ a:hover {
 }
 
 li{
-    display:block;
+    display: block;
 }
 
 html {
@@ -141,8 +140,6 @@ body {
     box-sizing: border-box;
     min-height: 100vh;
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     box-shadow: 0 0 200px rgba(0, 0, 0, 0.5) inset; /* vinyette */
 }
