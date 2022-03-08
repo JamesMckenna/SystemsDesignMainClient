@@ -37,15 +37,15 @@
     width: 2rem;
 }
 
-.main--nav--ani { animation: main--nav--ani 5s infinite alternate; }
+.main--nav--ani { animation: nav--ani--glow 5s infinite alternate; }
 
-@keyframes main--nav--ani {
+@keyframes nav--ani--glow {
     from { box-shadow: 0.0625rem 0.0625rem 0.625rem 0.1875rem rgb(105, 105, 134) inset; }
     to { box-shadow: 0rem 0rem 0rem -0.025rem rgb(105, 105, 134) inset; }
 }
   
 .main-nav {
-    position: relative;
+    position: fixed;
     margin: 1rem auto;
     z-index: 500;
     width: 100%;
@@ -60,7 +60,7 @@
 }
 .nav--down--ani {
     animation: forwards;
-    animation-name: nav--down;
+    animation-name: nav--down, nav--ani--glow;
     animation-duration: 500ms;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
@@ -127,13 +127,13 @@
       width: 96%;
       height: 100%;
       opacity: 1;
-      margin: 0rem auto 1rem auto;
+      margin: 0.5rem auto 1rem auto;
       transform: scaleX(1);
       transform: scaleY(1);
     }
-  }
+}
 
-  @keyframes main--nav--close {
+@keyframes main--nav--close {
     0% {
         width: 96%;
         height: 100%;
@@ -155,7 +155,7 @@
         transform: scaleX(0);
         transform: scaleY(0);
     }
-  }
+}
 /************************ START navDropDown & nddOpenClose animation ******************************/
 .nav-drop-downs {
     position: absolute;

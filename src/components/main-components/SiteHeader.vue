@@ -13,9 +13,9 @@
 
 <style scoped>
   #site-header {
-    box-sizing: border-box;
     height: 10rem;
-    margin-top: 5.5rem;
+    position: relative;
+    /* margin-top: 5.5rem; */
     background-color: var(--bgcolor3);
   }
 
@@ -27,7 +27,6 @@
   .right-header-img {
     position: relative;
     top:-3px;
-    box-sizing: border-box;
     background-image: url("../../assets/images/DamagedCode.jpg") ;
     background-size: cover;
     background-repeat: no-repeat;
@@ -35,9 +34,9 @@
   }
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
-  #site-header{
+  #site-header {
     height: 26rem;
-    margin-top: 5.5rem;
+    /* margin-top: 5.5rem; */
     margin-bottom: 3rem;
     display: block;
     background-color: var(--bgcolor3);
@@ -78,7 +77,7 @@
     display: grid;
     grid-template-columns: 12rem auto 12rem;
     height: 10rem;
-    margin-top: 5.5rem;
+    /* margin-top: 5.5rem; */
     background-color: var(--bgcolor3);
   }
 
@@ -111,7 +110,6 @@
 /*-------------------------960 px-----------------------*/
 @media (min-width: 60rem) {
   #site-header {
-    box-sizing: border-box;
     display: grid;
     grid-template-columns: 15rem auto 15rem;
     height: 10rem;

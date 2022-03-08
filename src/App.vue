@@ -12,20 +12,21 @@ import SiteNav from '@/components/main-components/SiteNav.vue'
 import SiteFooter from '@/components/main-components/SiteFooter.vue'
 
 const header = reactive({ render: true })
-const title = "Systems Design DOT rocks"
+const title = 'Systems Design DOT rocks'
 function renderHeader (val: boolean): void {
   header.render = val
 }
 
 onMounted(() => {
-  (document.getElementsByTagName("title")[0] as HTMLElement).innerHTML = title;
-});
+  (document.getElementsByTagName('title')[0] as HTMLElement).innerHTML = title
+})
 </script>
 
 <style>
 #app {
   margin: auto auto;
   position: relative;
+  top:0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
