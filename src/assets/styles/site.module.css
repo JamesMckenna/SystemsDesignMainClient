@@ -24,7 +24,7 @@
 :root {
     --bgcolor1: chartreuse;
     --bgcolor2: white;
-    --bgcolor3: yellow;
+    --bgcolor3: #3f532a;
   
     --h-tag-colour: #696986;
     --shadow-text-offset: 0.0625rem 0.0625rem 0.0625rem #fff;
