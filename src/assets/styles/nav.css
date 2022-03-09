@@ -243,7 +243,8 @@ a:hover {
 }
 .nav-btn:hover,
 .login-btn:hover,
-li:hover {
+.nav-links_li:hover,
+.nav-drop-downs_li:hover {
   background: linear-gradient( 
     to right,
     var(--navlink-gradient-hov-1) 0%,
@@ -254,7 +255,8 @@ li:hover {
   
 .nav-btn:active,
 .login-btn:active,
-li:active {
+.nav-links_li:active,
+.nav-drop-downs_li:active {
   background: linear-gradient(
     to right,
     var(--navlink-gradient-active-1) 50%,
