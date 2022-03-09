@@ -199,9 +199,13 @@ const nddOpenClose = (evt: Event): void => {
     return
   }
 
-  if (document.querySelector('.ndd--is--open')) { closeOpenNDDs(ulDropDown as HTMLElement) }
+  if (document.querySelector('.ndd--is--open')) {
+    closeOpenNDDs(ulDropDown as HTMLElement)
+  }
 
-  if (ulDropDown.classList.contains('ndd--is--open') && !ulDropDown.hasAttribute('data-mobile')) { ulDropDown.addEventListener('animationend', nddOpenCloseEventListener, true) }
+  if (ulDropDown.classList.contains('ndd--is--open') && !ulDropDown.hasAttribute('data-mobile')) {
+    ulDropDown.addEventListener('animationend', nddOpenCloseEventListener, true)
+  }
 
   if (ulDropDown.classList.contains('ndd--is--open')) {
     ulDropDown.classList.remove('ndd--is--open')

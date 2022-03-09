@@ -187,7 +187,7 @@
   0% {
     width: 12rem;
     height: auto;
-    margin-top: 1rem;
+    margin-top: 2rem;
     left: calc(50% - 6rem);
     transform: scale(1);
     opacity: 1;
@@ -222,7 +222,7 @@
   100% {
     width: 12rem;
     height: auto;
-    margin-top: 1rem;
+    margin-top: 2rem;
     transform: scale(1);
     left: calc(50% - 6rem);
     opacity: 1;
@@ -301,7 +301,8 @@ li:active {
   }
 
   .login-btn {
-    margin: 1rem 0rem 0rem 0rem;
+    height: 2rem;
+    margin: 1rem 0rem 1rem 0rem;
   }
   
   .nav-links_li {
@@ -311,7 +312,7 @@ li:active {
   }
 
   .nav-links_li_a {
-    margin: 1rem auto 1rem auto;
+    margin: 0rem auto 2rem auto;
   }
 }
 /*-------------------------420px------------------------*/
