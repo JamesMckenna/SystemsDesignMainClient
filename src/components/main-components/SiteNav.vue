@@ -4,7 +4,7 @@
       <hr class="hr-tag"/>
       <div class="nav-container theme-border theme-shadow">
 
-        <div class="auto-margin">
+        <div class="auto-margin wrap-nav-btn">
           <button id="navBtn" class="nav-btn theme-border theme-shadow" title="Open / Close Nav" aria-label="Open / Close Nav" type="button">
             <svg class="nav-btn_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
               <g>
@@ -219,7 +219,7 @@ const nddOpenClose = (evt: Event): void => {
   evt.stopPropagation()
 }
 const nddOpenCloseEventListener = (evt: Event) => {
-  if ((evt as AnimationEvent).animationName === 'ndd--close') {
+  if ((evt as AnimationEvent).animationName === 'close--ndd') {
     openCloseNav(evt);
     (evt.target! as HTMLElement).removeEventListener('animationend', nddOpenCloseEventListener, true)
   }
