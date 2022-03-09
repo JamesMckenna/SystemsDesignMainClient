@@ -37,13 +37,20 @@
   width: 2rem;
 }
 
-.main--nav--ani { animation: nav--ani--glow 5s infinite alternate; }
-
-@keyframes nav--ani--glow {
-  from { box-shadow: 0.0625rem 0.0625rem 0.625rem 0.1875rem rgb(105, 105, 134) inset; }
-  to { box-shadow: 0rem 0rem 0rem -0.025rem rgb(105, 105, 134) inset; }
+.nav--glow--ani { 
+  animation: nav--ani--glow 4s infinite alternate;
 }
-  
+@keyframes nav--ani--glow {
+  from { 
+    box-shadow: 0.0625rem 0.0625rem 0.625rem 0.1875rem rgb(105, 105, 134) inset; 
+    height: initial;
+  }
+  to { 
+    box-shadow: 0rem 0rem 0rem -0.025rem rgb(105, 105, 134) inset; 
+    height: auto;
+  }
+}
+
 .main-nav {
   position: fixed;
   margin: 1rem auto;
@@ -52,23 +59,20 @@
 }
 
 .nav--up--ani {
-  animation: forwards;
   animation-name: nav--up;
   animation-duration: 800ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
 }
-.nav--down--ani {
-  animation: forwards;
-  animation-name: nav--down, nav--ani--glow;
-  animation-duration: 500ms;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-out;
-}
-
 @keyframes nav--up {
   0% { top: 0; }
   100% { top: -10rem; }
+}
+.nav--down--ani {
+  animation-name: nav--down;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 }
 @keyframes nav--down {
   0% { top: -10rem; }
@@ -97,24 +101,48 @@
 }
 
 .nav-links--is--closed {
-  animation-name: main--nav--close;
+  animation-name: close--nav--links;
   animation-fill-mode: forwards;
   animation-duration: 500ms;
   animation-timing-function: ease-in-out;
-  transform-origin: 50vw top;
+  transform-origin: center top;
+}
+@keyframes close--nav--links {
+  0% {
+    width: 96%;
+    height: 100%;
+    opacity: 1;
+    margin: 0rem auto 1rem auto;
+    transform: scaleX(1);
+    transform: scaleY(1);
+  }
+
+  75% {
+    opacity: 0.01;
+  }
+
+  100% {
+    width: 0%;
+    height: 0%;
+    opacity: 0;
+    margin: auto auto;
+    transform: scaleX(0);
+    transform: scaleY(0);
+  }
 }
 .nav-links--is--open {
-  animation-name: main--nav--open;
+  animation-name: open--nav--links;
   animation-fill-mode: forwards;
   animation-duration: 500ms;
   animation-timing-function: ease-in-out;
-  transform-origin: 50vw top;
+  transform-origin: center top;
 }
-@keyframes main--nav--open {
+@keyframes open--nav--links {
   0% {
     width: 0%;
     height: 0%;
     opacity: 0;
+    margin: auto auto;
     transform: scaleX(0);
     transform: scaleY(0);
   }
@@ -132,31 +160,7 @@
     transform: scaleY(1);
   }
 }
-
-@keyframes main--nav--close {
-  0% {
-    width: 96%;
-    height: 100%;
-    opacity: 1;
-    margin: 0rem auto 1rem auto;
-    transform: scaleX(1);
-    transform: scaleY(1);
-  }
-
-  75% {
-    opacity: 0.01;
-  }
-
-  100% {
-    width: 0%;
-    height: 0%;
-    left: 50vw;
-    opacity: 0;
-    transform: scaleX(0);
-    transform: scaleY(0);
-  }
-}
-/************************ START navDropDown & nddOpenClose animation ******************************/
+/*** START navDropDown & nddOpenClose animation ***/
 .nav-drop-downs {
   position: absolute;
   max-width: 12rem;
@@ -165,20 +169,25 @@
   z-index: 510;
 }
 .nav-drop-downs_li {
-  margin: 1rem auto;
+  margin: 1rem auto 1rem auto;
+}
+.nav-drop-downs_li_a {
+  display: block;
+  margin: auto auto;
+  text-align: center;
 }
 .ndd--is--closed {
-  animation-name: ndd--close;
+  animation-name: close--ndd;
   animation-fill-mode: forwards;
   animation-duration: 500ms;
   animation-timing-function: ease-in-out;
   transform-origin: center top;
 }
-@keyframes ndd--close {
+@keyframes close--ndd {
   0% {
     width: 12rem;
     height: auto;
-    margin-top: 1rem;
+    margin-top: 2rem;
     left: calc(50% - 6rem);
     transform: scale(1);
     opacity: 1;
@@ -194,13 +203,13 @@
   }
 }
 .ndd--is--open {
-  animation-name: ndd--open;
+  animation-name: open-ndd;
   animation-fill-mode: forwards;
   animation-duration: 500ms;
   animation-timing-function: ease-in-out;
   transform-origin: center top;
 }
-@keyframes ndd--open {
+@keyframes open-ndd {
   0% {
     width: 0%;
     height: 0;
@@ -213,13 +222,13 @@
   100% {
     width: 12rem;
     height: auto;
-    margin-top: 1rem;
+    margin-top: 2rem;
     transform: scale(1);
     left: calc(50% - 6rem);
     opacity: 1;
   }
 }
-/************************ END navDropDown & ndd--openClose animation ******************************/
+/*** END navDropDown & open-nddClose animation ***/
  
 .nav-links {
   position: relative;
@@ -227,14 +236,6 @@
   margin: 1rem 0rem 0rem 0rem;
   background-color: var(--bg-colour-1);
 }
-
-.nav-links > li {
-  width: 100%;
-  min-height: 1.5rem;
-  margin: 1.5rem auto 1.5rem auto;
-  text-align: center;
-}
-  
 /* --- start hover styles <li> and <a>-------*/
 a:hover {
   color: var(--a-hover-colour);
@@ -267,15 +268,12 @@ li:active {
   position: relative;
   display: flex;
 }
- 
+
 .login-btn_a {
   display: block;
   text-align: center;
-}
-
-.center-anchor{
-  display: block;
-  text-align: center;
+  min-width: 9rem;
+  line-height: 1.5rem;
 }
 
 .down-arrow {
@@ -290,7 +288,7 @@ li:active {
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
   .wrap-title_h1 {
-    font-size: 1.625rem;
+    font-size: 1.5rem;
   }
 
   .logo-flip {
@@ -298,18 +296,37 @@ li:active {
   }
 
   .login-btn {
-    margin: 1rem 0rem 0rem 0rem;
-  } 
+    display: flex;
+    height: 3rem;
+    margin: 2rem auto 0rem auto;
+  }
+  .login-btn_a{
+    display: block;
+    height: 2rem;
+    margin: auto auto 1rem auto;
+  }
+
+  .nav-links_li {
+    display: inline-flex;
+    width: 100%;
+    min-height: 1.5rem;
+  }
+  .nav-links_li_a {
+    margin: 0rem auto 2rem auto;
+  }
 }
 /*-------------------------420px------------------------*/
 @media (min-width: 26.25rem) {
 }
 /*--- Nav from desktop to mobile -640px- login links moved with js-------------------*/
 @media (min-width: 40rem) {
-  li {
-    text-decoration: none;
+  
+  .nav-container {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1.5fr;
+    justify-items: auto;
   }
-
+  
   .logo,
   .logo-flip {
     display: inline-flex;
@@ -318,100 +335,47 @@ li:active {
     margin: auto 1rem;
   }
 
-
-  .wrap-login-links {
-    position: relative;
-    margin-left: 0;
-    margin-right: 1rem;
-    width: 9rem;
-    line-height: 1.75rem;
+  .wrap-nav-btn,
+  .wrap-title_h1 {
+    justify-self: auto;
   }
 
-  #loginBtn {
-    margin-top: 0.125rem;
-    margin-bottom: auto;
-    width: 9rem;
-  }
-
-  #loginBtn > div > a {
-    position: relative;
-    width: 7rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-    transform: none;
-    text-align: center;
+  .login-btn {
+    margin: auto 0rem;
+    justify-self: auto;
+  } 
+  .login-btn_a {
+    display: flex;
+    margin: auto;
+    align-items:center;
+    justify-content:center;
+  } 
+  .login-btn_a > .down-arrow {
+    margin: 0.25rem 0rem 0.75rem 0.5rem
   }
 
   .nav-links {
-    padding: 0rem;
     display: inline-flex;
     width: 96%;
     align-content: center;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border-style: inset;
-    border-width: 0.15rem;
-    border-radius: 0.1875rem;
+    margin: 1rem auto;
   }
-
-  .nav-links > li {
+  .nav-links_li {
     display: inline-flex;
     align-content: center;
     width: 100%;
     min-height: 1.5rem;
-    margin-bottom: 0rem;
-    margin-top: 0rem;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
   }
-
-  .nav-links li a {
+  .nav-links_li_a {
     position: relative;
     align-self: center;
     margin: auto;
   }
-
-  @keyframes main--nav--open {
-    0% {
-      width: 0%;
-      height: 0%;
-      opacity: 0;
-    }
-
-    100% {
-      width: 96%;
-      height: 100%;
-      opacity: 1;
-      margin-bottom: 1rem;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 0rem;
-    }
+  .nav-links_li_a > .down-arrow {
+    margin: 0.25rem 0rem 0.25rem 0.5rem
   }
-
-  @keyframes main--nav--close {
-    0% {
-      width: 96%;
-      height: 100%;
-      visibility: visible;
-      opacity: 1;
-    }
-
-    100% {
-      width: 0%;
-      height: 0%;
-      visibility: visible;
-      opacity: 0;
-      display: none;
-    }
-  }
-  /************************ START navDropDown & ndd--openClose animation ******************************/
-  @keyframes ndd--open {
+  @keyframes open-ndd {
     0% {
       position: relative;
     }
@@ -420,33 +384,27 @@ li:active {
       position: absolute;
       width: 0%;
       height: 0rem;
-      margin-top: 0rem;
-      margin-left: 0%;
-      margin-right: 0%;
-      margin-bottom: 0;
+      margin: 0rem 0rem;
       transform: scale(0);
       opacity: 0;
     }
 
     100% {
       position: absolute;
-      width: 100%;
+      min-width: 8rem;
       height: auto;
-      margin-top: 3rem;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 0;
+      margin: 3rem 0 0rem 0;
       transform: scale(1);
       opacity: 1;
     }
   }
 
-  @keyframes ndd--close {
+  @keyframes close--ndd {
     0% {
       position: absolute;
-      width: 100%;
+      min-width: 8rem;
       height: auto;
-      margin-top: 3rem;
+      margin: 3rem auto 0rem auto;
       transform: scale(1);
       opacity: 1;
     }
@@ -459,12 +417,11 @@ li:active {
       position: relative;
       width: 0%;
       height: 0rem;
-      margin-top: 0rem;
+      margin: 0rem 0rem;
       transform: scale(0);
       opacity: 0;
     }
   }
-  /************************ END navDropDown & ndd--openClose animation ******************************/
 }
 /*---------------------728px-----------------------------*/
 @media (min-width: 45.5rem) {
@@ -473,7 +430,54 @@ li:active {
   }
 }
 /*-------------------------960 px-----------------------*/
-@media (min-width: 60rem) {}
+@media (min-width: 60rem) {
+  @keyframes open-ndd {
+    0% {
+      position: relative;
+    }
+
+    1% {
+      position: absolute;
+      width: 0%;
+      height: 0rem;
+      margin: 0rem 0rem;
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    100% {
+      position: absolute;
+      width: 12rem;
+      height: auto;
+      margin: 3rem auto 0rem auto;
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes close--ndd {
+    0% {
+      position: absolute;
+      width: 12rem;
+      height: auto;
+      margin: 3rem auto 0rem auto;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    99%{
+      position: absolute;
+    }
+
+    100% {
+      position: relative;
+      width: 0%;
+      height: 0rem;
+      margin: 0rem 0rem;
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+}
 /*--------------------------------1328 px---------------*/
 @media (min-width: 83rem) {
   .main-nav {
