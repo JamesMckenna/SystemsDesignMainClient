@@ -1,5 +1,5 @@
 <template>
-  <div class="body-container">
+  <div>
     <h2>About This Application</h2>
     <p>
       The current project is a blogging / document creation application built with a VueJs client and .NET Core for the backend. There is a crazy amount of backend development to be completed before
@@ -51,12 +51,16 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, defineEmits } from 'vue'
+import { onBeforeMount, onMounted, defineEmits } from 'vue'
 
 const emits = defineEmits(['renderHeader'])
 
-onMounted(() => {
+onBeforeMount(() => {
   emits('renderHeader', false)
+})
+
+onMounted(() => {
+  document.getElementById('content-area')!.classList.add('renderd-content')
 })
 </script>
 

@@ -1,25 +1,26 @@
 <template>
   <site-nav />
   <site-header v-bind:is="'site-header'" v-if="header.render" />
-  <router-view v-on:renderHeader="renderHeader" />
+  <router-view id="content-area" v-on:renderHeader="renderHeader" />
   <site-footer />
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
+import { onBeforeMount, reactive } from 'vue'
 import SiteHeader from '@/components/main-components/SiteHeader.vue'
 import SiteNav from '@/components/main-components/SiteNav.vue'
 import SiteFooter from '@/components/main-components/SiteFooter.vue'
 
 const header = reactive({ render: true })
 const title = 'Systems Design DOT rocks'
-function renderHeader (val: boolean): void {
+const renderHeader = (val: boolean): void => {
   header.render = val
 }
 
-onMounted(() => {
+onBeforeMount(() => {
   (document.getElementsByTagName('title')[0] as HTMLElement).innerHTML = title
 })
+
 </script>
 
 <style>
@@ -30,7 +31,10 @@ onMounted(() => {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.renderd-content {
+  position: relative;
+  top: 9rem;
+}
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
   #app {
