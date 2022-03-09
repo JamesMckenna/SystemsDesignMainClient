@@ -29,10 +29,10 @@
             <a role="button" class="login-btn_a" v-if="isLoggedIn" aria-label="Open / Close Logout and Account Links">Hi<i class="down-arrow"></i></a>
             <a role="button" class="login-btn_a" v-else aria-label="Login and Account Links">Log In<i class="down-arrow"></i></a>
             <ul id="login" data-mobile class="nav-drop-downs ndd--is--closed theme-border theme-shadow" style="display: none;">
-              <li v-if="isLoggedIn" data-move class="nav-drop-downs_li"><a class="center-anchor" @click="redirect" aria-label="Account"><u>Account</u></a></li>
-              <li v-else data-move class="nav-drop-downs_li"><a class="center-anchor" :href="registerAccount" aria-label="Sign Up"><u>Sign Up</u></a></li>
-              <li v-if="isLoggedIn" data-move class="nav-drop-downs_li"><a class="center-anchor" @click="store.dispatch('logout', null, { root: true })" aria-label="Log Out"><u>Log Out</u></a></li>
-              <li v-else data-move class="nav-drop-downs_li"><a class="center-anchor" @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
+              <li v-if="isLoggedIn" data-move class="nav-drop-downs_li"><a class="nav-drop-downs_li_a" @click="redirect" aria-label="Account"><u>Account</u></a></li>
+              <li v-else data-move class="nav-drop-downs_li"><a class="nav-drop-downs_li_a" :href="registerAccount" aria-label="Sign Up"><u>Sign Up</u></a></li>
+              <li v-if="isLoggedIn" data-move class="nav-drop-downs_li"><a class="nav-drop-downs_li_a" @click="store.dispatch('logout', null, { root: true })" aria-label="Log Out"><u>Log Out</u></a></li>
+              <li v-else data-move class="nav-drop-downs_li"><a class="nav-drop-downs_li_a" @click="store.dispatch('setLoggedInState', null, { root: true })" aria-label="Log In"><u>Log In</u></a></li>
             </ul>
           </div>
         </div>
@@ -46,9 +46,9 @@
           <li class="auto-margin nav-links_li">
             <a role="button" class="nav-links_li_a">Home<i class="down-arrow"></i></a>
             <ul class="nav-drop-downs ndd--is--closed theme-border theme-shadow" style="display: none;">
-              <li class="nav-drop-downs_li"><router-link to="/" aria-label="Home">Home</router-link></li>
-              <li class="nav-drop-downs_li"><router-link to="/About" aria-label="About">About</router-link></li>
-              <li class="nav-drop-downs_li"><router-link to="/Contact" aria-label="Contact">Contact</router-link></li>
+              <li class="nav-drop-downs_li"><router-link class="nav-drop-downs_li_a" to="/" aria-label="Home">Home</router-link></li>
+              <li class="nav-drop-downs_li"><router-link class="nav-drop-downs_li_a" to="/About" aria-label="About">About</router-link></li>
+              <li class="nav-drop-downs_li"><router-link class="nav-drop-downs_li_a" to="/Contact" aria-label="Contact">Contact</router-link></li>
             </ul>
           </li>
           <!-- <li v-show="isLoggedIn" class="auto-margin"><router-link to="/Blogs" aria-label="Blogs">Blogs</router-link></li> -->
@@ -58,9 +58,9 @@
           <li class="auto-margin nav-links_li">
             <a class="nav-links_li_a" role="button" aria-label="Placeholder">Placeholder<i class="down-arrow"></i></a>
             <ul class="nav-drop-downs auto-margin ndd--is--closed theme-border theme-shadow" style="display: none;">
-              <li class="nav-drop-downs_li"><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-              <li class="nav-drop-downs_li"><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
-              <li class="nav-drop-downs_li"><router-link to="#" aria-label="Placeholder">Placeholder</router-link></li>
+              <li class="nav-drop-downs_li"><router-link class="nav-drop-downs_li_a" to="#" aria-label="Placeholder">Placeholder</router-link></li>
+              <li class="nav-drop-downs_li"><router-link class="nav-drop-downs_li_a" to="#" aria-label="Placeholder">Placeholder</router-link></li>
+              <li class="nav-drop-downs_li"><router-link class="nav-drop-downs_li_a" to="#" aria-label="Placeholder">Placeholder</router-link></li>
             </ul>
           </li>
         </ul>

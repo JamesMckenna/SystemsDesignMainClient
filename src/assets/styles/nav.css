@@ -169,7 +169,12 @@
   z-index: 510;
 }
 .nav-drop-downs_li {
-  margin: 1rem auto;
+  margin: 1rem auto 1rem auto;
+}
+.nav-drop-downs_li_a {
+  display: block;
+  margin: auto auto;
+  text-align: center;
 }
 .ndd--is--closed {
   animation-name: ndd--close;
@@ -231,14 +236,6 @@
   margin: 1rem 0rem 0rem 0rem;
   background-color: var(--bg-colour-1);
 }
-
-/* .nav-links > li {
-  width: 100%;
-  min-height: 1.5rem;
-  margin: 1.5rem auto 1.5rem auto;
-  text-align: center;
-}
-   */
 /* --- start hover styles <li> and <a>-------*/
 a:hover {
   color: var(--a-hover-colour);
@@ -271,10 +268,12 @@ li:active {
   position: relative;
   display: flex;
 }
- 
+
 .login-btn_a {
   display: block;
   text-align: center;
+  min-width: 9rem;
+  line-height: 1.5rem;
 }
 
 .center-anchor{
@@ -303,7 +302,17 @@ li:active {
 
   .login-btn {
     margin: 1rem 0rem 0rem 0rem;
-  } 
+  }
+  
+  .nav-links_li {
+    display: inline-flex;
+    width: 100%;
+    min-height: 1.5rem;
+  }
+
+  .nav-links_li_a {
+    margin: 1rem auto 1rem auto;
+  }
 }
 /*-------------------------420px------------------------*/
 @media (min-width: 26.25rem) {
@@ -329,7 +338,7 @@ li:active {
     margin: 1rem auto;
   }
 
-  .nav-links_li {
+  /* .nav-links_li {
     display: inline-flex;
     align-content: center;
     width: 100%;
@@ -341,7 +350,7 @@ li:active {
     position: relative;
     align-self: center;
     margin: auto;
-  }
+  } */
   /*** START ndd--openClose animation ****/
   @keyframes ndd--open {
     0% {
