@@ -51,7 +51,6 @@
               <li class="nav-drop-downs_li"><router-link class="nav-drop-downs_li_a" to="/Contact" aria-label="Contact">Contact</router-link></li>
             </ul>
           </li>
-          <!-- <li v-show="isLoggedIn" class="auto-margin"><router-link to="/Blogs" aria-label="Blogs">Blogs</router-link></li> -->
           <li class="auto-margin nav-links_li"><router-link class="nav-links_li_a" to="" aria-label="Placeholder">Placeholder</router-link></li>
           <li class="auto-margin nav-links_li"><router-link class="nav-links_li_a" to="" aria-label="Placeholder">Placeholder</router-link></li>
           <li class="auto-margin nav-links_li"><router-link class="nav-links_li_a" to="" aria-label="Placeholder">Placeholder</router-link></li>
