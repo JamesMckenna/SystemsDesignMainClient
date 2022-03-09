@@ -301,8 +301,15 @@ li:active {
   }
 
   .login-btn {
+    display: flex;
+    height: 3rem;
+    margin: 2rem auto 0rem auto;
+  }
+
+  .login-btn_a{
+    display: block;
     height: 2rem;
-    margin: 1rem 0rem 1rem 0rem;
+    margin: auto auto 1rem auto;
   }
   
   .nav-links_li {
@@ -339,7 +346,7 @@ li:active {
     margin: 1rem auto;
   }
 
-  /* .nav-links_li {
+  .nav-links_li {
     display: inline-flex;
     align-content: center;
     width: 100%;
@@ -351,7 +358,7 @@ li:active {
     position: relative;
     align-self: center;
     margin: auto;
-  } */
+  }
   /*** START ndd--openClose animation ****/
   @keyframes ndd--open {
     0% {
