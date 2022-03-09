@@ -22,12 +22,12 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, defineProps, defineEmits } from 'vue'
+import { onMounted, defineProps, defineEmits, onBeforeMount } from 'vue'
 
 const props = defineProps({ renderHeader: String, msg: String })
 const emits = defineEmits(['renderHeader'])
 
-onMounted(() => {
+onBeforeMount(() => {
   emits('renderHeader', true)
 })
 </script>
