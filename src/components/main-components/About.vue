@@ -83,11 +83,6 @@ li {
   text-align: center;
 }
 
-.body-container {
-  margin-top: 1rem;
-  min-height: 80vh;
-}
-
 .images {
   display: block;
   width: 100%;
