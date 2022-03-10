@@ -14,15 +14,11 @@
 
 /*--------------Helpers--------------------------------*/
 .auto-margin {margin: auto auto;}
-.inLineBlock {display: inline-block;}
-.inlineFlex {display: inline-flex;}
-.textCenter {text-align: center;}
+.center-text {text-align: center;}
 .text-danger {color: rgb(255, 0, 0);}
-.floatLeft {float: left;}
-.floatRight {float: right;}
 
 :root {
-    --bgcolor1: chartreuse;
+    --bgcolor1: #A36B30;
     --bgcolor2: white;
     --bgcolor3: #3f532a;
   
@@ -141,7 +137,7 @@ body {
     min-height: 100vh;
     position: absolute;
     width: 100%;
-    box-shadow: 0 0 200px rgba(0, 0, 0, 0.5) inset; /* vinyette */
+    box-shadow: 1rem 1rem 6rem 1rem rgba(0, 0, 0, 0.5) inset;  /* vinyette */
 }
 
 /*colour hex value #696986*/
