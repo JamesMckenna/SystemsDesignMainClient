@@ -18,13 +18,12 @@
 
         <div id="wrapTitle" class="wrap-title">
           <img class="logo-flip" src="@/assets/images/theThinkerIconFlip.png" aria-label="[Image of The Thinker Statue]"/>
-          <h1 class="wrap-title_h1">
-            <router-link class="title-h1-anchor" title="Website Title and Link to Homepage" to="/">Systems Design</router-link>
-          </h1>
+          <router-link class="title-anchor" title="Link to Systems Design DOT rocks Homepage" to="/"><img class="title_img" src="@/assets/images/sdr-title-ani.gif" /></router-link>
+
           <img id="logo" class="logo" src="@/assets/images/theThinkerIcon.png" aria-label="[Image of The Thinker Statue]"/>
         </div>
 
-        <div id="loginLinks" class="wrap-login-links auto-margin">
+        <div id="loginLinks" class="wrap-login-links">
           <div id="loginBtn" class="login-btn" title="Open / Close Login and Account Links">
             <a role="button" class="login-btn_a" v-if="isLoggedIn" aria-label="Open / Close Logout and Account Links">Hi<i class="down-arrow"></i></a>
             <a role="button" class="login-btn_a" v-else aria-label="Login and Account Links">Log In<i class="down-arrow"></i></a>
