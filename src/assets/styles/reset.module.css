@@ -44,7 +44,7 @@ table {
 }
 
 /** I added for brave browser*/
-:-webkit-any(article, aside, nav, section) h1 {
+:-webkit-any(article, aside, nav, section) h1, p {
 	margin-block-start: 0;
 	margin-block-end: 0;
 }

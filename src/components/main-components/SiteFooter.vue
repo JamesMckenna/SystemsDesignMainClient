@@ -7,11 +7,4 @@
 
 <script></script>
 
-<style>
-footer {
-  height: 10rem;
-  padding: 2rem;
-  background-color: var(--bgcolor3);
-  text-align: center;
-}
-</style>
+<style></style>

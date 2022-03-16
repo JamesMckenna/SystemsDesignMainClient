@@ -1,54 +1,25 @@
 <template>
-   <div>
-    <h2>{{ props.msg }}</h2>
-    <p>I have spent time researching, designing and coding a ‘base’ for enterprise software, and now the hard part comes: writing, (and I use the term loosely) engaging, content for visitors to this site.</p>
+    <h2>{{ $props.msg }}</h2>
+    <p>I have spent time researching, designing and coding a ‘base’ for enterprise software, and now the hard part comes: writing, (and I use the term loosely) engaging, content for visitors to this site. As I haven't taken the necessary steps for search engine optimization, I am under the impression that visitors to this site have come here via LinkedIn or have followed a link on my resume.</p>
 
-    <p>Following Service Oriented Architecture (SOA), the idea is to build the base software functionality in such a way that any organization can add to it and customize to suit their needs. For a base, authentication and authorization are a must. The application will need a public facing website as well as an administrator's client application. Blogging functionality could be useful for ‘base functionality’ of an enterprise application.  From there, organization specific services can be added as needed.</p>
+    <h4>A Bit About Me - the elevator pitch</h4>
+    <p>I studied Information Systems Technology with a major in Information Systems - so I design and build enterprise software. I have a fascination with 3D animation and virtual reality/mixed reality, and in my spare time, I experiment with implementing 3D models/assets in a web browser. With VR/XR slowly gaining widespread use, I want to become an expert on VR/XR apps running in a web browser and will use this domain as a experimenting ground.</p>
 
-    <p>As of now, authentication is complete. A User can register a new account with email verification, add and verify phone a number via SMS, change password and forgot password, and enable 2FA using TOTP. The ApplicationUser model is barebones and inherits from the base IdentityUser class of the ASP.Net Core Identity Framework - custom ApplicationUser properties will be added in later SDLC, iterations.</p>
+    <p>The first language I learnt was JavaScript (ECMAscript 5). I went on to learn PHP 5, CodeIgniter, Wordpress and started with server-side programming. MySQL was my first foray into database scripting and I went on to learn both Microsoft T-SQL and Oracle 10, PL-SQL. As I gained more experience, I started to focus on ASP.NET and gained experience with .NET 4.7 and Webforms.</p>
 
     <img src="@/assets/images/VSSS.png" class="images"/>
+    <p>I took a look at Node.Js and played with a very early version of <a href="https://www.feathersjs.com" target="blank" style="font-weight:bold;">Feather.js</a> by building a small real-time chat app (the quick start) which gave me an introduction into NOSQL databases. I won't say it was a career changing project, in fact it was a throw away project, but I did learn from it.</p>
 
-    <p>Currently, I am in the Analysis phase for the authorization use cases, designing authorization policies, user claims and (probably) user roles - so a combination of claims-based and roles-based, authorization policies. Once I have decided on the base policies that will be required for generic authorization, I can start the Design and Implementation phases. An Administrator UI / CRUD Endpoints will be required in order to tailor authorization polices and user administration to specific organizational needs.</p>
+    <p>Along the way, I took a side road and built a couple of small Android apps; I learnt much more than I thought I would about building for a platform. As it turns out, programming for Android taught me about background processes, threading and not to put computational algorithms, or long running processes on the UI thread - this would come in handy later when building Electron apps. I started to see how many of the programming best practices weren't about the language I was coding in, but about how to design and structure the code, how to think about the app's behavior and how to structure data.</p>
 
     <img src="@/assets/images/VueSS.png" class="images"/>
 
-    <p>Following the completion of authorization, come the clients. As one can see, right now they are in serious need of some lovin'. Also, the blog creation functionality will need an API and storage layer to accompany the main client. I am leaning towards VueJs / Net Core using a backend for frontend architecture, though I like what I have seen from Blazor and may choose that route for a client framework. So I will eventually unify the style across the UI's (Main Client, Id Management, Identity Server 4 log in / log out).</p>
+    <p>When .NET Core came out I started learning the new framework. I did this by implementing an OpenID Connect compliant middleware (<a href="http://docs.identityserver.io/en/latest/" target="blank" style="font-weight:bold;">Identity Server 4</a>). As .NET Core 2.x and 3.x came out I rebuilt the secure token server and gain a better understanding of the OpenID Connect and OAuth 2.0 protocols. As a developer, my personal choice for frameworks are Vue.js 3 for client applications and .NET Core WebApi for RESTful services. For data persistance I gravitate towards MS SQL Server and PostGres, with Event Logging and Error Logging as a legit use-case for NOSQL databases.</p>
 
-    <p>For this software to embrace SOA, client applications - and the API’s to service those client applications - will need to be added to the token management system without needing to re-publish and re-deploy the ‘base functionality’ application.  The token management application (built with Identity Server 4), will need a UI so that a developer can add the resources as they are developed and are ready for production deployment.</p>
-
-    <router-view></router-view>
-  </div>
+    <p>I have been part of a development team that has shipped a couple of Electron apps, Vue.js client apps and .NET WebAPI, RESTful APIs to production.</p>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, defineProps, defineEmits, onBeforeMount } from 'vue'
-
-const props = defineProps({ renderHeader: String, msg: String })
-const emits = defineEmits(['renderHeader'])
-
-onBeforeMount(() => {
-  emits('renderHeader', true)
-})
+import { defineProps } from 'vue'
+defineProps({ msg: String })
 </script>
-
-<style scoped>
-p {
-  margin: auto auto;
-  max-width: 45rem;
-  text-align: left;
-  text-indent: 3rem;
-  padding: 1rem 1rem;
-}
-
-h2{
-  margin-bottom: 3rem;
-}
-
-.images {
-  width: 100%;
-  max-width: 44rem;
-  height: auto;
-  margin: 2rem auto;
-}
-</style>
