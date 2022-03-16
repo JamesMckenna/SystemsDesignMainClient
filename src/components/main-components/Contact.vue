@@ -6,11 +6,11 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, defineEmits } from 'vue'
+import { onBeforeMount, defineEmits } from 'vue'
 
 const emits = defineEmits(['renderHeader'])
 
-onMounted(() => {
+onBeforeMount(() => {
   emits('renderHeader', true)
 })
 </script>

@@ -1,36 +1,88 @@
 <template>
   <site-nav />
-  <site-header v-bind:is="'site-header'" v-if="header.render" />
-  <router-view v-on:renderHeader="renderHeader" />
+  <site-header v-if="header.render" />
+  <router-view v-slot="{ Component }" id="content-area" v-on:renderHeader="renderHeader">
+    <transition name="routetrans" mode="out-in">
+      <component :is="Component" :key="$route.path" />
+    </transition>
+  </router-view>
   <site-footer />
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
+import { onBeforeMount, reactive } from 'vue'
 import SiteHeader from '@/components/main-components/SiteHeader.vue'
 import SiteNav from '@/components/main-components/SiteNav.vue'
 import SiteFooter from '@/components/main-components/SiteFooter.vue'
 
-const header = reactive({ render: true })
 const title = 'Systems Design DOT rocks'
-function renderHeader (val: boolean): void {
+const header = reactive({ render: false })
+const renderHeader = (val: boolean): void => {
   header.render = val
 }
 
-onMounted(() => {
+onBeforeMount(() => {
   (document.getElementsByTagName('title')[0] as HTMLElement).innerHTML = title
 })
 </script>
 
 <style>
 #app {
-  margin: auto auto;
   position: relative;
+  margin: auto auto;
   top:0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.renderd-content {
+  position: relative;
+  margin-top: 9rem;
+}
+
+.routetrans-enter-from {
+  opacity: 0;
+  transform: translateX(10rem);
+}
+.routetrans-enter-active {
+  transition: all 0.5s ease-out;
+}
+.routetrans-leave-to {
+  opacity: 0;
+  transform: translateX(-10rem);
+}
+.routetrans-leave-active {
+  transition: all 0.5s ease-in;
+}
+
+p {
+  margin: auto auto !important;
+  max-width: 45rem;
+  text-indent: 3rem;
+  padding: 1rem 1rem !important;
+}
+
+.images {
+  display: block;
+  width: 100%;
+  max-width: 44rem;
+  height: auto;
+  margin: 2rem auto;
+}
+
+footer {
+  position: relative;
+  margin-top: 3rem !important;
+  height: 10rem;
+  padding: 2rem;
+  background-color: var(--bgcolor3);
+}
+footer p {
+  margin: auto auto;
+  max-width: 45rem;
+  text-align: center;
+  padding: 1rem 1rem;
+}
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
   #app {

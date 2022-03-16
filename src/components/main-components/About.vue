@@ -1,94 +1,63 @@
 <template>
-  <div class="body-container">
-    <h2>About This Application</h2>
+    <h2>{{ $props.msg }}</h2>
     <p>
-      The current project is a blogging / document creation application built with a VueJs client and .NET Core for the backend. There is a crazy amount of backend development to be completed before
-      this client application receives any lovin' - after all, a sports car with a shinning paint job and sleek body lines is just an ornament if the engine doesn't run.
-      <br />
-      <i style="font-family: Roboto; font-size: .85rem;">I understand that listing the tech stack and deploymnent environment on a public web page is considered a security risk and decided in this case, it won't be the end of the world if this app gets hacked. When it comes down to it, there's nothing to gain from hacking this app.</i>
+      The current project is a Vue.Js 3 client app with .NET Core 3.1 used for the OIDC compliant token server, the identity management app and the backend.
     </p>
-    <h3>The Frameworks and Libraries used in this application</h3>
-    <ul>
-      <li>
-        VueJs for a browser client application
-      </li>
-      <li>
-        Identity Server 4 for Token Signing and Token Management.
-      </li>
-      <li>
-        Identiy Core for User management and Multi-Factor Authentication using Time-based One Time Passwords
-      </li>
-      <li>
-        Entity Framework Core to communicate with the database.
-      </li>
-      <li>
-        .NET Core for the backend REST API's.
-      </li>
-      <li>
-        Tip-Tap library for the text editor, client application.
-      </li>
+    <h4>TODO</h4>
+    <ol class="text-indent">
+      <li class="temp-li-class">1) Set up CI/CD</li>
+      <li class="temp-li-class">2) Experiment with WebXR and WebGL 3D engine</li>
+      <li class="temp-li-class">3) Migrate backend, token server and identity management apps to .NET 6</li>
+      <li class="temp-li-class">4) Unifiy style across all the UIs</li>
+      <li class="temp-li-class">5) Add external identity providers (Microsoft Account and Google Account) for login</li>
+      <li class="temp-li-class">6) A Guest Book say "Hello, I was here"</li>
+    </ol>
+    <h4>The Frameworks and Libraries</h4>
+    <ul class="center-text">
+      <li class="temp-li-class">VueJs for a browser client application</li>
+      <li class="temp-li-class">Identity Server 4 for Token Signing and Token Management.</li>
+      <li class="temp-li-class">ASP.NET Identiy Core for User Management and 2FA functionality with TOTP</li>
+      <li class="temp-li-class">Entity Framework Core ORM to communicate with the database.</li>
+      <li class="temp-li-class">.NET Core, WebApi for the backend RESTful API.</li>
     </ul>
     <img src="@/assets/images/html.jpg" class="images"/>
     <h4>Software on the Server</h4>
-    <ul>
-      <li>
-        Running Windows Server 2019
-      </li>
-      <li>
-        SQL Server 2019 Express
-      </li>
-      <li>
-        Thunderbird Email Client
-      </li>
-      <li>
-        HmailServer relay / email server
-      </li>
-      <li>
-        Running on a VPS in Eastern Europe
-      </li>
+    <ul class="center-text">
+      <li class="temp-li-class">Running Windows Server 2019</li>
+      <li class="temp-li-class">SQL Server 2019 Express</li>
+      <li class="temp-li-class">Thunderbird Email Client</li>
+      <li class="temp-li-class">HmailServer relay / email server</li>
+      <li class="temp-li-class">Running on a VPS in Eastern Europe</li>
     </ul>
-  </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, defineEmits } from 'vue'
-
-const emits = defineEmits(['renderHeader'])
-
-onMounted(() => {
-  emits('renderHeader', false)
-})
+import { defineProps } from 'vue'
+defineProps({ msg: String })
 </script>
 
-<style scoped>
-h2 {
-  margin: 1rem;
-}
-
-p {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  max-width: 45rem;
-  margin: 1rem auto;
-}
-
-li {
+<style>
+.temp-li-class {
   margin: 1rem auto;
   max-width: 45rem;
-  line-height: 1.5rem;
+}
+.center-text {
   text-align: center;
 }
-
-.body-container {
-  margin-top: 1rem;
-  min-height: 80vh;
+/*--------------------------320px----------------------*/
+@media (min-width: 20rem) {
+  .text-indent {
+    text-align: center;
+  }
+  h4 {
+    padding: 1rem 1rem;;
+  }
 }
-
-.images {
-  display: block;
-  width: 100%;
-  max-width: 44rem;
-  height: auto;
-  margin: 2rem auto;
+/*---------------------728px-----------------------------*/
+@media (min-width: 45.5rem) {
+  .text-indent {
+    text-align: left;
+    text-indent: 5rem;
+  }
 }
 </style>

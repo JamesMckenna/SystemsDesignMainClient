@@ -14,15 +14,11 @@
 
 /*--------------Helpers--------------------------------*/
 .auto-margin {margin: auto auto;}
-.inLineBlock {display: inline-block;}
-.inlineFlex {display: inline-flex;}
-.textCenter {text-align: center;}
+.center-text {text-align: center;}
 .text-danger {color: rgb(255, 0, 0);}
-.floatLeft {float: left;}
-.floatRight {float: right;}
 
 :root {
-    --bgcolor1: chartreuse;
+    --bgcolor1: #A36B30;
     --bgcolor2: white;
     --bgcolor3: #3f532a;
   
@@ -85,21 +81,38 @@ svg:hover {
 }
 
 @font-face {
-    font-family: "Hind_Vadndara";
-    src: url("../fonts/Hind_Vadodara/HindVadodara-Light.ttf") format("truetype");
-    src: url("../fonts/Hind_Vadodara/HindVadodara-Bold.ttf") format("truetype");
-    src: url("../fonts/Hind_Vadodara/HindVadodara-Medium.ttf") format("truetype");
-    src: url("../fonts/Hind_Vadodara/HindVadodara-Regular.ttf") format("truetype");
+    font-family: "DejaVu Sans";
+    src: url("../fonts/dejavu-sans/DejaVuSans-Bold.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSans-BoldOblique.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSans-ExtraLight.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSans-Oblique.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSans.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSansCondensed-Bold.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSansCondensed-BoldOblique.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSansCondensed-Oblique.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSansCondensed.ttf") format("truetype");
     font-family: "Roboto";
-    src: url("../fonts/Roboto/Roboto-Italic.ttf") format("truetype"),
+    src: url("../fonts/Roboto/Roboto-Black.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-BlackItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-BoldItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Italic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Light.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-LightItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-MediumItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Thin.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-ThinItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Regular.ttf") format("truetype");
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--h-tag-colour);
     text-shadow: var(--shadow-text-offset);
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: bold;
     text-align: center;
+    font-family: "DejaVu Sans";
 }
 h1 { font-size: 2.5rem; }
 h2 { font-size: 1.875rem; }
@@ -107,6 +120,7 @@ h3 { font-size: 1.5rem; }
 h4 { font-size: 1.25rem; }
 
 a {
+    font-family: "Roboto";
     color: var(--h-tag-colour);
     text-shadow: var(--shadow-text-offset);
 }
@@ -116,8 +130,19 @@ a:hover {
     text-shadow: none;
 }
 
-li{
+p {
+    font-family: "Roboto";
+    color: #000;
+    font-weight: normal;
+    line-height: 1.5rem;
+}
+
+li {
     display: block;
+    font-family: "Roboto";
+    color: #000;
+    font-weight: normal;
+    line-height: 1.5rem;
 }
 
 html {
@@ -141,7 +166,7 @@ body {
     min-height: 100vh;
     position: absolute;
     width: 100%;
-    box-shadow: 0 0 200px rgba(0, 0, 0, 0.5) inset; /* vinyette */
+    box-shadow: 1rem 1rem 6rem 1rem rgba(0, 0, 0, 0.5) inset;  /* vinyette */
 }
 
 /*colour hex value #696986*/
