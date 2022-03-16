@@ -109,7 +109,7 @@ svg:hover {
 h1, h2, h3, h4, h5, h6 {
     color: var(--h-tag-colour);
     text-shadow: var(--shadow-text-offset);
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: bold;
     text-align: center;
     font-family: "DejaVu Sans";
@@ -137,8 +137,12 @@ p {
     line-height: 1.5rem;
 }
 
-li{
+li {
     display: block;
+    font-family: "Roboto";
+    color: #000;
+    font-weight: normal;
+    line-height: 1.5rem;
 }
 
 html {

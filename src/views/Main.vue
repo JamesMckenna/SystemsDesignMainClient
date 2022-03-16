@@ -1,13 +1,11 @@
 <template>
   <div>
     <template v-if="path === '/'">
-      <div class="home">
-        <Home msg="Welcome to my test / staging server" />
-      </div>
+      <Home class="home" msg="You have found my playground" />
     </template>
 
     <template v-if="path === '/About'">
-      <About />
+      <About msg="About this App!!" />
     </template>
 
     <template v-if="path === '/Contact'">
@@ -26,10 +24,18 @@ import Contact from '@/components/main-components/Contact.vue'
 
 const route: RouteLocationNormalized = useRoute()
 const path: ComputedRef<string> = computed(() => route.path)
-const props = defineProps({ renderHeader: String })
+defineProps({ msg: String })
+
 const emits = defineEmits(['renderHeader'])
 
 onMounted(() => {
-  emits('renderHeader', true)
+  if (route.path === '/') {
+    emits('renderHeader', true)
+  } else if (route.path === '/About') {
+    emits('renderHeader', false)
+    document.getElementById('content-area')!.classList.add('renderd-content')
+  } else {
+    emits('renderHeader', true)
+  }
 })
 </script>
