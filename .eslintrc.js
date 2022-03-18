@@ -11,78 +11,46 @@ https://github.com/typescript-eslint/tslint-to-eslint-config/blob/master/docs/FA
 
 Happy linting! 💖
 */
-/* eslint-env node */
-
-// module.exports = {
-//     "env": {
-//         "browser": true,
-//         "es6": true
-//     },
-//     "parser": "@typescript-eslint/parser",
-//     "parserOptions": {
-//         "project": "tsconfig.json",
-//         "sourceType": "module",
-//         "extraFileExtensions": [".vue"]
-//     },
-//     "plugins": [
-//         "@typescript-eslint"
-//     ],
-//     "rules": {
-//         //"@typescript-eslint/rule-name": "error"
-//     },
-//     overrides: [{
-//         files: ['*.ts', '*.tsx'], // Your TypeScript files extension
-
-//         // As mentioned in the comments, you should extend TypeScript plugins here,
-//         // instead of extending them outside the `overrides`.
-//         // If you don't want to extend any rules, you don't need an `extends` attribute.
-//         extends: [
-//             "eslint:recommended",
-
-//             'plugin:vue/vue3-essential',
-//             '@vue/eslint-config-typescript',
-
-//           "prettier"
-//         ],
-  
-//         parserOptions: {
-//           project: ['./tsconfig.json'], // Specify it only for TypeScript files
-//         },
-//     }]
-// };
 
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "vue/setup-compiler-macros": true
-    },
-    "parser": "vue-eslint-parser",
-    "parserOptions": {
-        "parser": "@typescript-eslint/parser",
-        "ecmaVersion": "latest",
-        "project": "tsconfig.json",
-        "sourceType": "module",
-        // "extraFileExtensions": [".vue"] NOT A VALID PARSER OPTION
-    },
-    "plugins": [
-        "@typescript-eslint"
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
+    "vue/setup-compiler-macros": true,
+  },
+  parser: "vue-eslint-parser",
+  parserOptions: {
+    parser: "@typescript-eslint/parser",
+    ecmaVersion: "latest",
+    project: ["./tsconfig.json"],
+    sourceType: "module",
+  },
+  plugins: ["@typescript-eslint", "prettier"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:vue/base",
+    "plugin:vue/vue3-essential",
+    "@vue/eslint-config-typescript",
+    "plugin:prettier/recommended",
+    "prettier",
+  ],
+  rules: {
+    "no-irregular-whitespace": [
+      "error",
+      {
+        skipStrings: true,
+        skipComments: true,
+        skipRegExps: true,
+        skipTemplates: true,
+      },
     ],
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:vue/base",
-        'plugin:vue/vue3-essential',
-        '@vue/eslint-config-typescript',
-
-        "prettier"
-    ],
-    "rules": {
-        //"@typescript-eslint/rule-name": "error"
-        "no-irregular-whitespace" : ["error",{ "skipStrings": true, "skipComments": true, "skipRegExps": true, "skipTemplates": true }],
-        "curly": ["error", "multi-line"],
-        "eqeqeq": ["error", "always"],
-        "vue/script-setup-uses-vars":"error"
-    }
+    curly: ["error", "multi-line"],
+    eqeqeq: ["error", "always"],
+    "vue/script-setup-uses-vars": "error",
+    "prettier/prettier": 1,
+  },
 };
