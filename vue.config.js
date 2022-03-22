@@ -32,6 +32,12 @@ var path = require("path");
 
 //   return packageJson && packageJson.version;
 // };
+const terserOptionsCompress = {
+  defaults: true, //keep defaults unless other explicitly changed in options below
+  booleans_as_integers: true, // (default: false) -- Turn booleans into 0 and 1, also makes comparisons with booleans use == and != instead of === and !==.
+  drop_console: true, // (default: false) -- Pass true to discard calls to console.* functions. If you wish to drop a specific function call such as console.info and/or retain side effects from function arguments after dropping the function call then use pure_funcs instead.
+  ecma: "ESNext", // (default: 5) -- Pass 2015 or greater to enable compress options that will transform ES5 code into smaller ES6+ equivalent forms.
+};
 
 module.exports = {
   lintOnSave: false,
@@ -74,9 +80,9 @@ module.exports = {
             extractComments: true,
             minify: TerserPlugin.terserMinify,
             terserOptions: {
-              //ecma: undefined,
+              ecma: "ESNext",
               //parse: {},
-              compress: false,
+              compress: terserOptionsCompress,
               mangle: true, // Note `mangle.properties` is `false` by default.
               module: false,
               // Deprecated
