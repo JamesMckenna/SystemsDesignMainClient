@@ -37,6 +37,9 @@ module.exports = {
     curly: ["error", "multi-line"],
     eqeqeq: ["error", "always"],
     "vue/script-setup-uses-vars": "error",
+
+    "@typescript-eslint/no-unsafe-member-access": "off",
+
     "prettier/prettier": 1,
   },
 };
