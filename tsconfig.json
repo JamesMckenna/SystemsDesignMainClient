@@ -10,8 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    //"sourceMap": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "baseUrl": ".",
     "types": [
       "webpack-env",
@@ -41,7 +40,5 @@
   ],
   "exclude": [
     "node_modules",
-    //"src/dist"
-    //".eslintrc.js",
   ]
 }
