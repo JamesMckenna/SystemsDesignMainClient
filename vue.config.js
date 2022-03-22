@@ -1,6 +1,6 @@
-//const TerserPlugin = require("terser-webpack-plugin");
+var TerserPlugin = require("terser-webpack-plugin");
 //const WebpackObfuscator = require('webpack-obfuscator');
-//const path = require("path");
+var path = require("path");
 
 //https://webpack.js.org/plugins/terser-webpack-plugin/
 // const minify = (input, sourceMap, minimizerOptions, extractsComments) => {
@@ -63,34 +63,37 @@ module.exports = {
   publicPath: "/",
   integrity: true,
   configureWebpack: {
-    //optimization: {
-    //minimize: true,
-    // minimizer: [new TerserPlugin({
-    //   test: /\.js(\?.*)?$/i,
-    //   include: "./src/*",
-    //   exclude: [path.resolve(__dirname, 'node_modules')],
-    //   extractComments: true,
-    //   minify: TerserPlugin.terserMinify,
-    //   terserOptions: {
-    //     //ecma: undefined,
-    //     //parse: {},
-    //     compress: false,
-    //     mangle: true, // Note `mangle.properties` is `false` by default.
-    //     module: false,
-    //     // Deprecated
-    //     //output: null,
-    //     //format: null,
-    //     //toplevel: false,
-    //     //nameCache: null,
-    //     //ie8: false,
-    //     //keep_classnames: undefined,
-    //     //keep_fnames: false,
-    //     //safari10: false,
-    //   }
-    // },
-    // //minify,
-    // )],
-    //},
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin(
+          {
+            test: /\.js(\?.*)?$/i,
+            include: "./src/*",
+            exclude: [path.resolve(__dirname, "node_modules")],
+            extractComments: true,
+            minify: TerserPlugin.terserMinify,
+            terserOptions: {
+              //ecma: undefined,
+              //parse: {},
+              compress: false,
+              mangle: true, // Note `mangle.properties` is `false` by default.
+              module: false,
+              // Deprecated
+              //output: null,
+              //format: null,
+              //toplevel: false,
+              //nameCache: null,
+              //ie8: false,
+              //keep_classnames: undefined,
+              //keep_fnames: false,
+              //safari10: false,
+            },
+          }
+          //minify,
+        ),
+      ],
+    },
     module: {
       rules: [
         {
