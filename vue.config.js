@@ -43,6 +43,7 @@ const webpackObfuscatorOptions = {
 module.exports = {
   lintOnSave: false,
   devServer: {
+    hot: true,
     client: {
       logging: "verbose",
       overlay: {
@@ -69,7 +70,7 @@ module.exports = {
   },
   productionSourceMap: process.env.NODE_ENV === "development",
   publicPath: "/",
-  integrity: true,
+  integrity: process.env.NODE_ENV === "production",
   configureWebpack: {
     plugins: [new webpack.AutomaticPrefetchPlugin()],
     optimization: {
