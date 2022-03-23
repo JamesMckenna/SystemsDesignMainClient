@@ -25,8 +25,8 @@
     --h-tag-colour: #696986;
     --shadow-text-offset: 0.0625rem 0.0625rem 0.0625rem #fff;
     --bg-colour-1: #dcdcdc;
-    --boxshadow: 0.125rem 0.125rem 0.125rem 0.0625rem #696986;
-    --boxshadow-right: -0.125rem  0.125rem 0.125rem 0.0625rem #696986;
+    --boxshadow: 0.125rem 0.125rem 0.125rem 0.0625rem var(--h-tag-colour);
+    --boxshadow-right: -0.125rem  0.125rem 0.125rem 0.0625rem var(--h-tag-colour);
   
     --borderradius: 0.1875rem;
     --borderstyle: inset;
@@ -36,11 +36,11 @@
     --a-hover-colour: #fff;
     --navlink-gradient-hov-1: rgba(125, 185, 232, 0.01);
     --navlink-gradient-hov-2: rgba(105, 105, 134, 0.1);
-    --navlink-gradient-hov-3: rgba(105, 105, 134, 1);
+    --navlink-gradient-hov-3: var(--h-tag-colour);
     --navlink-gradient-active-1: rgba(0, 0, 0, 0.3);
     --navlink-gradient-active-2: rgba(0, 0, 0, 0);
-  
-    font-family: Hind_Vadndara;
+
+    font-family: "Roboto";
 }
 
 .theme-shadow {

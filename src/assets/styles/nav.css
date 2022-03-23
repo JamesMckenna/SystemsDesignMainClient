@@ -53,11 +53,24 @@
   margin: auto;
 }
 
+.filter-brightness {
+  filter: brightness(200%);
+}
 .logo, .logo-flip {
   width: 2.5rem;
 }
+.logo {
+  filter: drop-shadow(-0.0625rem 0.0625rem 0.0625rem black);
+}
+.logo-flip {
+  filter: drop-shadow(0.0625rem 0.0625rem 0.0625rem black);
+}
 .title_img {
   max-width: 150px;
+  filter: drop-shadow(0.0625rem 0.0625rem 0.0625rem black);
+}
+.title_img:hover {
+  filter: brightness(150%);
 }
 
 .wrap-login-links {
@@ -314,7 +327,7 @@ a:hover {
     margin: 0;
   }
   .login-btn_a {
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
   }
 
   .nav-links {

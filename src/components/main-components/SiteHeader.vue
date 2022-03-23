@@ -1,7 +1,9 @@
 <template>
   <header id="site-header" class="site-header">
     <img class="left-header-img theme-shadow theme-border" />
-    <div class="header-center" title="Systems Design animated logo"></div>
+    <div class="header-center" title="Systems Design animated logo">
+      <img src="../../assets/images/sdr-title-ani-hdri150.gif" />
+    </div>
     <img class="right-header-img theme-shadow theme-border" />
   </header>
 </template>
@@ -22,10 +24,6 @@
   min-width: 16rem;
   min-height: 9rem;
   margin: auto;
-  background-image: url("../../assets/images/sdr-title-ani.gif");
-  background-repeat: no-repeat;
-
-  background-size: contain;
 }
 
 .left-header-img,
@@ -39,32 +37,23 @@
 }
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
-
 }
 /*-------------------------420px------------------------*/
 @media (min-width: 26.25rem) {
-
 }
 /*--- Nav from desktop to mobile -640px- login links moved with js-------------------*/
 @media (min-width: 40rem) {
-
-  .header-center
-  .right-header-img
-  .left-header-img {
+  .header-center .right-header-img .left-header-img {
     display: inline-flex;
   }
 }
 /*---------------------728px-----------------------------*/
 @media (min-width: 45.5rem) {
-
 }
 /*-------------------------960 px-----------------------*/
 @media (min-width: 60rem) {
-
 }
 /*--------------------------------1328 px---------------*/
 @media (min-width: 83rem) {
-
 }
-
 </style>
