@@ -15,9 +15,6 @@ module.exports = {
   plugins: ["@typescript-eslint", "prettier"],
   extends: [
     "eslint:recommended",
-    //"plugin:@typescript-eslint/eslint-recommended",
-    //"plugin:@typescript-eslint/recommended",
-    //"plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:vue/base",
     "plugin:vue/vue3-essential",
     "@vue/eslint-config-typescript",
