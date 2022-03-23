@@ -30,6 +30,7 @@
   },
   "include": [
     ".eslintrc.js",
+    "vue.config.js",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
@@ -39,6 +40,5 @@
   ],
   "exclude": [
     "node_modules",
-    "src/dist"
   ]
 }
