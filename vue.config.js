@@ -1,7 +1,8 @@
 var TerserPlugin = require("terser-webpack-plugin");
 var WebpackObfuscator = require("webpack-obfuscator");
 var path = require("path");
-
+var webpack = require("webpack");
+//https://github.com/terser/terser#minify-options
 const terserOptionsCompress = {
   defaults: true, //keep defaults unless otherwise explicitly changed in options.property below
   booleans_as_integers: true, // (default: false) -- Turn booleans into 0 and 1, also makes comparisons with booleans use == and != instead of === and !==.
@@ -52,7 +53,7 @@ module.exports = {
     },
     headers: [
       {
-        key: "Example-Header",
+        key: "Example-Dev-Server-Header",
         value: "ExampleHeaderValue",
       },
       {
@@ -61,7 +62,8 @@ module.exports = {
       },
       {
         key: "A-Single-Header",
-        value: "Can-Be-Coded-As-Header-Name-colon-HeaderValue",
+        value:
+          "Can-Be-Coded-As-Header-Name-colon-HeaderValue-as-A-String-instead-of-JS-Object",
       },
     ],
   },
@@ -69,7 +71,29 @@ module.exports = {
   publicPath: "/",
   integrity: true,
   configureWebpack: {
+    plugins: [new webpack.AutomaticPrefetchPlugin()],
     optimization: {
+      splitChunks: {
+        chunks: "async",
+        minSize: 20000,
+        minRemainingSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        enforceSizeThreshold: 50000,
+        cacheGroups: {
+          defaultVendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            reuseExistingChunk: true,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
       minimize: true,
       minimizer: [
         new TerserPlugin({
