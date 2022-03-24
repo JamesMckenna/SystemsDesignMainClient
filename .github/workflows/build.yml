@@ -1,0 +1,20 @@
+name: Build
+on:
+  push:
+    branch: [ci]
+jobs:
+  build-app:
+    runs-on: ubuntu-latest # the runner
+    steps:
+      - uses: actions/checkout@v2 # runner use this repo
+      - name: setup Node.js # runner uses node runtime to build source into app
+        uses: actions/setup-node@v1
+        with:
+          node-version: 'latest'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+      - run: npm ci # install dependencies
+      - run: run build --if-present
