@@ -2,12 +2,14 @@ name: Build
 on:
   push:
     branch: [ci]
+    tags:
+    - 'v*.*.*'
 
 jobs:
   build-app:
     runs-on: ubuntu-latest # the runner
     steps:
-      - name: get-repo-to-build
+      - name: Get repo to build
         uses: actions/checkout@v2 # runner use this repo
       - name: setup Node.js # runner uses node runtime to build source into app
         uses: actions/setup-node@v1
@@ -18,5 +20,44 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-
-      - run: npm ci # install dependencies
-      - run: npm run build --if-present
+      - name: Install dependencies
+        run: npm ci
+      - name: Build the app
+        run: npm run build --if-present
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with: 
+          name: main-client-artifacts
+          path: out/
+  
+  release-project:
+    name: Release main client artifacts to Github Releases
+    runs-on: ubuntu-latest
+    needs: build-app
+    steps: 
+      - name: Get built artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: main-client-artifacts
+      - name: Archive artifacts
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: mainclient.zip
+      - name: Create Github Release
+        id: create-github-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+      - name: Upload to Github Releases
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-github-release.outputs.upload_url }}
+          asset_path: ./mainclient.zip
+          asset_name: mainclient-v${{ github.run_number }}.zip
+          asset_content_type: application/zip
+
