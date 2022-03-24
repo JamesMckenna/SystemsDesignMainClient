@@ -2,8 +2,7 @@ name: Build
 on:
   push:
     branch: [ci]
-    tags:
-    - 'v*'
+
 jobs:
   build-app:
     runs-on: ubuntu-latest # the runner
