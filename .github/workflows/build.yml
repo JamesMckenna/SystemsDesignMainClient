@@ -10,7 +10,7 @@ jobs:
       - name: setup Node.js # runner uses node runtime to build source into app
         uses: actions/setup-node@v1
         with:
-          node-version: 'v17.x.x'
+          node-version: '17'
       - uses: actions/cache@v2
         with:
           path: ~/.npm
