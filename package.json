@@ -1,6 +1,6 @@
 {
   "name": "systems_design_main_client",
-  "version": "0.1.0",
+  "version": "v0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --host localhost",

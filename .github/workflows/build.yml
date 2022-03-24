@@ -2,11 +2,14 @@ name: Build
 on:
   push:
     branch: [ci]
+    tags:
+    - 'v*'
 jobs:
   build-app:
     runs-on: ubuntu-latest # the runner
     steps:
-      - uses: actions/checkout@v2 # runner use this repo
+      - name: get-repo-to-build
+        uses: actions/checkout@v2 # runner use this repo
       - name: setup Node.js # runner uses node runtime to build source into app
         uses: actions/setup-node@v1
         with:
