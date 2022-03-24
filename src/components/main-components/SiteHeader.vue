@@ -3,7 +3,6 @@
     <img class="left-header-img theme-shadow theme-border" />
     <div class="header-center" title="Systems Design animated logo">
       <img src="../../assets/images/sdr-title-ani-hdri150.gif" />
-      make change to p[ush to repo again
     </div>
     <img class="right-header-img theme-shadow theme-border" />
   </header>
