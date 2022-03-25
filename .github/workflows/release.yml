@@ -1,0 +1,32 @@
+name: Create release artifacts
+on:
+  push:
+    branches: [ci]
+    tags:
+      - "v*.*.*"
+
+jobs:
+  create-release-artifacts:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get repo to build
+      uses: actions/checkout@v2 # runner use this repo
+    - name: setup Node.js # runner uses node runtime to build source into app
+      uses: actions/setup-node@v1
+      with:
+        node-version: '17'
+    - name: Install dependencies
+      run: npm install
+    - name: Build the app
+      run: npm run build
+
+    - name: get release name
+      id: get_release_name
+      run: echo ::set-out name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mainclient-v${{ steps.get_release_name.outputs.VERSION }}
+        path: dist/*
