@@ -10,7 +10,7 @@ jobs:
       - name: Get repo to build
         uses: actions/checkout@v2 # runner use this repo
 
-      - run: mkdir -p tempdir
+      - run: mkdir -p ./tempdir
 
       - name: setup Node.js # runner uses node runtime to build source into app
         uses: actions/setup-node@v1
@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with: 
           name: main-client-artifacts
-          path: tempdir
+          path: tempdir/main-client-artifacts
   
   # release-project:
   #   name: Release main client artifacts to Github Releases
