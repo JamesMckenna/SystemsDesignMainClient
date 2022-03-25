@@ -3,7 +3,7 @@ on:
   push:
     branches: [ci]
     tags:
-      - "v*.*.*"
+      - "v*"
 
 jobs:
   create-release-artifacts:
