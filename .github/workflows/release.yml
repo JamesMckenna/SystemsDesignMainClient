@@ -25,8 +25,8 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        release: ${{ startsWith(github.ref, 'refs/tags/v')}}
-        #name: mainclient-${{ startsWith(github.ref, 'refs/tags/v')}
+        release: true
+        name: mainclient-${{ startsWith(github.ref, 'refs/tags/v')}
         path: |
           dist
           !dist/**/*.md
