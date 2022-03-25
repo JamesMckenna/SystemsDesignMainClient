@@ -28,11 +28,7 @@ jobs:
         run: npm run build --if-present
 
       - name: try upload to releases
-        uses: svenstaro/upload-release-action@v2
+        uses: actions/upload-artifact@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist
-          asset_name: dist
-          tag: ${{ github.ref }}
-          overwrite: true
-          body: testing
+          name: test
+          path: .
