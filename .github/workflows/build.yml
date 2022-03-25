@@ -25,7 +25,8 @@ jobs:
         run: npm run build
         id: the-build
       - run: |
-          echo 'TESTING Release secret: ${{steps.the-build.outputs.stdout}}'
+         echo 'TESTING Release secret: ${{steps.the-build.outputs.stdout}}'
+         echo '::set-output name={name}::{value}'
       # - name: Upload build artifacts
       #   uses: actions/upload-artifact@v3
       #   with: 
