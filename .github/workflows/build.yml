@@ -42,7 +42,9 @@ jobs:
       - name: Archive artifacts
         uses: thedoctor0/zip-release@master
         with:
-          filename: mainclient.zip
+          type: 'zip'
+          filename: 'mainclient.zip'
+          exclusions: '*.git* /*node_modules/* package-lock.json vue.config.js src/* public/* tests/* .env.development .env.production tsconfig.json .eslintrc.js .browserlintrc.js .getignore README.md'
       - name: Create Github Release
         id: create-github-release
         uses: actions/create-release@v1
