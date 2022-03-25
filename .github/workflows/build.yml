@@ -2,8 +2,6 @@ name: Build
 on:
   push:
     branches: [ci]
-  pull_request:
-    branches: [ci]
 
 jobs:
   build-app:
@@ -30,7 +28,7 @@ jobs:
           echo "${{ github.ref }}"
           echo "${{ github.repository }}"
           echo "${{ steps.the-build.conclusion }}"
-          echo 'TESTING Release secret: ${{steps.the-build.outputs.stdout}}'
+          echo 'TESTING Release secret: ${{ steps.the-build.outputs.stdout }}'
           echo "::set-output name={name}::{value}"
           echo "::debug::TESTING DEBUG OUTPUT"
           echo "$GITHUB.REPOSITORY"
