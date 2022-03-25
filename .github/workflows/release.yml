@@ -26,8 +26,11 @@ jobs:
         run: npm run build --if-present
 
       - name: try upload to releases
-        uses: actions/upload-artifact@v3
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'ref/tags/')
         with:
-          name: MainClient
-          path: ./dist
-
+          files: dist/*
+          draft: false
+          prerelease: false
+          tag_name: github.ref
+          token: ${{ secrets.GITHUB_TOKEN }}
