@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <h2>{{ $props.msg }}</h2>
-    <h3>Testing branch ci</h3>
     <p>
       I have spent time researching, designing and coding a ‘base’ for
       enterprise software, and now the hard part comes: writing, (and I use the
