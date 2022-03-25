@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: Get repo to build
         uses: actions/checkout@v2 # runner use this repo
+
+      - run: mkdir -p tempdir/
+
       - name: setup Node.js # runner uses node runtime to build source into app
         uses: actions/setup-node@v1
         with:
@@ -23,10 +26,10 @@ jobs:
       - name: Build the app
         run: npm run build --if-present
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with: 
           name: main-client-artifacts
-          path: out/
+          path: tempdir/
   
   # release-project:
   #   name: Release main client artifacts to Github Releases
@@ -34,9 +37,11 @@ jobs:
   #   needs: build-app
   #   steps: 
       - name: Get built artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/checkout@v2
+        uses: actions/download-artifact@v3
         with:
           name: main-client-artifacts
+          path: ~/tempdir
       - name: Archive artifacts
         uses: thedoctor0/zip-release@master
         with:
