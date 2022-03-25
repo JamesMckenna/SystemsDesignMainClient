@@ -1,7 +1,9 @@
 name: Build
 on:
   push:
-    branch: [ci]
+    branches: [ci]
+  pull_request:
+    branches: [ci]
 
 jobs:
   build-app:
@@ -23,11 +25,54 @@ jobs:
         run: npm install
       - name: Build the app
         run: npm run build
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+        id: the-build
+      - run: |
+          echo "${{ github.ref }}"
+          echo "${{ github.repository }}"
+          echo "${{ steps.the-build.conclusion }}"
+          echo 'TESTING Release secret: ${{steps.the-build.outputs.stdout}}'
+          echo "::set-output name={name}::{value}"
+          echo "::debug::TESTING DEBUG OUTPUT"
+          echo "$GITHUB.REPOSITORY"
+          echo "$GITHUB.REPOSITORY_OWNER"
+          echo "$GITHUB_CONTEXT"
+      # - name: Upload build artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with: 
+      #     name: main-client-artifacts
+      #     path: home/tempdir
+  
+  # release-project:
+  #   name: Release main client artifacts to Github Releases
+  #   runs-on: ubuntu-latest
+  #   needs: build-app
+  #   steps: 
+      # - name: Get built artifacts
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: main-client-artifacts
+      #     path: home/tempdir
+      - name: Archive artifacts
+        uses: thedoctor0/zip-release@master
         with:
-          name: dist-without-markdown
-          path: |
-            dist
-            !dist/**/*.md
+          type: 'zip'
+          filename: 'mainclient.zip'
+          exclusions: '*.git* /*node_modules/* package-lock.json vue.config.js /*src/* /*public/* /*tests/* .env.development .env.production tsconfig.json .eslintrc.js .browserslistrc .editorconfig babel.config.js package.json README.md'
+      - name: Create Github Release
+        id: create-github-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+      - name: Upload to Github Releases
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-github-release.outputs.upload_url }}
+          asset_path: ./mainclient.zip
+          asset_name: mainclient-v${{ github.run_number }}.zip
+          asset_content_type: application/zip
 
