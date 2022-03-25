@@ -24,10 +24,10 @@ jobs:
       - name: Build the app
         run: npm run build
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with: 
           name: main-client-artifacts
-          path: tempdir/main-client-artifacts
+          path: /
   
   # release-project:
   #   name: Release main client artifacts to Github Releases
@@ -38,7 +38,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: main-client-artifacts
-          path: tempdir
+          path: /
       - name: Archive artifacts
         uses: thedoctor0/zip-release@master
         with:
