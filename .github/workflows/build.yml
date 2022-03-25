@@ -6,9 +6,7 @@ on:
 jobs:
   build-app:
     runs-on: ubuntu-latest # the runner
-    defaults:
-      run:
-        working-directory: ./tempdir
+
     steps:
       - name: Get repo to build
         uses: actions/checkout@v2 # runner use this repo
