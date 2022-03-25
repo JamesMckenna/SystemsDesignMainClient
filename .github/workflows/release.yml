@@ -1,43 +1,27 @@
-name: Create release artifacts
+name: Node.js CI
+
 on:
   push:
-    branches: [ci]
-    tags:
-      - "v*"
+    branches: [ ci ]
+  pull_request:
+    branches: [ ci ]
 
 jobs:
-  create-release-artifacts:
+  build:
+
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Get repo to build
-      uses: actions/checkout@v2 # runner use this repo
-    - name: setup Node.js # runner uses node runtime to build source into app
-      uses: actions/setup-node@v1
-      with:
-        node-version: '17'
-    - name: Install dependencies
-      run: npm install
-    - name: Build the app
-      run: npm run build --if-present
+    strategy:
+      matrix:
+        node-version: [17.x]
 
-    # - name: Create Release
-    #   id: create_release
-    #   uses: actions/create-release@v1
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #     tag_name: ${{ github.ref }}
-    #     release_name: MainClient-${{ github.ref }}
-    #     draft: false
-    #     prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: "."
-        asset_name: dist/*
-        asset_content_type: application/zip
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
