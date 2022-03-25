@@ -22,11 +22,10 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build the app
+        id: the-build
         run: npm run build
       - run: |
-          echo 'TESTING Release created: ${{steps}}' # boolean
-          echo 'TESTING Release exists: ${{steps.version.outputs.release_exists}}' # boolean
-          echo 'TESTING Release context: ${{steps.version.outputs.release_context}}'
+          echo 'TESTING Release created: ${{steps.the-build}}'
       # - name: Upload build artifacts
       #   uses: actions/upload-artifact@v3
       #   with: 
