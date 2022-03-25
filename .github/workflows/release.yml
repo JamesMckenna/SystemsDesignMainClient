@@ -3,6 +3,8 @@ name: Node.js CI
 on:
   push:
     branches: [ ci ]
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -26,11 +28,11 @@ jobs:
         run: npm run build --if-present
 
       - name: try upload to releases
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'ref/tags/')
+        uses: svenstaro/upload-release-action@v2
         with:
-          files: dist/*
-          draft: false
-          prerelease: false
-          tag_name: github.ref
-          token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: fileMainClient
+          asset_name: assetMainClient
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: testing
