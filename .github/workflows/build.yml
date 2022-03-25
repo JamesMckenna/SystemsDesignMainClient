@@ -22,8 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build the app
-        id: the-build
         run: npm run build
+        id: the-build
       - run: |
           echo 'TESTING Release secret: ${{steps.the-build.outputs.stdout}}'
       # - name: Upload build artifacts
