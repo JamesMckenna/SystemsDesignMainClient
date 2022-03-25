@@ -28,9 +28,9 @@ jobs:
          echo 'TESTING Release secret: ${{steps.the-build.outputs.stdout}}'
          echo "::set-output name={name}::{value}"
          echo "::debug::TESTING DEBUG OUTPUT"
-         echo "$GITHUB.REPOSITORY"
-         echo "$GITHUB.REPOSITORY_OWNER"
-         echo "$GITHUB_CONTEXT"
+      - run: echo "$GITHUB.REPOSITORY"
+      - run: echo "$GITHUB.REPOSITORY_OWNER"
+      - run: echo "$GITHUB_CONTEXT"
       # - name: Upload build artifacts
       #   uses: actions/upload-artifact@v3
       #   with: 
