@@ -2,8 +2,8 @@ name: Build
 on:
   push:
     branch: [ci]
-    tags:
-    - 'v*.*.*'
+    #tags:
+    #- 'v*.*.*'
 
 jobs:
   build-app:
