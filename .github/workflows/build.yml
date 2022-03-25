@@ -2,6 +2,8 @@ name: Build
 on:
   push:
     branches: [ci]
+    tags:
+      - "v*.*.*"
 
 jobs:
   build-app:
@@ -55,7 +57,9 @@ jobs:
         with:
           type: 'zip'
           filename: 'mainclient.zip'
-          exclusions: '*.git* /*node_modules/* package-lock.json vue.config.js /*src/* /*public/* /*tests/* .env.development .env.production tsconfig.json .eslintrc.js .browserslistrc .editorconfig babel.config.js package.json README.md'
+          #exclusions: '*.git* /*node_modules/* package-lock.json vue.config.js /*src/* /*public/* /*tests/* .env.development .env.production tsconfig.json .eslintrc.js .browserslistrc .editorconfig babel.config.js package.json README.md'
+          path: "."
+          directory: "./dist"
       - name: Create Github Release
         id: create-github-release
         uses: actions/create-release@v1
