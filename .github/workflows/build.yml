@@ -25,6 +25,8 @@ jobs:
         run: npm run build
         id: the-build
       - run: |
+          echo "${{ github.ref }}"
+          echo "${{ github.repository }}"
           echo 'TESTING Release secret: ${{steps.the-build.outputs.stdout}}'
           echo "::set-output name={name}::{value}"
           echo "::debug::TESTING DEBUG OUTPUT"
