@@ -39,7 +39,7 @@ jobs:
       #     path: "dist/*"
 
       - name: Upload to releases
-        uses: AButler/upload-release-assets@v2
+        uses: AButler/upload-release-assets@v2.0
         with:
           files: dist/*
           repo-token: ${{ secrets.GITHUB_TOKEN }}
