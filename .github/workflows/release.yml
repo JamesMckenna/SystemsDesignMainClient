@@ -32,7 +32,7 @@ jobs:
 
       - name: try upload to releases
         uses: actions/upload-artifact@v2
-        runs: echo ${{ steps.get_version.outputs.VERSION }}
+        run: echo ${{ steps.get_version.outputs.VERSION }}
         with:
           name: test3 #-${{ steps.get_version.outputs.VERSION }}
           path: "dist/*"
