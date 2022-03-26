@@ -32,8 +32,14 @@ jobs:
       - name: Build app
         run: npm run build --if-present
 
-      - name: try upload to releases
-        uses: actions/upload-artifact@v2 
+      # - name: try upload to releases
+      #   uses: actions/upload-artifact@v2 
+      #   with:
+      #     name: test3 #-${{ steps.get_version.outputs.VERSION }}
+      #     path: "dist/*"
+
+      - name: Upload to releases
+        uses: AButler/upload-release-assets@v2
         with:
-          name: test3 #-${{ steps.get_version.outputs.VERSION }}
-          path: "dist/*"
+          files: dist/*
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
