@@ -35,7 +35,7 @@ jobs:
 
       - name: testing accessing
         run: | 
-          echo ${{ steps.built-app.output }}
+          echo ${{ steps.built-app.output.artifacts }}
           echo ${{ steps.get_version.outputs.VERSION }}
       # - name: try upload to releases
       #   uses: actions/upload-artifact@v2 
