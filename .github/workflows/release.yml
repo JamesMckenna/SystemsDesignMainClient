@@ -43,6 +43,7 @@ jobs:
           echo ${GITHUB_REF##*/} 
           echo ${GITHUB_REF#refs/*/}
           echo ${GITHUB_REF}
+          echo ${GITHUB_REF/tags}
           echo ${{ github.event.release.tag_name }}
           echo ${{ steps.built-app.output.artifacts }}
           echo ${{ steps.get_version.outputs.VERSION }}
