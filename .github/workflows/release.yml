@@ -34,9 +34,18 @@ jobs:
         run: npm run build --if-present
 
       - name: testing accessing
+        id: test-accessing-artifacts
         run: | 
           echo ${{ steps.built-app.output.artifacts }}
           echo ${{ steps.get_version.outputs.VERSION }}
+          echo ${{ GITHUB_BASE_REF }}
+          echo ${{ GITHUB_REF }}
+          echo ${{ GITHUB_REF_TYPE }}
+          echo ${{ GITHUB_ACTION_PATH }}
+          echo ${{ GITHUB_ACTION_REPOSITORY }}
+          echo ${{ GITHUB_EVENT_PATH}}
+          echo ${{ GITHUB_JOB}}
+          echo ${{ GITHUB_WORKSPACE }}
       # - name: try upload to releases
       #   uses: actions/upload-artifact@v2 
       #   with:
