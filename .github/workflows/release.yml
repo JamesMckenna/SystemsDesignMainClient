@@ -30,16 +30,19 @@ jobs:
          npm ci
          echo ${{ steps.get_version.outputs.VERSION }}
       - name: Build app
+        id: built-app
         run: npm run build --if-present
 
+      - name: testing accessing
+        run: echo ${{ steps.built-app.output }}
       # - name: try upload to releases
       #   uses: actions/upload-artifact@v2 
       #   with:
       #     name: test3 #-${{ steps.get_version.outputs.VERSION }}
       #     path: "dist/*"
 
-      - name: Upload to releases
-        uses: AButler/upload-release-assets@v2.0
-        with:
-          files: dist/*
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Upload to releases
+      #   uses: AButler/upload-release-assets@v2.0
+      #   with:
+      #     files: dist/*
+      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
