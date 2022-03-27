@@ -40,6 +40,7 @@ jobs:
       - name: testing accessing
         id: test-accessing-artifacts
         run: | 
+          echo ${{ github.event.release.tag_name }}
           echo ${{ steps.built-app.output.artifacts }}
           echo ${{ steps.get_version.outputs.VERSION }}
           echo $GITHUB_BASE_REF
