@@ -49,14 +49,24 @@ jobs:
           echo "TESTING"
           echo ${{ github.ref }}
 
-      - name: try upload to releases
-        uses: actions/upload-artifact@v2 
-        with:
-          name: test3 #-${{ steps.get_version.outputs.VERSION }}
-          path: "dist/*"
+      # - name: try upload to releases
+      #   uses: actions/upload-artifact@v2 
+      #   with:
+      #     name: test3 #-${{ steps.get_version.outputs.VERSION }}
+      #     path: "dist/*"
 
       # - name: Upload to releases
       #   uses: AButler/upload-release-assets@v2.0
       #   with:
       #     files: dist/*
       #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/release/mything
+          asset_name: mything
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
