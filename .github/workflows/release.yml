@@ -46,6 +46,7 @@ jobs:
           echo $GITHUB_EVENT_PATH
           echo $GITHUB_JOB
           echo $GITHUB_WORKSPACE
+          echo "TESTING"
       # - name: try upload to releases
       #   uses: actions/upload-artifact@v2 
       #   with:
