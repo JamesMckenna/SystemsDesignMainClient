@@ -47,11 +47,12 @@ jobs:
           echo $GITHUB_JOB
           echo $GITHUB_WORKSPACE
           echo "TESTING"
-      # - name: try upload to releases
-      #   uses: actions/upload-artifact@v2 
-      #   with:
-      #     name: test3 #-${{ steps.get_version.outputs.VERSION }}
-      #     path: "dist/*"
+
+      - name: try upload to releases
+        uses: actions/upload-artifact@v2 
+        with:
+          name: test3 #-${{ steps.get_version.outputs.VERSION }}
+          path: "dist/*"
 
       # - name: Upload to releases
       #   uses: AButler/upload-release-assets@v2.0
