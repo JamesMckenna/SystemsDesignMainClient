@@ -47,6 +47,7 @@ jobs:
           echo $GITHUB_JOB
           echo $GITHUB_WORKSPACE
           echo "TESTING"
+          echo ${{ github.refs/tags/ }}
 
       - name: try upload to releases
         uses: actions/upload-artifact@v2 
