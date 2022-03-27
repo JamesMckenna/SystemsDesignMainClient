@@ -14,6 +14,10 @@ jobs:
     strategy:
       matrix:
         node-version: [17.x]
+        include:
+          - os: ubuntu-latest
+            artifact_name: built-app-artifact-name
+            asset_name: built-app-asset-name
 
     steps:
       - name: Get the version
