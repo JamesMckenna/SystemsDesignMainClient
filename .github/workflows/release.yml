@@ -37,11 +37,8 @@ jobs:
           echo ${{ env.RELEASE_VERSION }}
 
       - name: Set env2
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-      - name: Test2
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
+        run: echo ${{github.ref_name}}
+
 
 
       - name: Use Node.js ${{ matrix.node-version }}
