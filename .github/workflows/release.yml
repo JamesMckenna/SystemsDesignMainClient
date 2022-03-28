@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout and get the version
-        id: get_version
+        #id: get_version
         #run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
         #run: echo ::set-output name=VERSION::${GITHUB_REF/refs/tags/}
         
@@ -43,9 +43,8 @@ jobs:
 
 
       - name: Install dependencies
-        run: |
-         npm ci
-         echo ${{ steps.get_version.outputs.VERSION }}
+        run: npm ci
+
       - name: tag name
         run: echo ${{github.event.release.tag_name}}
       - name: Check Release Version
