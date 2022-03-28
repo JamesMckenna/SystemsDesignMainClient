@@ -39,7 +39,8 @@ jobs:
         run: |
          npm ci
          echo ${{ steps.get_version.outputs.VERSION }}
-
+      - name: tag name
+        run: echo ${{github.event.release.tag_name}}
       - name: Check Release Version
         uses: thebongy/version-check@v1
         with:
