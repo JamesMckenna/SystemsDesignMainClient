@@ -59,7 +59,8 @@ jobs:
 
       - run: echo ${{ steps.get_version.outputs.version }}
 
-
+      - name: filter
+        run: ${{github.ref.*}}
 
       - name: Install dependencies
         run: npm ci
