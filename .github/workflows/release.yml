@@ -27,7 +27,9 @@ jobs:
         #run: echo ::set-output name=VERSION::${GITHUB_REF/refs/tags/}
         
         uses: actions/checkout@v2
-        
+        with:
+          fetch-depth: 0
+          
       - run: git fetch --tags
 
       - name: Extract tag name
