@@ -20,12 +20,15 @@ jobs:
             asset_name: built-app-asset-name
 
     steps:
-      - name: Get the version
+      - name: Checkout and get the version
         id: get_version
         #run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
         #run: echo ::set-output name=VERSION::${GITHUB_REF/refs/tags/}
+        
+        uses: actions/checkout@v2
         run: git fetch --all --tags
-      - uses: actions/checkout@v2
+
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
