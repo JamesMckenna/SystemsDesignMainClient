@@ -27,7 +27,7 @@ jobs:
         
         uses: actions/checkout@v2
         
-      #- run: git fetch --tags
+      - run: git fetch --tags
 
       - name: Extract tag name
         id: tag
