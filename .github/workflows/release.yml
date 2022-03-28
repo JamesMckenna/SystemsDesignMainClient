@@ -26,7 +26,8 @@ jobs:
         #run: echo ::set-output name=VERSION::${GITHUB_REF/refs/tags/}
         
         uses: actions/checkout@v2
-        run: git fetch --all --tags
+        
+      - run: git fetch --all --tags
 
 
       - name: Use Node.js ${{ matrix.node-version }}
