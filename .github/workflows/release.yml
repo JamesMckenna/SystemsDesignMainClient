@@ -36,8 +36,11 @@ jobs:
          echo ${{ steps.get_version.outputs.VERSION }}
       - name: Build app
         id: built-app
-        run: npm run build --if-present
-
+        run: |
+          npm run build --if-present
+          echo ${{ github.event.release.tag_name }}
+          echo ${{ steps.built-app.output.artifacts }}
+          echo ${{ steps.get_version.outputs.VERSION }}
       - name: testing accessing
         id: test-accessing-artifacts
         run: | 
