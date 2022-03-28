@@ -68,14 +68,14 @@ jobs:
 
       - name: tag name
         run: echo ${{github.event.release.tag_name}}
-      - name: Check Release Version
-        uses: thebongy/version-check@v1
-        with:
-          file: package.json
-          tagFormat: ${version}
-        id: version_check_staging
-      - name:
-        run: echo "Version ${{steps.version_check_staging.outputs.releaseVersion}}"
+      # - name: Check Release Version
+      #   uses: thebongy/version-check@v1
+      #   with:
+      #     file: package.json
+      #     tagFormat: ${version}
+      #   id: version_check_staging
+      # - name:
+      #   run: echo "Version ${{steps.version_check_staging.outputs.releaseVersion}}"
       #- name: Build app
       #   id: built-app
       #   run: |
