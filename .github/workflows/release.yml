@@ -23,7 +23,8 @@ jobs:
       - name: Get the version
         id: get_version
         #run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs/tags/}
+        #run: echo ::set-output name=VERSION::${GITHUB_REF/refs/tags/}
+        run: git fetch --all --tags
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -34,39 +35,49 @@ jobs:
         run: |
          npm ci
          echo ${{ steps.get_version.outputs.VERSION }}
-      - name: Build app
-        id: built-app
-        run: |
-          npm run build --if-present
-          echo ${{ github.event.release.tag_name }}
-          echo ${{ steps.built-app.output.artifacts }}
-          echo ${{ steps.get_version.outputs.VERSION }}
-      - name: testing accessing
-        id: test-accessing-artifacts
-        run: | 
-          echo ${GITHUB_REF##*/} 
-          echo ${GITHUB_REF#refs/*/}
-          echo ${GITHUB_REF}
-          echo ${GITHUB_REF/tags}
-          echo ${{ github.event.release.tag_name }}
-          echo ${{ steps.built-app.output.artifacts }}
-          echo ${{ steps.get_version.outputs.VERSION }}
-          echo $GITHUB_BASE_REF
-          echo $GITHUB_REF
-          echo $GITHUB_REF_TYPE
-          echo $GITHUB_ACTION_PATH
-          echo $GITHUB_ACTION_REPOSITORY
-          echo $GITHUB_EVENT_PATH
-          echo $GITHUB_JOB
-          echo $GITHUB_WORKSPACE
-          echo "TESTING"
-          echo ${{ github.ref }}
 
-      - name: try upload to releases
-        uses: actions/upload-artifact@v2 
+      - name: Check Release Version
+        uses: thebongy/version-check@v1
         with:
-          name: test3 #-${{ steps.get_version.outputs.VERSION }}
-          path: "dist/*"
+          file: package.json
+          tagFormat: v${version}
+        id: version_check_staging
+      - name:
+        run: |
+        echo "Version ${{ steps.version_check_staging.outputs.releaseVersion }}"
+      #- name: Build app
+      #   id: built-app
+      #   run: |
+      #     npm run build --if-present
+      #     echo ${{ github.event.release.tag_name }}
+      #     echo ${{ steps.built-app.output.artifacts }}
+      #     echo ${{ steps.get_version.outputs.VERSION }}
+      # - name: testing accessing
+      #   id: test-accessing-artifacts
+      #   run: | 
+      #     echo ${GITHUB_REF##*/} 
+      #     echo ${GITHUB_REF#refs/*/}
+      #     echo ${GITHUB_REF}
+      #     echo ${GITHUB_REF/tags}
+      #     echo ${{ github.event.release.tag_name }}
+      #     echo ${{ steps.built-app.output.artifacts }}
+      #     echo ${{ steps.get_version.outputs.VERSION }}
+      #     echo $GITHUB_BASE_REF
+      #     echo $GITHUB_REF
+      #     echo $GITHUB_REF_TYPE
+      #     echo $GITHUB_ACTION_PATH
+      #     echo $GITHUB_ACTION_REPOSITORY
+      #     echo $GITHUB_EVENT_PATH
+      #     echo $GITHUB_JOB
+      #     echo $GITHUB_WORKSPACE
+      #     echo "TESTING"
+      #     echo ${{ github.ref }}
+
+      # - name: try upload to releases
+      #   uses: actions/upload-artifact@v2 
+      #   with:
+      #     name: test3 #-${{ steps.get_version.outputs.VERSION }}
+      #     path: "dist/*"
 
       # - name: Upload to releases
       #   uses: AButler/upload-release-assets@v2.0
