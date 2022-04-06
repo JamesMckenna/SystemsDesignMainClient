@@ -1,0 +1,233 @@
+/*1px = 0.0625rem, 2px = 0.125rem, 3px = 0.1875rem, 4px = 0.25rem, 5px = 0.3125rem, 8px = 0.5rem, 10px = 0.625rem, 12px = 0.75rem, 14px = 0.875rem, 16px = 1rem (base), 18px = 1.125rem, 20px = 1.25rem, 24px = 1.5rem, 30px = 1.875rem, 32px = 2rem*/
+.col-1 {width: 8.33333%;}
+.col-2 {width: 16.66667%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33%;}
+.col-5 {width: 41.66667%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33333%;}
+.col-8 {width: 66.66667%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33333%;}
+.col-11 {width: 91.66667%;}
+.col-12 {width: 100%;}
+
+/*--------------Helpers--------------------------------*/
+.auto-margin {margin: auto auto;}
+.center-text {text-align: center;}
+.text-danger {color: rgb(255, 0, 0);}
+
+:root {
+    --bgcolor1: #A36B30;
+    --bgcolor2: white;
+    --bgcolor3: #3f532a;
+  
+    --h-tag-colour: #696986;
+    --shadow-text-offset: 0.0625rem 0.0625rem 0.0625rem #fff;
+    --bg-colour-1: #dcdcdc;
+    --boxshadow: 0.125rem 0.125rem 0.125rem 0.0625rem var(--h-tag-colour);
+    --boxshadow-right: -0.125rem  0.125rem 0.125rem 0.0625rem var(--h-tag-colour);
+  
+    --borderradius: 0.1875rem;
+    --borderstyle: inset;
+    --borderwidth: 0.1rem;
+    --bordercolor: var(--bg-colour-1);
+  
+    --a-hover-colour: #fff;
+    --navlink-gradient-hov-1: rgba(125, 185, 232, 0.01);
+    --navlink-gradient-hov-2: rgba(105, 105, 134, 0.1);
+    --navlink-gradient-hov-3: var(--h-tag-colour);
+    --navlink-gradient-active-1: rgba(0, 0, 0, 0.3);
+    --navlink-gradient-active-2: rgba(0, 0, 0, 0);
+
+    font-family: "Roboto";
+}
+
+.theme-shadow {
+    box-shadow: var(--boxshadow);
+}
+  
+.theme-shadow-right {
+    box-shadow: var(--boxshadow-right);
+}
+  
+.theme-border {
+    border-radius: var(--borderradius);
+    border-style: var(--borderstyle);
+    border-width: var(--borderwidth);
+    border-color: var(--bordercolor);
+}
+  
+.theme-button {
+    margin: 0.25rem;
+    background: var(--bgcolor2);
+    color: var(--h-tag-colour);
+    cursor: pointer;
+}
+  
+.theme-button:hover,
+svg:hover {
+    fill: white;
+}
+  
+.theme-button:hover {
+    color: white;
+    background: linear-gradient(
+      to right,
+      var(--navlink-gradient-hov-1) 0%,
+      var(--navlink-gradient-hov-2) 50%,
+      var(--navlink-gradient-hov-3) 100%
+    );
+}
+
+@font-face {
+    font-family: "DejaVu Sans";
+    src: url("../fonts/dejavu-sans/DejaVuSans-Bold.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSans-BoldOblique.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSans-ExtraLight.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSans-Oblique.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSans.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSansCondensed-Bold.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSansCondensed-BoldOblique.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSansCondensed-Oblique.ttf") format("truetype");
+    src: url("../fonts/dejavu-sans/DejaVuSansCondensed.ttf") format("truetype");
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Black.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-BlackItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-BoldItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Italic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Light.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-LightItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-MediumItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Thin.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-ThinItalic.ttf") format("truetype");
+    src: url("../fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--h-tag-colour);
+    text-shadow: var(--shadow-text-offset);
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    font-family: "DejaVu Sans";
+}
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+a {
+    font-family: "Roboto";
+    color: var(--h-tag-colour);
+    text-shadow: var(--shadow-text-offset);
+}
+
+a:hover {
+    color: white;
+    text-shadow: none;
+}
+
+p {
+    font-family: "Roboto";
+    color: #000;
+    font-weight: normal;
+    line-height: 1.5rem;
+}
+
+li {
+    display: block;
+    font-family: "Roboto";
+    color: #000;
+    font-weight: normal;
+    line-height: 1.5rem;
+}
+
+html {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    min-height: 100vh;
+    margin: auto auto;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.01) 0%,
+      rgba(127, 127, 127, 0.5) 40%,
+      rgba(127, 127, 127, 0.01) 50%,
+      rgba(127, 127, 127, 0.5) 60%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+}
+
+body {
+    box-sizing: border-box;
+    min-height: 100vh;
+    position: absolute;
+    width: 100%;
+    box-shadow: 1rem 1rem 6rem 1rem rgba(0, 0, 0, 0.5) inset;  /* vinyette */
+}
+
+/*colour hex value #696986*/
+/**-------- Start BALL CSS ----------------------------**/
+.ballPosition {
+    animation: ballPosition 5s infinite alternate;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    position: fixed;
+    left: 50%;
+    z-index: -100;
+}
+
+.ballFlash {
+    position: relative;
+    left: -1rem;
+    width: 2rem;
+    height: 2rem;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7f7f7f+0,000000+100&1+0,0+100 */
+    background: -moz-radial-gradient(center, ellipse cover, rgba(127,127,127,.25) 0%, rgba(255,255,255,0.1) 90%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(127,127,127,.25) 0%,rgba(255,255,255,0.1) 90%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, rgba(127,127,127,.25) 0%,rgba(255,255,255,0.1) 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7f7f7f', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    animation: ballFlash 2s infinite alternate;
+    z-index: -100;
+}
+
+@keyframes ballPosition {
+    0% {top: 2vh;}
+    100% {top: 99vh;}}
+
+@keyframes ballFlash {
+    50% {
+        opacity: 0.2;
+    }
+}
+/**-------- End BALL CSS ----------------------------**/
+
+
+/*--------------------------320px----------------------*/
+@media (min-width: 20rem) {
+}
+/*-------------------------420px------------------------*/
+@media (min-width: 26.25rem) {
+}
+/*--- Nav from desktop to mobile -640px- login links moved with js-------------------*/
+@media (min-width: 40rem){
+
+}
+/*-------------------728px----------------------------------*/
+@media (min-width: 45.5rem) {
+}
+
+/*-------------------------960 px-----------------------*/
+@media (min-width: 60rem) {
+
+}
+
+/*--------------------------------1328 px---------------*/
+@media (min-width: 83rem) {
+}
