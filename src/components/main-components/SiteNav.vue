@@ -112,9 +112,7 @@
               <li v-else data-move class="nav-drop-downs_li">
                 <a
                   class="nav-drop-downs_li_a"
-                  @click="
-                    store.dispatch('setLoggedInState', null, { root: true })
-                  "
+                  @click="store.dispatch('login', null, { root: true })"
                   aria-label="Log In"
                   ><u>Log In</u></a
                 >
