@@ -22,21 +22,12 @@ type AugmentedActionContext = {
 } & Omit<ActionContext<AuthStateType, RootStateType>, "commit">;
 
 type AuthActions = {
-  //TEST ACTION
-  setLoggedInState({ commit }: AugmentedActionContext): void;
-
   login({ commit }: AugmentedActionContext): void;
   logout({ commit }: AugmentedActionContext): void;
 };
 
 export const authActions: ActionTree<AuthStateType, RootStateType> &
   AuthActions = {
-  //TEST ACTION
-  setLoggedInState({ commit }) {
-    console.log("called");
-    commit(AuthMutationTypes.TEST_SET_LOGGEDIN_STATE, true);
-  },
-
   login({ commit }) {
     console.log("LOGIN CALLED");
     userManager
