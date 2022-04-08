@@ -2,6 +2,7 @@ var TerserPlugin = require("terser-webpack-plugin");
 var WebpackObfuscator = require("webpack-obfuscator");
 var path = require("path");
 var webpack = require("webpack");
+var fs = require("fs");
 //https://github.com/terser/terser#minify-options
 const terserOptionsCompress = {
   defaults: true, //keep defaults unless otherwise explicitly changed in options.property below
@@ -42,36 +43,58 @@ const webpackObfuscatorOptions = {
 
 module.exports = {
   lintOnSave: false,
-  devServer: {
-    hot: true,
-    client: {
-      logging: "verbose",
-      overlay: {
-        warnings: true,
-        errors: true,
-      },
-      reconnect: 6,
-    },
-    headers: [
-      {
-        key: "Example-Dev-Server-Header",
-        value: "ExampleHeaderValue",
-      },
-      {
-        key: "Example-Header-two",
-        value: "MoreThanOneHeaderNeedsToBeArrayOfObjects",
-      },
-      {
-        key: "A-Single-Header",
-        value:
-          "Can-Be-Coded-As-Header-Name-colon-HeaderValue-as-A-String-instead-of-JS-Object",
-      },
-    ],
-  },
   productionSourceMap: process.env.NODE_ENV === "development",
   publicPath: "/",
   integrity: process.env.NODE_ENV === "production",
   configureWebpack: {
+    devServer: {
+      allowedHosts: "auto",
+      host: "0.0.0.0",
+      port: "443",
+      https: true,
+      server: {
+        type: "https",
+        options: {
+          minVersion: "TLSv1.1",
+          key: fs.readFileSync(
+            path.join(__dirname, "./localhostcerts/Expires04-08-2023.key")
+          ),
+          //pfx: fs.readFileSync(path.join(__dirname, './IS4.pfx')),
+          cert: fs.readFileSync(
+            path.join(__dirname, "./localhostcerts/Expires04-08-2023.crt")
+          ),
+          ca: fs.readFileSync(
+            path.join(__dirname, "./localhostcerts/Expires04-08-2023.pem")
+          ),
+          passphrase: "localhost",
+          requestCert: true,
+        },
+      },
+      hot: true,
+      client: {
+        //logging: "verbose",
+        overlay: {
+          warnings: true,
+          errors: true,
+        },
+        reconnect: 6,
+      },
+      headers: [
+        {
+          key: "Example-Dev-Server-Header",
+          value: "ExampleHeaderValue",
+        },
+        {
+          key: "Example-Header-two",
+          value: "MoreThanOneHeaderNeedsToBeArrayOfObjects",
+        },
+        {
+          key: "A-Single-Header",
+          value:
+            "Can-Be-Coded-As-Header-Name-colon-HeaderValue-as-A-String-instead-of-JS-Object",
+        },
+      ],
+    },
     plugins: [new webpack.AutomaticPrefetchPlugin()],
     optimization: {
       splitChunks: {
