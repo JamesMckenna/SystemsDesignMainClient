@@ -10,17 +10,11 @@ export enum AuthMutationTypes {
 }
 
 export type AuthMutations<AuthStateType> = {
-  [AuthMutationTypes.HIDE_REFRESH_MODAL](
-    state: AuthStateType,
-    payload: boolean
-  ): void;
-  [AuthMutationTypes.SHOW_REFRESH_MODAL](
-    state: AuthStateType,
-    payload: boolean
-  ): void;
+  [AuthMutationTypes.HIDE_REFRESH_MODAL](state: AuthStateType): void;
+  [AuthMutationTypes.SHOW_REFRESH_MODAL](state: AuthStateType): void;
   [AuthMutationTypes.SET_LOGGEDIN_STATE](
     state: AuthStateType,
-    payload: User
+    payload: string
   ): void;
   [AuthMutationTypes.SET_LOGOUT_STATE](
     state: AuthStateType,
@@ -38,15 +32,14 @@ export const authMutations: MutationTree<AuthStateType> &
     state.showRefreshModal = true;
   },
 
-  SET_LOGGEDIN_STATE: (state: AuthStateType, data: User) => {
-    console.log(`HERE ${JSON.stringify(data)}`);
-    console.log(`TOKEN ${data.id_token}`);
+  SET_LOGGEDIN_STATE: (state: AuthStateType, data: string) => {
+    const parsed = JSON.parse(data);
     state.loggedIn = true;
-    state.idToken = data.id_token;
-    state.user = data;
-    state.accessToken = data.access_token;
-    state.refreshToken = data.refresh_token;
-    state.scopes = data.scope;
+    state.idToken = parsed.id_token;
+    state.user = parsed.profile;
+    state.accessToken = parsed.access_token;
+    state.refreshToken = parsed.refresh_token;
+    state.scopes = parsed.scope;
   },
 
   SET_LOGOUT_STATE: (state: AuthStateType) => {

@@ -28,26 +28,19 @@ type AuthActions = {
 
 export const authActions: ActionTree<AuthStateType, RootStateType> &
   AuthActions = {
-  login({ commit }) {
-    console.log("LOGIN CALLED");
-    userManager
-      .signinRedirect()
-      .then(() => userManager.getUser())
-      .then((data) => {
-        commit(AuthMutationTypes.SET_LOGGEDIN_STATE, data as User);
-      })
-      .catch((err) => {
-        store.dispatch("setError", err);
-      });
+  login() {
+    userManager.signinRedirect().catch((err: Error) => {
+      store.dispatch("setError", err);
+    });
   },
 
   logout({ commit }) {
     userManager
       .signoutRedirect()
-      .then(function () {
+      .then(() => {
         commit(AuthMutationTypes.SET_LOGOUT_STATE, false);
       })
-      .catch((err) => {
+      .catch((err: Error) => {
         store.dispatch("setError", err);
       });
   },
