@@ -432,10 +432,13 @@ const nddOpenCloseEventListener = (evt: Event) => {
   }
 };
 
-watch(() => {
-  isLoggedIn.value = store.getters.getLoggedIn;
-  name.value = store.getters.getUser.name;
-});
+watch(
+  () => store.getters.getLoggedIn,
+  () => {
+    isLoggedIn.value = store.getters.getLoggedIn;
+    name.value = store.getters.getUser.name;
+  }
+);
 
 onMounted(() => {
   navBtn = document.getElementById("navBtn")!;
