@@ -59,7 +59,6 @@ module.exports = {
           key: fs.readFileSync(
             path.join(__dirname, "./localhostcerts/Expires04-08-2023.key")
           ),
-          //pfx: fs.readFileSync(path.join(__dirname, './IS4.pfx')),
           cert: fs.readFileSync(
             path.join(__dirname, "./localhostcerts/Expires04-08-2023.crt")
           ),
