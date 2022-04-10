@@ -1,39 +1,19 @@
-﻿<!DOCTYPE html name="Callback">
+﻿<!DOCTYPE html>
 <html>
-<head name="Callback">
+<head>
     <meta charset="utf-8" />
     <title></title>
 </head>
-<body name="Callback">
+<body>
     <script src="./js/oidc-client.rsa256.slim.min.js"></script>
     <script>
-        new Oidc.UserManager({ response_mode: "query"}).signinRedirectCallback().then(function () {
+        const mgr = new Oidc.UserManager({ userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }), loadUserInfo: true, filterProtocolClaims: true, response_mode:"query" });
+        mgr.signinRedirectCallback().then(function (user) {
+            window.history.replaceState({},
+                window.document.title,
+                window.location.origin + window.location.pathname);
             window.location = "/";
-        })
-        .catch(function (e) {
-            console.error(e);
         });
-
-        // new Oidc.UserManager({ response_mode: "query", userStore: new Oidc.WebStorageStateStore({ store: sessionStorage }) }).signinRedirectCallback().then(function () {
-        //     window.location = "/";
-        // })
-        // .catch(function (e) {
-        //     console.error(e);
-        // });
-
-        // new Oidc.UserManager({ response_mode: "query", userStore: new Oidc.WebStorageStateStore({ store: localStorage }) }).signinRedirectCallback().then(function (user) {
-        //     window.location = "/";
-        // })
-        // .catch(function (e) {
-        //     console.error(e);
-        // });
-
-        // new Oidc.UserManager({ response_mode: "query", userStore: new Oidc.WebStorageStateStore({ store: new Oidc.InMemoryWebStorage() }) }).signinRedirectCallback().then(function (user) {
-        //     window.location = "/";
-        // })
-        // .catch(function (e) {
-        //     console.error(e);
-        // });
     </script>
 </body>
 </html>
