@@ -1,4 +1,4 @@
-import { WebStorageStateStore, UserManagerSettings } from "oidc-client";
+import Oidc, { UserManagerSettings } from "oidc-client";
 
 const config: UserManagerSettings = {
   metadata: {
@@ -39,11 +39,7 @@ const config: UserManagerSettings = {
   staleStateAge: 300,
   silent_redirect_uri: process.env.VUE_APP_BASE_URL + "/silent-refresh.html",
 
-  userStore: new WebStorageStateStore({ store: window.sessionStorage }), // This is acceptable from a security stand point, but best to use inmemorystorage and obufuscate js code.
-
-  // TODO: Implement this - should be able to access userStore as console.log(this.$userManager.settings.userStore.get("oidc.user:" + process.env.VUE_APP_IS4_BASE_URL + ":" + process.env.VUE_APP_MAIN_CLIENT));
-  // InMemoryWebStorage has a getItem(), setItem() that returns as promise.
-  // userStore: new WebStorageStateStore({ store: new InMemoryWebStorage() })
+  userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),
 };
 
 export default config;
