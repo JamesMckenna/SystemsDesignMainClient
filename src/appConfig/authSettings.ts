@@ -29,7 +29,7 @@ const config: UserManagerSettings = {
 
   accessTokenExpiringNotificationTime: 150,
 
-  checkSessionInterval: 2000,
+  checkSessionInterval: 10000,
   monitorSession: true,
   automaticSilentRenew: false,
 

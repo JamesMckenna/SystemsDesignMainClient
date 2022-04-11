@@ -4,10 +4,7 @@ import { RootStateType, store } from "../index";
 import { AuthStateType } from "./index";
 import { AuthMutations, AuthMutationTypes } from "./authMutations";
 
-import { User, UserManager, Log } from "oidc-client";
-import config from "@/appConfig/authSettings";
-const userManager = new UserManager(config);
-
+import { Log } from "oidc-client";
 if (process.env.NODE_ENV === "development") {
   console.info("RUNNING IN DEV MODE!! UserManager - oidc-client");
   Log.logger = console;
@@ -29,13 +26,13 @@ type AuthActions = {
 export const authActions: ActionTree<AuthStateType, RootStateType> &
   AuthActions = {
   login() {
-    userManager.signinRedirect().catch((err: Error) => {
+    store.getters.getUserManager.signinRedirect().catch((err: Error) => {
       store.dispatch("setError", err);
     });
   },
 
   logout({ commit }) {
-    userManager
+    store.getters.getUserManager
       .signoutRedirect()
       .then(() => {
         commit(AuthMutationTypes.SET_LOGOUT_STATE, false);

@@ -13,7 +13,11 @@
                 window.document.title,
                 window.location.origin + window.location.pathname);
             window.location = "/";
+        }).then(() => {
+            Oidc.mgr = {};
+            delete Oidc.mgr;
         });
+        
     </script>
 </body>
 </html>
