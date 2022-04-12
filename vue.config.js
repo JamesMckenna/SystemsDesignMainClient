@@ -2,7 +2,8 @@ var TerserPlugin = require("terser-webpack-plugin");
 var WebpackObfuscator = require("webpack-obfuscator");
 var path = require("path");
 var webpack = require("webpack");
-var fs = require("fs");
+//var fs = require("fs");
+
 //https://github.com/terser/terser#minify-options
 const terserOptionsCompress = {
   defaults: true, //keep defaults unless otherwise explicitly changed in options.property below
@@ -50,26 +51,25 @@ module.exports = {
     devServer: {
       allowedHosts: "auto",
       host: "0.0.0.0",
-      port: "443",
-      https: true,
-      server: {
-        type: "https",
-        options: {
-          minVersion: "TLSv1.1",
-          key: fs.readFileSync(
-            path.join(__dirname, "./localhostcerts/Expires04-08-2023.key")
-          ),
-          //pfx: fs.readFileSync(path.join(__dirname, './IS4.pfx')),
-          cert: fs.readFileSync(
-            path.join(__dirname, "./localhostcerts/Expires04-08-2023.crt")
-          ),
-          ca: fs.readFileSync(
-            path.join(__dirname, "./localhostcerts/Expires04-08-2023.pem")
-          ),
-          passphrase: "localhost",
-          requestCert: true,
-        },
-      },
+      // port: "443",
+      // https: true,
+      // server: {
+      //   type: "https",
+      //   options: {
+      //     minVersion: "TLSv1.1",
+      //     key: fs.readFileSync(
+      //       path.join(__dirname, "./localhostcerts/Expires04-08-2023.key")
+      //     ),
+      //     cert: fs.readFileSync(
+      //       path.join(__dirname, "./localhostcerts/Expires04-08-2023.crt")
+      //     ),
+      //     ca: fs.readFileSync(
+      //       path.join(__dirname, "./localhostcerts/Expires04-08-2023.pem")
+      //     ),
+      //     passphrase: "localhost",
+      //     requestCert: true,
+      //   },
+      // },
       hot: true,
       client: {
         //logging: "verbose",

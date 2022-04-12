@@ -1,0 +1,46 @@
+Self-signed certificate for localhost SSL/TLS usage
+
+STEP 1)
+From the OpenSSL install directory, locate and make a copy of the openssl config file (openssl.cnf).
+Rename the copy to something like self-signed-config.cnf (leave it in same directory as the openssl.cnf fine).
+
+In self-signed-config.cnf, under the # Policies used by the TSA examples section comment out:
+tsa_policy1 = 1.2.3.4.1
+tsa_policy2 = 1.2.3.4.5.6
+tsa_policy3 = 1.2.3.4.5.7
+
+under the [v3_ca] section, and at the end of that section, add:
+subjectAltName=DNS:localhost
+
+Save the file, copy and paste it, then rename the copied file to self-signed.cnf.dist and leave it in the same directory as openssl.cnf, openssl.cnf.dist and the newly made self-signed-config.cnf files.
+
+
+STEP 2)
+Make a directory to store the certs and keys
+Generate the private key
+
+sudo openssl req -x509 -newkey rsa:4096 -keyout relative/path/to/output/dir/private.key -out relative/path/to/output/dir/localhost.crt -days 365 -nodes -subj "/CN=myapp" 
+NOTE: -days should be 365 or less, I read that as of Sept 2020, something about certs over 1 year are supposed to be rejected. 
+
+This step will produce a private key and certificate file.
+TO PRINT OUT TO CONSOLE:
+openssl x509 -in relative/path/to/output/dir/localhost.crt -noout -text
+
+
+
+STEP 3) - SSL/TSL cert for webserver
+sudo openssl req -x509 -newkey rsa:4096 -keyout relative/path/to/output/dir/private.key -out relative/path/to/output/dir/localhost.crt -days 365 -nodes -subj "/CN=localhost" -config opensslDir/path/to/self-signed-config.cnf
+
+Make .pfx from .crt using crt and private.key:
+sudo openssl pkcs12 -export -out relative/path/to/output/dir/localhost.pfx -inkey relative/path/to/output/dir/private.key -in relative/path/to/output/dir/localhost.crt -name "Localhost Selfsigned"
+
+This step will ask for a passphrase, WRITE IT DOWN/REMEBER IT. I use a .txt file in same directory as cert files. 
+
+We can install the certificate (.pfx) in the computer's certificate store (double click the .pfx, a wizard should open and follow wizard instructions) which would allow firefox to recognize the certificate when delivered by the webserver.
+
+
+STEP 4)
+A .crt can be converted to .pem by: openssl x509 -in localhost.crt -out public.pem -outform PEM
+
+You should now have 4 files. a .crt, .pfx .key and .pem: these can be used for SSL/TLS development when the pfx is installed to the dev computer's cert store. Firefox will ask to trust the cert and will remember turst if set to not clear browser on close. Should also be able to be use .pem and private.key for dkim signinging by a smtp server. Depending on smtp server, might need to use .crt, .pem and .key or convert private.key to private.pem 
+

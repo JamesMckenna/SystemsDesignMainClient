@@ -70,7 +70,7 @@
               class="login-btn_a"
               v-if="isLoggedIn"
               aria-label="Open / Close Logout and Account Links"
-              >Hi<i class="down-arrow"></i
+              >{{ name }}<i class="down-arrow"></i
             ></a>
             <a
               role="button"
@@ -230,6 +230,7 @@ let loginBtn: HTMLElement;
 let login: HTMLElement;
 let navLinks: HTMLElement;
 let scrollLastStopped: number = window.scrollY;
+const name = ref("");
 const registerAccount = process.env.VUE_APP_REGISTER_ACCOUNT;
 
 const redirect = () => {
@@ -435,6 +436,7 @@ watch(
   () => store.getters.getLoggedIn,
   () => {
     isLoggedIn.value = store.getters.getLoggedIn;
+    name.value = store.getters.getUser.name;
   }
 );
 
