@@ -8,7 +8,6 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
-
 ```
 
 <p>To enable SSL/TLS for authentication testing, uncomment in vue.config.json</p>
@@ -43,8 +42,8 @@ npm run serve
 <p>src/store/authModule/index.ts - uncomment logging code to log to console</p>
 
 <p>in vue.config.json uncomment for general development logging</p>
-```
 
+```
  configureWebpack: { 
     devserver: { 
         client: { 
@@ -52,7 +51,6 @@ npm run serve
         } 
     } 
 }
-
 ```
 
 
