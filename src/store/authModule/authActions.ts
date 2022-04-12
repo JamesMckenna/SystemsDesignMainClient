@@ -4,13 +4,6 @@ import { RootStateType, store } from "../index";
 import { AuthStateType } from "./index";
 import { AuthMutations, AuthMutationTypes } from "./authMutations";
 
-import { Log } from "oidc-client";
-if (process.env.NODE_ENV === "development") {
-  console.info("RUNNING IN DEV MODE!! UserManager - oidc-client");
-  Log.logger = console;
-  Log.level = Log.DEBUG;
-}
-
 type AugmentedActionContext = {
   commit<K extends keyof AuthMutations<AuthStateType>>(
     key: K,

@@ -6,6 +6,15 @@ import { authGetters } from "./authGetters";
 import { authMutations } from "./authMutations";
 import { authActions } from "./authActions";
 import { UserManager } from "oidc-client";
+
+// import { Log } from "oidc-client";
+
+// if (process.env.NODE_ENV === "development") {
+//   console.info("RUNNING IN DEV MODE!! UserManager - oidc-client");
+//   Log.logger = console;
+//   Log.level = Log.DEBUG;
+// }
+
 export type AuthStateType = {
   loggedIn: boolean;
   user: User;
