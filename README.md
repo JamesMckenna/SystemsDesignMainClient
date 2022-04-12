@@ -14,7 +14,6 @@ npm run serve
 <p>To enable SSL/TLS for authentication testing, uncomment in vue.config.json</p>
 
 ```
-
     port: "443",
     https: true,
     server: {
@@ -33,7 +32,6 @@ npm run serve
                 passphrase: "localhost",
                 requestCert: true,
     },
-    
 ```
 
 
@@ -46,13 +44,15 @@ npm run serve
 
 <p>in vue.config.json uncomment for general development logging</p>
 ```
+
  configureWebpack: { 
     devserver: { 
         client: { 
             logging: "verbose" 
         } 
     } 
-} 
+}
+
 ```
 
 
