@@ -11,7 +11,10 @@ npm run serve
 
 ```
 
-<p>To enable SSL/TLS for authentication testing, uncomment
+<p>To enable SSL/TLS for authentication testing, uncomment</p>
+
+```
+
     <br />port: "443",
     <br />https: true,
     <br />server: {
@@ -30,7 +33,11 @@ npm run serve
                 <br />passphrase: "localhost",
                 <br />requestCert: true,
     <br />},
-<br />in vue.config.json</p>
+<br />
+
+```
+
+<p>in vue.config.json</p>
 
 <p>Self-signed certificate in project repo is dated and has a 1 year expirey date. Add the certificate to local dev machine's certificate store and firefox should allow https://localhost:443.</p>
 
