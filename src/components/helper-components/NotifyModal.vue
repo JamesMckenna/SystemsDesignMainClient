@@ -30,14 +30,14 @@ import { store } from "@/store/index";
 import { onMounted, ref } from "vue";
 
 let sessionLength = ref(0);
-const um = store.getters.getUserManager;
+
 const renew = () => {
-  const rb = document.getElementById("refreshBtn");
-  rb!.innerText = "REFRESHING!!";
+  const refreshBtn = document.getElementById("refreshBtn");
+  refreshBtn!.innerText = "REFRESHING!!";
   if (store.getters.getLoggedIn) {
-    um.startSilentRenew();
+    store.getters.getUserManager.startSilentRenew();
     setTimeout(() => {
-      um.stopSilentRenew();
+      store.getters.getUserManager.stopSilentRenew();
     }, 2000);
   }
 };

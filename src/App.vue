@@ -22,41 +22,32 @@ import SiteFooter from "@/components/main-components/SiteFooter.vue";
 import Notify from "@/components/helper-components/NotifyModal.vue";
 import { store } from "@/store/index";
 
-const title = "Systems Design DOT rocks";
 const header = reactive({ render: false });
-const um = store.getters.getUserManager;
 
 const renderHeader = (val: boolean): void => {
   header.render = val;
 };
 
 onBeforeMount(() => {
-  (document.getElementsByTagName("title")[0] as HTMLElement).innerHTML = title;
-  um.events.addUserLoaded(() => {
+  store.getters.getUserManager.events.addUserLoaded(() => {
     //if statement prevents event from calling store.dispatch("hideRefreshModal") more than once
     if (store.getters.getShowRefreshModal) {
       store.commit("HIDE_REFRESH_MODAL");
     }
   });
 
-  um.events.addAccessTokenExpiring(() => {
-    if (!store.getters.getShowRefreshModal) {
-      store.commit("SHOW_REFRESH_MODAL");
-    }
-  });
-
-  um.events.addAccessTokenExpired(() => {
+  store.getters.getUserManager.events.addAccessTokenExpired(() => {
     store.dispatch("logout");
   });
 
-  um.events.addSilentRenewError(() => {
+  store.getters.getUserManager.events.addSilentRenewError(() => {
     store.commit(
       "SET_ERROR",
       "An error occured when attempting to refresh you login status."
     );
   });
 
-  um.events.addUserSignedOut(() => {
+  store.getters.getUserManager.events.addUserSignedOut(() => {
     store.commit("SET_LOGOUT_STATE");
     if (
       localStorage.getItem(
@@ -77,24 +68,24 @@ onBeforeMount(() => {
 });
 
 onBeforeUnmount(() => {
-  um.events.removeUserLoaded(() => {
+  store.getters.getUserManager.events.removeUserLoaded(() => {
     store.commit("SET_LOGOUT_STATE");
     console.info("User loaded listener successfully removed");
   });
 
-  um.events.removeAccessTokenExpiring(() => {
+  store.getters.getUserManager.events.removeAccessTokenExpiring(() => {
     console.info("Access token expiring listener successfully removed");
   });
 
-  um.events.removeAccessTokenExpired(() => {
+  store.getters.getUserManager.events.removeAccessTokenExpired(() => {
     console.info("Access token expired listener successfully removed");
   });
 
-  um.events.removeSilentRenewError(() => {
+  store.getters.getUserManager.events.removeSilentRenewError(() => {
     console.info("Silientrenew error listener successfully removed");
   });
 
-  um.events.removeUserSignedOut(() => {
+  store.getters.getUserManager.events.removeUserSignedOut(() => {
     console.info("User signout listener successfully removed");
   });
 });
