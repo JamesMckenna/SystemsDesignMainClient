@@ -9,6 +9,8 @@ npm install
 ```
 npm run serve
 
+```
+
 To enable SSL/TLS for authentication testing, uncomment
     port: "443",
     https: true,
@@ -38,7 +40,7 @@ src/store/authModule/index.ts - uncomment logging code to log to console
 
 vue.config.json - uncomment configureWebpack: { devserver: { client: { logging: "verbose" } } } for general development logging
 
-```
+
 
 ### Compiles and minifies for production
 ```
