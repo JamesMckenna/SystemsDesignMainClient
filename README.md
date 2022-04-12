@@ -66,6 +66,7 @@ npm run test:unit
 
 ### Lints and fixes files
 <p>linting happens on commit hook</p> 
+
 ```
 npm run lint
 ```
