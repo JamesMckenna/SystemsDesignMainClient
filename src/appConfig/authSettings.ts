@@ -27,7 +27,7 @@ const config: UserManagerSettings = {
   scope: "openid profile offline_access IdApi email",
   post_logout_redirect_uri: process.env.VUE_APP_BASE_URL,
 
-  accessTokenExpiringNotificationTime: 150,
+  accessTokenExpiringNotificationTime: 60,
 
   checkSessionInterval: 10000,
   monitorSession: true,
