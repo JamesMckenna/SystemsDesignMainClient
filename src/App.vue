@@ -36,6 +36,12 @@ onBeforeMount(() => {
     }
   });
 
+  store.getters.getUserManager.events.addAccessTokenExpiring(() => {
+    if (!store.getters.getShowRefreshModal) {
+      store.commit("SHOW_REFRESH_MODAL");
+    }
+  });
+
   store.getters.getUserManager.events.addAccessTokenExpired(() => {
     store.dispatch("logout");
   });
