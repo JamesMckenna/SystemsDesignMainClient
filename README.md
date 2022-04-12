@@ -14,27 +14,24 @@ npm run serve
 <p>To enable SSL/TLS for authentication testing, uncomment</p>
 
 ```
-
-    <br />port: "443",
-    <br />https: true,
-    <br />server: {
-        <br />type: "https",
-        <br />options: {
-            <br />minVersion: "TLSv1.1",
-            <br />key: fs.readFileSync(
-                <br />path.join(__dirname, "./localhostcerts/Expires04-08-2023.key")
-                <br />),
-                <br />cert: fs.readFileSync(
-                    <br />path.join(__dirname, "./localhostcerts/Expires04-08-2023.crt")
-                <br />),
-                <br />ca: fs.readFileSync(
-                    <br />path.join(__dirname, "./localhostcerts/Expires04-08-2023.pem")
-                <br />),
-                <br />passphrase: "localhost",
-                <br />requestCert: true,
-    <br />},
-<br />
-
+    port: "443",
+    https: true,
+    server: {
+        type: "https",
+        options: {
+            minVersion: "TLSv1.1",
+            key: fs.readFileSync(
+                    path.join(__dirname, "./localhostcerts/Expires04-08-2023.key")
+                ),
+                cert: fs.readFileSync(
+                    path.join(__dirname, "./localhostcerts/Expires04-08-2023.crt")
+                ),
+                ca: fs.readFileSync(
+                    path.join(__dirname, "./localhostcerts/Expires04-08-2023.pem")
+                ),
+                passphrase: "localhost",
+                requestCert: true,
+    },
 ```
 
 <p>in vue.config.json</p>
