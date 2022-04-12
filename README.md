@@ -11,7 +11,7 @@ npm run serve
 
 ```
 
-<p>To enable SSL/TLS for authentication testing, uncomment</p>
+<p>To enable SSL/TLS for authentication testing, uncomment in vue.config.json</p>
 
 ```
     port: "443",
@@ -34,7 +34,7 @@ npm run serve
     },
 ```
 
-<p>in vue.config.json</p>
+
 
 <p>Self-signed certificate in project repo is dated and has a 1 year expirey date. Add the certificate to local dev machine's certificate store and firefox should allow https://localhost:443.</p>
 
@@ -42,8 +42,16 @@ npm run serve
 
 <p>src/store/authModule/index.ts - uncomment logging code to log to console</p>
 
-<p>vue.config.json - uncomment configureWebpack: { devserver: { client: { logging: "verbose" } } } for general development logging</p>
-
+<p>in vue.config.json uncomment for general development logging</p>
+```
+ configureWebpack: { 
+    devserver: { 
+        client: { 
+            logging: "verbose" 
+        } 
+    } 
+} 
+```
 
 
 ### Compiles and minifies for production
@@ -57,6 +65,7 @@ npm run test:unit
 ```
 
 ### Lints and fixes files
+<p>linting happens on commit hook</p> 
 ```
 npm run lint
 ```
