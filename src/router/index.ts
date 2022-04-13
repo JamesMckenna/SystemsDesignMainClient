@@ -13,6 +13,24 @@ const routes: Array<RouteRecordRaw> = [
     path: "/About",
     name: "About",
     component: () => import(/* webpackChunkName: "home" */ "../views/Main.vue"),
+    children: [
+      {
+        path: "/About/TheApp",
+        name: "The App",
+        component: () =>
+          import(
+            /* webpackChunkName: "home" */ "@/components/content-components/TheApp.vue"
+          ),
+      },
+      {
+        path: "/About/ElevatorPitch",
+        name: "Elevator Pitch",
+        component: () =>
+          import(
+            /* webpackChunkName: "home" */ "@/components/content-components/ElevatorPitch.vue"
+          ),
+      },
+    ],
     meta: { requiresAuth: false },
   },
   {
@@ -25,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/:catchAll(.*)",
     name: "NotFound",
     component: () =>
-      import(/* webpackChunkName: "home" */ "../views/NotFound.vue"),
+      import(/* webpackChunkName: "error" */ "../views/NotFound.vue"),
     meta: { requiresAuth: false },
   },
 ];

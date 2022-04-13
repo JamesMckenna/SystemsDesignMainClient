@@ -149,7 +149,7 @@
               <li class="nav-drop-downs_li">
                 <router-link
                   class="nav-drop-downs_li_a"
-                  to="/About"
+                  to="/About/TheApp"
                   aria-label="About"
                   >About</router-link
                 >
@@ -165,17 +165,26 @@
             </ul>
           </li>
           <li class="auto-margin nav-links_li">
-            <router-link class="nav-links_li_a" to="" aria-label="Placeholder"
+            <router-link
+              class="nav-links_li_a"
+              to="/placeholder"
+              aria-label="Placeholder"
               >Placeholder</router-link
             >
           </li>
           <li class="auto-margin nav-links_li">
-            <router-link class="nav-links_li_a" to="" aria-label="Placeholder"
+            <router-link
+              class="nav-links_li_a"
+              to="/placeholder"
+              aria-label="Placeholder"
               >Placeholder</router-link
             >
           </li>
           <li class="auto-margin nav-links_li">
-            <router-link class="nav-links_li_a" to="" aria-label="Placeholder"
+            <router-link
+              class="nav-links_li_a"
+              to="/placeholder"
+              aria-label="Placeholder"
               >Placeholder</router-link
             >
           </li>
@@ -190,7 +199,7 @@
               <li class="nav-drop-downs_li">
                 <router-link
                   class="nav-drop-downs_li_a"
-                  to="#"
+                  to="/placeholder"
                   aria-label="Placeholder"
                   >Placeholder</router-link
                 >
@@ -198,7 +207,7 @@
               <li class="nav-drop-downs_li">
                 <router-link
                   class="nav-drop-downs_li_a"
-                  to="#"
+                  to="/placeholder"
                   aria-label="Placeholder"
                   >Placeholder</router-link
                 >
@@ -206,7 +215,7 @@
               <li class="nav-drop-downs_li">
                 <router-link
                   class="nav-drop-downs_li_a"
-                  to="#"
+                  to="/placeholder"
                   aria-label="Placeholder"
                   >Placeholder</router-link
                 >
