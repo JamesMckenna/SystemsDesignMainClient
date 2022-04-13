@@ -347,11 +347,10 @@ a:hover {
   }
   @keyframes open-ndd {
     0% {
-      position: relative;
+      position: absolute;
     }
 
     1% {
-      position: absolute;
       width: 0%;
       height: 0rem;
       margin: 0rem 0rem;
@@ -399,11 +398,10 @@ a:hover {
 
   @keyframes open-ndd {
     0% {
-      position: relative;
+      position: absolute;
     }
 
     1% {
-      position: absolute;
       width: 0%;
       height: 0rem;
       margin: 0rem 0rem;
