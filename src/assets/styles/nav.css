@@ -67,7 +67,7 @@
 }
 .title_img {
   max-width: 150px;
-  filter: drop-shadow(0.0625rem 0.0625rem 0.0625rem black);
+  filter: drop-shadow(0.0625rem 0.0625rem 0.0625rem var(--h-tag-colour));
 }
 .title_img:hover {
   filter: brightness(150%);
