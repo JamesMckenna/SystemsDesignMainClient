@@ -84,21 +84,21 @@ import {
   showBackgroundIntersectionObserver,
 } from "@/assets/js/helper-functions";
 
-let area: IntersectionObserver;
+let pTagBackgroundObserver: IntersectionObserver;
 
 onMounted(() => {
   const windowWidth: number = window.innerWidth;
   const windowHeight: number = window.innerHeight;
   const options: showBackgroundObserverOptions =
     buildShowBackgroundObserverOptions(windowWidth, windowHeight);
-  area = showBackgroundIntersectionObserver(
+  pTagBackgroundObserver = showBackgroundIntersectionObserver(
     "highlight-p-tag",
     "highlight-p-tag__observer",
     options
   );
 });
 onUnmounted(() => {
-  area.disconnect();
+  pTagBackgroundObserver.disconnect();
 });
 </script>
 
