@@ -33,12 +33,11 @@ const showBackgroundIntersectionObserver = (
   options: showBackgroundObserverOptions
 ): IntersectionObserver => {
   const allTagsWithClassName = document.getElementsByClassName(classNameToFind);
-  const op = options;
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       e.target.classList.toggle(classToAdd, e.isIntersecting);
     });
-  }, op);
+  }, options);
 
   Array.from(allTagsWithClassName).forEach((el) => {
     observer.observe(el);
