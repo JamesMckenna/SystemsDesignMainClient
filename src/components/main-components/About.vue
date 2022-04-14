@@ -12,13 +12,8 @@ import { defineProps } from "vue";
 defineProps({ msg: String });
 </script>
 
-<style>
+<style scoped>
 .move--down {
   margin-bottom: 1rem;
-}
-
-.router-link-active,
-.router-link-exact-active {
-  color: black;
 }
 </style>
