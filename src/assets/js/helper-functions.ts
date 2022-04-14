@@ -33,7 +33,6 @@ const showBackgroundIntersectionObserver = (
   options: showBackgroundObserverOptions
 ): IntersectionObserver => {
   const allTagsWithClassName = document.getElementsByClassName(classNameToFind);
-  console.log(options);
   const op = options;
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
