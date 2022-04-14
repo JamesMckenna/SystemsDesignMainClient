@@ -146,13 +146,13 @@ onUpdated(() => {
   transition: all 0.5s ease-in;
 }
 
-.area {
+.highlight-p-tag {
   width: 95%;
   margin: 1rem auto;
   padding: 1rem 0.25rem 1rem 0.25rem;
   transition: background-color 0.5s ease-in;
 }
-.area__observer {
+.highlight-p-tag__observer {
   background-color: var(--bgcolor2);
   border-radius: 0.1875rem;
 }

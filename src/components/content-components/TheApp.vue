@@ -4,7 +4,7 @@
     3.1 used for the OIDC compliant token server, the identity management and
     the backend apps/APIs.
   </p>
-  <div class="area">
+  <div class="highlight-p-tag">
     <h4>TODO - the (unordered) backlog</h4>
     <ul class="text-indent">
       <li class="temp-li-class">- Lease two more virtual private servers</li>
@@ -41,7 +41,7 @@
       </li>
     </ul>
   </div>
-  <div class="area">
+  <div class="highlight-p-tag">
     <h4>The Frameworks and Libraries</h4>
     <ul class="center-text">
       <li class="temp-li-class">
@@ -64,7 +64,7 @@
     </ul>
   </div>
   <img src="@/assets/images/html.jpg" class="images" />
-  <div class="area">
+  <div class="highlight-p-tag">
     <h4>Software on the Server</h4>
     <ul class="center-text">
       <li class="temp-li-class">Running Windows Server 2019</li>
@@ -91,7 +91,11 @@ onMounted(() => {
   const windowHeight: number = window.innerHeight;
   const options: showBackgroundObserverOptions =
     buildShowBackgroundObserverOptions(windowWidth, windowHeight);
-  area = showBackgroundIntersectionObserver("area", "area__observer", options);
+  area = showBackgroundIntersectionObserver(
+    "highlight-p-tag",
+    "highlight-p-tag__observer",
+    options
+  );
 });
 onUnmounted(() => {
   area.disconnect();

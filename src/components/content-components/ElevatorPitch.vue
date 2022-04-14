@@ -1,6 +1,6 @@
 <template>
   <h4>A Bit About Me - the elevator pitch</h4>
-  <div class="area">
+  <div class="highlight-p-tag">
     <p>
       I studied Information Systems Technology with a major in Information
       Systems - so I design and build enterprise software. Professionally, I am
@@ -12,7 +12,7 @@
       browser and will use this domain as a experimenting ground.
     </p>
   </div>
-  <div class="area">
+  <div class="highlight-p-tag">
     <p>
       The first language I learnt was JavaScript (ECMAScript 5). I went on to
       learn PHP 5, the CodeIgniter Framework, Wordpress and started with
@@ -23,7 +23,7 @@
     </p>
   </div>
   <img src="@/assets/images/VSSS.png" class="images" />
-  <div class="area">
+  <div class="highlight-p-tag">
     <p>
       I took a look at Node.Js and played with a very early version of
       <a
@@ -37,7 +37,7 @@
       project, in fact it was a throw away project, but I did learn from it.
     </p>
   </div>
-  <div class="area">
+  <div class="highlight-p-tag">
     <p>
       Along the way, I took a side road and built a couple of small Android
       apps; I learnt much more than I thought I would about building for a
@@ -51,7 +51,7 @@
     </p>
   </div>
   <img src="@/assets/images/VueSS.png" class="images" />
-  <div class="area">
+  <div class="highlight-p-tag">
     <p>
       When .NET Core came out I started learning the new framework. I did this
       by implementing an OpenID Connect compliant middleware (<a
@@ -70,7 +70,7 @@
       yes believe it or not, I do.
     </p>
   </div>
-  <div class="area">
+  <div class="highlight-p-tag">
     <p>
       I have been part of a development team(s) that has designed, built and
       shipped Electron apps, Vue.js client apps and .NET WebAPI to production.
@@ -93,7 +93,11 @@ onMounted(() => {
   const windowHeight: number = window.innerHeight;
   const options: showBackgroundObserverOptions =
     buildShowBackgroundObserverOptions(windowWidth, windowHeight);
-  area = showBackgroundIntersectionObserver("area", "area__observer", options);
+  area = showBackgroundIntersectionObserver(
+    "highlight-p-tag",
+    "highlight-p-tag__observer",
+    options
+  );
 });
 onUnmounted(() => {
   area.disconnect();
