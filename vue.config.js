@@ -72,7 +72,7 @@ module.exports = {
       // },
       hot: true,
       client: {
-        //logging: "verbose",
+        logging: "verbose",
         overlay: {
           warnings: true,
           errors: true,

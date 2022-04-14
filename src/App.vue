@@ -127,7 +127,8 @@ onUpdated(() => {
 
 .renderd-content {
   position: relative;
-  margin-top: 9rem;
+  z-index: 100;
+  padding-top: 9rem;
 }
 
 .routetrans-enter-from {
@@ -145,6 +146,17 @@ onUpdated(() => {
   transition: all 0.5s ease-in;
 }
 
+.highlight-p-tag {
+  width: 95%;
+  margin: 1rem auto;
+  padding: 1rem 0.25rem 1rem 0.25rem;
+  transition: background-color 0.5s ease-in;
+}
+.highlight-p-tag__observer {
+  background-color: var(--bgcolor2);
+  border-radius: 0.1875rem;
+}
+
 p {
   margin: auto auto !important;
   max-width: 45rem;
@@ -158,6 +170,12 @@ p {
   max-width: 44rem;
   height: auto;
   margin: 2rem auto;
+  border-radius: 0.1875rem;
+}
+
+.router-link-active,
+.router-link-exact-active {
+  color: var(--bgcolor3);
 }
 
 footer {
