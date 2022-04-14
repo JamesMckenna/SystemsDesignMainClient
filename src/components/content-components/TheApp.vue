@@ -78,11 +78,20 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted } from "vue";
-import { elementIntersectionObserver } from "@/assets/js/helper-functions";
+import {
+  showBackgroundObserverOptions,
+  buildShowBackgroundObserverOptions,
+  showBackgroundIntersectionObserver,
+} from "@/assets/js/helper-functions";
+
 let area: IntersectionObserver;
 
 onMounted(() => {
-  area = elementIntersectionObserver("area", "area__observer");
+  const windowWidth: number = window.innerWidth;
+  const windowHeight: number = window.innerHeight;
+  const options: showBackgroundObserverOptions =
+    buildShowBackgroundObserverOptions(windowWidth, windowHeight);
+  area = showBackgroundIntersectionObserver("area", "area__observer", options);
 });
 onUnmounted(() => {
   area.disconnect();
