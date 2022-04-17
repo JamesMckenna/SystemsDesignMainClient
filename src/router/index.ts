@@ -40,6 +40,32 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: false },
   },
   {
+    path: "/3d-web",
+    name: "3DWeb",
+    component: () =>
+      import(/* webpackChunkName: "3DWeb" */ "@/components/babylon/3d-web.vue"),
+  },
+  {
+    path: "/rose",
+    name: "Rose",
+    component: () =>
+      import(/* webpackChunkName: "3DWeb" */ "@/components/babylon/rose.vue"),
+  },
+  {
+    path: "/gears",
+    name: "Gears",
+    component: () =>
+      import(/* webpackChunkName: "3DWeb" */ "@/components/babylon/gears.vue"),
+  },
+  {
+    path: "/robot-arm",
+    name: "RobotArm",
+    component: () =>
+      import(
+        /* webpackChunkName: "3DWeb" */ "@/components/babylon/robotArm.vue"
+      ),
+  },
+  {
     path: "/:catchAll(.*)",
     name: "NotFound",
     component: () =>

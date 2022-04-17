@@ -189,35 +189,31 @@
             >
           </li>
           <li class="auto-margin nav-links_li">
-            <a class="nav-links_li_a" role="button" aria-label="Placeholder"
-              >Placeholder<i class="down-arrow"></i
+            <a class="nav-links_li_a" role="button"
+              >Web 3D<i class="down-arrow"></i
             ></a>
             <ul
               class="nav-drop-downs auto-margin ndd--is--closed theme-border theme-shadow"
               style="display: none"
             >
               <li class="nav-drop-downs_li">
-                <router-link
-                  class="nav-drop-downs_li_a"
-                  to="/placeholder"
-                  aria-label="Placeholder"
-                  >Placeholder</router-link
+                <router-link class="nav-drop-downs_li_a" to="/3d-web"
+                  >3D Web</router-link
                 >
               </li>
               <li class="nav-drop-downs_li">
-                <router-link
-                  class="nav-drop-downs_li_a"
-                  to="/placeholder"
-                  aria-label="Placeholder"
-                  >Placeholder</router-link
+                <router-link class="nav-drop-downs_li_a" to="/rose"
+                  >3D Rose</router-link
                 >
               </li>
               <li class="nav-drop-downs_li">
-                <router-link
-                  class="nav-drop-downs_li_a"
-                  to="/placeholder"
-                  aria-label="Placeholder"
-                  >Placeholder</router-link
+                <router-link class="nav-drop-downs_li_a" to="/gears"
+                  >Gears</router-link
+                >
+              </li>
+              <li class="nav-drop-downs_li">
+                <router-link class="nav-drop-downs_li_a" to="/robot-arm"
+                  >Robot Arm</router-link
                 >
               </li>
             </ul>
