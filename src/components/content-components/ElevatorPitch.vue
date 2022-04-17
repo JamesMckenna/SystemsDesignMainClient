@@ -105,12 +105,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.a-tag-style-two {
-  font-weight: bold;
-}
-.a-tag-style-two:hover {
-  color: var(--bgcolor1);
-}
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
   .text-indent {

@@ -160,7 +160,6 @@ onUpdated(() => {
 p {
   margin: auto auto !important;
   max-width: 45rem;
-  text-indent: 3rem;
   padding: 1rem 1rem !important;
 }
 
@@ -176,6 +175,14 @@ p {
 .router-link-active,
 .router-link-exact-active {
   color: var(--bgcolor3);
+}
+
+.a-tag-style-two {
+  font-weight: bold;
+}
+.a-tag-style-two:hover {
+  font-weight: bold;
+  color: var(--bgcolor1);
 }
 
 footer {
