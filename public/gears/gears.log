@@ -1,0 +1,57 @@
+	Exporter version: 4.6.1, Blender version: 2.78 (sub 0)
+========= Conversion from Blender to Babylon.js =========
+	Scene settings used:
+		selected layers only:  false
+		flat shading entire scene:  false
+		inline textures:  false
+		texture directory:  C:\Users\User\Documents\GitHub\Portfolio\portfolio\Site\scenes\
+	Python World class constructor completed
+	processing begun of mesh:  wornGear
+		animation processing begun
+			processing action wormGear1Action:  in[0 - 288], out[0 - 288]
+			processing action wormGear2Action:  in[0 - 288], out[300 - 588]
+			processing action wornGearAction:  in[0 - 288], out[600 - 888]
+		processing begun of Standard material:  Metal_Mat
+		num positions      :  2659
+		num normals        :  2659
+		num uvs            :  5318
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  8232
+	processing begun of camera (ArcRotateCamera):  Camera
+	processing begun of mesh:  wormGear1
+		animation processing begun
+			processing action wormGear1Action:  in[0 - 288], out[0 - 288]
+			processing action wormGear2Action:  in[0 - 288], out[300 - 588]
+			processing action wornGearAction:  in[0 - 288], out[600 - 888]
+		processing begun of Standard material:  Stripe
+		registered as also a user of material:  Metal_Mat
+		processing begun of multimaterial:  gears2.Multimaterial#0
+		num positions      :  5806
+		num normals        :  5806
+		num uvs            :  11612
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  16128
+	processing begun of mesh:  wormGear2
+		animation processing begun
+			processing action wormGear1Action:  in[0 - 288], out[0 - 288]
+			processing action wormGear2Action:  in[0 - 288], out[300 - 588]
+			processing action wornGearAction:  in[0 - 288], out[600 - 888]
+		registered as also a user of material:  Metal_Mat
+		registered as also a user of material:  Stripe
+		processing begun of multimaterial:  gears2.Multimaterial#1
+		num positions      :  7374
+		num normals        :  7374
+		num uvs            :  14748
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  20736
+	processing begun of light (AREA):  Area.002
+	processing begun of light (AREA):  Area.001
+	processing begun of light (AREA):  Area
+	WARNING: Only directional (sun) and spot types of lamp are valid for shadows thus ignored: Area
+========= Writing of scene file started =========
+========= Writing of scene file completed =========
+========= end of processing =========
+elapsed time:  0 min, 1.0802 secs
