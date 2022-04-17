@@ -185,6 +185,13 @@ p {
   color: var(--bgcolor1);
 }
 
+.hr-tag-2 {
+  margin: 2rem auto;
+  width: 45rem;
+  line-height: 1.5rem;
+  color: var(--bgcolor1);
+}
+
 footer {
   position: relative;
   margin-top: 3rem !important;
