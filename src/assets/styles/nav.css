@@ -41,7 +41,7 @@
 }
 .nav-btn_svg {
   display: block;
-  margin: 0.5rem auto;
+  margin: 0.5rem 0.5rem;
   width: 1.75rem;
 }
 
@@ -67,7 +67,7 @@
 }
 .title_img {
   max-width: 150px;
-  filter: drop-shadow(0.0625rem 0.0625rem 0.0625rem black);
+  filter: drop-shadow(0.0625rem 0.0625rem 0.0625rem var(--h-tag-colour));
 }
 .title_img:hover {
   filter: brightness(150%);
@@ -287,6 +287,11 @@ a:hover {
   
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
+
+  .main-nav {
+    max-width: 100vw;
+  }
+
   .logo-flip {
     display: none;
   }
@@ -342,11 +347,11 @@ a:hover {
   }
   @keyframes open-ndd {
     0% {
-      position: relative;
+      position: absolute;
+      opacity: 0;
     }
 
     1% {
-      position: absolute;
       width: 0%;
       height: 0rem;
       margin: 0rem 0rem;
@@ -391,16 +396,14 @@ a:hover {
 @media (min-width: 45.5rem) {}
 /*-------------------------960 px-----------------------*/
 @media (min-width: 60rem) {
-  .main-nav {
-    max-width: 83rem;
-  }
+
   @keyframes open-ndd {
     0% {
-      position: relative;
+      position: absolute;
+      opacity: 0;
     }
 
     1% {
-      position: absolute;
       width: 0%;
       height: 0rem;
       margin: 0rem 0rem;
@@ -442,4 +445,8 @@ a:hover {
   }
 }
 /*--------------------------------1328 px---------------*/
-@media (min-width: 83rem) {}
+@media (min-width: 83rem) {
+  .main-nav {
+    max-width: 83rem;
+  }
+}

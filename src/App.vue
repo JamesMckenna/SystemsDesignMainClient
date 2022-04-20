@@ -1,7 +1,12 @@
 <template>
   <site-nav />
+  <notify v-if="store.getters.getShowRefreshModal" />
   <site-header v-if="header.render" />
-  <router-view v-slot="{ Component }" id="content-area" v-on:renderHeader="renderHeader">
+  <router-view
+    v-slot="{ Component }"
+    id="content-area"
+    v-on:renderHeader="renderHeader"
+  >
     <transition name="routetrans" mode="out-in">
       <component :is="Component" :key="$route.path" />
     </transition>
@@ -10,34 +15,120 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, reactive } from 'vue'
-import SiteHeader from '@/components/main-components/SiteHeader.vue'
-import SiteNav from '@/components/main-components/SiteNav.vue'
-import SiteFooter from '@/components/main-components/SiteFooter.vue'
+import { onBeforeMount, onBeforeUnmount, onUpdated, reactive } from "vue";
+import SiteHeader from "@/components/main-components/SiteHeader.vue";
+import SiteNav from "@/components/main-components/SiteNav.vue";
+import SiteFooter from "@/components/main-components/SiteFooter.vue";
+import Notify from "@/components/helper-components/NotifyModal.vue";
+import { store } from "@/store/index";
 
-const title = 'Systems Design DOT rocks'
-const header = reactive({ render: false })
+const header = reactive({ render: false });
+
 const renderHeader = (val: boolean): void => {
-  header.render = val
-}
+  header.render = val;
+};
 
 onBeforeMount(() => {
-  (document.getElementsByTagName('title')[0] as HTMLElement).innerHTML = title
-})
+  store.getters.getUserManager.events.addUserLoaded(() => {
+    //if statement prevents event from calling store.dispatch("hideRefreshModal") more than once
+    if (store.getters.getShowRefreshModal) {
+      store.commit("HIDE_REFRESH_MODAL");
+    }
+  });
+
+  store.getters.getUserManager.events.addAccessTokenExpiring(() => {
+    if (!store.getters.getShowRefreshModal) {
+      store.commit("SHOW_REFRESH_MODAL");
+    }
+  });
+
+  store.getters.getUserManager.events.addAccessTokenExpired(() => {
+    store.dispatch("logout");
+  });
+
+  store.getters.getUserManager.events.addSilentRenewError(() => {
+    store.commit(
+      "SET_ERROR",
+      "An error occured when attempting to refresh you login status."
+    );
+  });
+
+  store.getters.getUserManager.events.addUserSignedOut(() => {
+    store.commit("SET_LOGOUT_STATE");
+    if (
+      localStorage.getItem(
+        "oidc.user:" +
+          process.env.VUE_APP_IS4_BASE_URL +
+          ":" +
+          process.env.VUE_APP_MAIN_CLIENT
+      ) != undefined
+    ) {
+      localStorage.removeItem(
+        "oidc.user:" +
+          process.env.VUE_APP_IS4_BASE_URL +
+          ":" +
+          process.env.VUE_APP_MAIN_CLIENT
+      );
+    }
+  });
+});
+
+onBeforeUnmount(() => {
+  store.getters.getUserManager.events.removeUserLoaded(() => {
+    store.commit("SET_LOGOUT_STATE");
+    console.info("User loaded listener successfully removed");
+  });
+
+  store.getters.getUserManager.events.removeAccessTokenExpiring(() => {
+    console.info("Access token expiring listener successfully removed");
+  });
+
+  store.getters.getUserManager.events.removeAccessTokenExpired(() => {
+    console.info("Access token expired listener successfully removed");
+  });
+
+  store.getters.getUserManager.events.removeSilentRenewError(() => {
+    console.info("Silientrenew error listener successfully removed");
+  });
+
+  store.getters.getUserManager.events.removeUserSignedOut(() => {
+    console.info("User signout listener successfully removed");
+  });
+});
+
+onUpdated(() => {
+  if (
+    localStorage.getItem(
+      "oidc.user:" +
+        process.env.VUE_APP_IS4_BASE_URL +
+        ":" +
+        process.env.VUE_APP_MAIN_CLIENT
+    ) != undefined
+  ) {
+    const data = localStorage.getItem(
+      "oidc.user:" +
+        process.env.VUE_APP_IS4_BASE_URL +
+        ":" +
+        process.env.VUE_APP_MAIN_CLIENT
+    );
+    store.commit("SET_LOGGEDIN_STATE", data);
+  }
+});
 </script>
 
 <style>
 #app {
   position: relative;
   margin: auto auto;
-  top:0;
+  top: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .renderd-content {
   position: relative;
-  margin-top: 9rem;
+  z-index: 100;
+  padding-top: 9rem;
 }
 
 .routetrans-enter-from {
@@ -55,6 +146,17 @@ onBeforeMount(() => {
   transition: all 0.5s ease-in;
 }
 
+.highlight-p-tag {
+  width: 95%;
+  margin: 1rem auto;
+  padding: 1rem 0.25rem 1rem 0.25rem;
+  transition: background-color 0.5s ease-in;
+}
+.highlight-p-tag__observer {
+  background-color: var(--bgcolor2);
+  border-radius: 0.1875rem;
+}
+
 p {
   margin: auto auto !important;
   max-width: 45rem;
@@ -68,6 +170,12 @@ p {
   max-width: 44rem;
   height: auto;
   margin: 2rem auto;
+  border-radius: 0.1875rem;
+}
+
+.router-link-active,
+.router-link-exact-active {
+  color: var(--bgcolor3);
 }
 
 footer {

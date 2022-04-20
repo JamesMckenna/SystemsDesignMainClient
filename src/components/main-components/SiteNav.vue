@@ -70,7 +70,7 @@
               class="login-btn_a"
               v-if="isLoggedIn"
               aria-label="Open / Close Logout and Account Links"
-              >Hi<i class="down-arrow"></i
+              >{{ name }}<i class="down-arrow"></i
             ></a>
             <a
               role="button"
@@ -112,9 +112,7 @@
               <li v-else data-move class="nav-drop-downs_li">
                 <a
                   class="nav-drop-downs_li_a"
-                  @click="
-                    store.dispatch('setLoggedInState', null, { root: true })
-                  "
+                  @click="store.dispatch('login', null, { root: true })"
                   aria-label="Log In"
                   ><u>Log In</u></a
                 >
@@ -151,7 +149,7 @@
               <li class="nav-drop-downs_li">
                 <router-link
                   class="nav-drop-downs_li_a"
-                  to="/About"
+                  to="/About/TheApp"
                   aria-label="About"
                   >About</router-link
                 >
@@ -167,17 +165,26 @@
             </ul>
           </li>
           <li class="auto-margin nav-links_li">
-            <router-link class="nav-links_li_a" to="" aria-label="Placeholder"
+            <router-link
+              class="nav-links_li_a"
+              to="/placeholder"
+              aria-label="Placeholder"
               >Placeholder</router-link
             >
           </li>
           <li class="auto-margin nav-links_li">
-            <router-link class="nav-links_li_a" to="" aria-label="Placeholder"
+            <router-link
+              class="nav-links_li_a"
+              to="/placeholder"
+              aria-label="Placeholder"
               >Placeholder</router-link
             >
           </li>
           <li class="auto-margin nav-links_li">
-            <router-link class="nav-links_li_a" to="" aria-label="Placeholder"
+            <router-link
+              class="nav-links_li_a"
+              to="/placeholder"
+              aria-label="Placeholder"
               >Placeholder</router-link
             >
           </li>
@@ -192,7 +199,7 @@
               <li class="nav-drop-downs_li">
                 <router-link
                   class="nav-drop-downs_li_a"
-                  to="#"
+                  to="/placeholder"
                   aria-label="Placeholder"
                   >Placeholder</router-link
                 >
@@ -200,7 +207,7 @@
               <li class="nav-drop-downs_li">
                 <router-link
                   class="nav-drop-downs_li_a"
-                  to="#"
+                  to="/placeholder"
                   aria-label="Placeholder"
                   >Placeholder</router-link
                 >
@@ -208,7 +215,7 @@
               <li class="nav-drop-downs_li">
                 <router-link
                   class="nav-drop-downs_li_a"
-                  to="#"
+                  to="/placeholder"
                   aria-label="Placeholder"
                   >Placeholder</router-link
                 >
@@ -232,6 +239,7 @@ let loginBtn: HTMLElement;
 let login: HTMLElement;
 let navLinks: HTMLElement;
 let scrollLastStopped: number = window.scrollY;
+const name = ref("");
 const registerAccount = process.env.VUE_APP_REGISTER_ACCOUNT;
 
 const redirect = () => {
@@ -437,6 +445,7 @@ watch(
   () => store.getters.getLoggedIn,
   () => {
     isLoggedIn.value = store.getters.getLoggedIn;
+    name.value = store.getters.getUser.name;
   }
 );
 

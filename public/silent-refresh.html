@@ -7,7 +7,7 @@
 <body>
     <script src="./js/oidc-client.rsa256.slim.min.js"></script>
     <script>
-        new Oidc.UserManager().signinSilentCallback()
+        var mgr = new Oidc.UserManager().signinSilentCallback(() => { Oidc.mgr = {}; delete Oidc.mgr; })
             .catch((err) => {
                 console.error(err);
             });

@@ -32,7 +32,7 @@ module.exports = {
       },
     ],
     curly: ["error", "multi-line"],
-    eqeqeq: ["error", "always"],
+    eqeqeq: ["warn", "always"],
     "vue/script-setup-uses-vars": "error",
 
     "@typescript-eslint/no-unsafe-member-access": "off",
