@@ -155,7 +155,7 @@ onUpdated(() => {
 .highlight-p-tag__observer {
   background-color: var(--bgcolor2);
   border-radius: 0.1875rem;
-  box-shadow: inset 0 0 1.25rem var(--bgcolor3);
+  box-shadow: 0 0 0.5rem var(--bgcolor3);
 }
 
 p {
@@ -163,6 +163,7 @@ p {
   max-width: 45rem;
   text-indent: 3rem;
   padding: 1rem 1rem !important;
+  line-height: 300% !important;
 }
 
 .images {

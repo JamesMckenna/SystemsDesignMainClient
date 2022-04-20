@@ -1,9 +1,26 @@
 <template>
-  <p>
-    The current project is a (newly rebuilt) Vue.Js 3 client app with .NET Core
-    3.1 used for the OIDC compliant token server, the identity management and
-    the backend apps/APIs.
-  </p>
+  <h4>A Porfolio Project (and a developer's playground)</h4>
+  <hr class="hr-tag-2" />
+  <div class="highlight-p-tag">
+    <p>
+      The current project is a
+      <a
+        href="https://github.com/JamesMckenna/SystemsDesignMainClient"
+        target="blank"
+        class="a-tag-style-two"
+        >Vue.Js 3 client app</a
+      >
+      with
+      <a
+        href="https://github.com/JamesMckenna/SystemsDesign.rocks"
+        target="blank"
+        class="a-tag-style-two"
+        >.NET Core 3.1</a
+      >
+      used for the OIDC compliant token server, the identity management and the
+      backend apps/APIs.
+    </p>
+  </div>
   <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <h4>TODO - the (unordered) backlog</h4>
@@ -43,6 +60,8 @@
     </ul>
   </div>
   <hr class="hr-tag-2" />
+  <img src="@/assets/images/html.jpg" class="images" />
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <h4>The Frameworks and Libraries</h4>
     <ul class="center-text">
@@ -65,8 +84,6 @@
       </li>
     </ul>
   </div>
-  <hr class="hr-tag-2" />
-  <img src="@/assets/images/html.jpg" class="images" />
   <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <h4>Software on the Server</h4>
