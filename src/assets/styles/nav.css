@@ -348,6 +348,7 @@ a:hover {
   @keyframes open-ndd {
     0% {
       position: absolute;
+      opacity: 0;
     }
 
     1% {
@@ -399,6 +400,7 @@ a:hover {
   @keyframes open-ndd {
     0% {
       position: absolute;
+      opacity: 0;
     }
 
     1% {
