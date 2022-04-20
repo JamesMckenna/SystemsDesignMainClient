@@ -17,3 +17,9 @@
 import { defineProps } from "vue";
 defineProps({ msg: String });
 </script>
+
+<style>
+.home {
+  min-height: 50vh;
+}
+</style>
