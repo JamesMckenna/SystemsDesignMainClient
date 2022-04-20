@@ -150,11 +150,12 @@ onUpdated(() => {
   width: 95%;
   margin: 1rem auto;
   padding: 1rem 0.25rem 1rem 0.25rem;
-  transition: background-color 0.5s ease-in;
+  transition: background-color, box-shadow 0.5s ease-in;
 }
 .highlight-p-tag__observer {
   background-color: var(--bgcolor2);
   border-radius: 0.1875rem;
+  box-shadow: inset 0 0 1.25rem var(--bgcolor3);
 }
 
 p {
@@ -176,6 +177,24 @@ p {
 .router-link-active,
 .router-link-exact-active {
   color: var(--bgcolor3);
+}
+
+.a-tag-style-two {
+  font-weight: bold;
+}
+.a-tag-style-two:hover {
+  font-weight: bold;
+  color: var(--bgcolor1);
+}
+
+.hr-tag-2 {
+  margin: 2rem auto;
+  width: 45rem;
+  line-height: 1.5rem;
+  border: none;
+  height: 0.125rem;
+  color: var(--bgcolor1);
+  background-color: var(--bgcolor1);
 }
 
 footer {

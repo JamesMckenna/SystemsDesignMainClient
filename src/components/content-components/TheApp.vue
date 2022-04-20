@@ -4,6 +4,7 @@
     3.1 used for the OIDC compliant token server, the identity management and
     the backend apps/APIs.
   </p>
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <h4>TODO - the (unordered) backlog</h4>
     <ul class="text-indent">
@@ -41,6 +42,7 @@
       </li>
     </ul>
   </div>
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <h4>The Frameworks and Libraries</h4>
     <ul class="center-text">
@@ -63,7 +65,9 @@
       </li>
     </ul>
   </div>
+  <hr class="hr-tag-2" />
   <img src="@/assets/images/html.jpg" class="images" />
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <h4>Software on the Server</h4>
     <ul class="center-text">
