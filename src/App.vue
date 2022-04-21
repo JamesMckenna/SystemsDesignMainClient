@@ -150,17 +150,19 @@ onUpdated(() => {
   width: 95%;
   margin: 1rem auto;
   padding: 1rem 0.25rem 1rem 0.25rem;
-  transition: background-color 0.5s ease-in;
+  transition: background-color, box-shadow 0.5s ease-in;
 }
 .highlight-p-tag__observer {
   background-color: var(--bgcolor2);
   border-radius: 0.1875rem;
+  box-shadow: 0 0 0.5rem var(--bgcolor3);
 }
 
 p {
   margin: auto auto !important;
   max-width: 45rem;
   padding: 1rem 1rem !important;
+  line-height: 200% !important;
 }
 
 .images {
@@ -179,6 +181,7 @@ p {
 
 .a-tag-style-two {
   font-weight: bold;
+  word-wrap: break-word;
 }
 .a-tag-style-two:hover {
   font-weight: bold;
