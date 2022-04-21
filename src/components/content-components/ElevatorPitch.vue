@@ -1,5 +1,6 @@
 <template>
   <h4>A Bit About Me - the elevator pitch</h4>
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <p>
       I studied Information Systems Technology with a major in Information
@@ -12,6 +13,7 @@
       browser and will use this domain as a experimenting ground.
     </p>
   </div>
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <p>
       The first language I learnt was JavaScript (ECMAScript 5). I went on to
@@ -22,7 +24,9 @@
       .NET 4.x and ASP.NET Webforms.
     </p>
   </div>
+  <hr class="hr-tag-2" />
   <img src="@/assets/images/VSSS.png" class="images" />
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <p>
       I took a look at Node.Js and played with a very early version of
@@ -37,6 +41,7 @@
       project, in fact it was a throw away project, but I did learn from it.
     </p>
   </div>
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <p>
       Along the way, I took a side road and built a couple of small Android
@@ -50,7 +55,9 @@
       app's behavior and the importance of structuring data.
     </p>
   </div>
+  <hr class="hr-tag-2" />
   <img src="@/assets/images/VueSS.png" class="images" />
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <p>
       When .NET Core came out I started learning the new framework. I did this
@@ -70,6 +77,7 @@
       yes believe it or not, I do.
     </p>
   </div>
+  <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
     <p>
       I have been part of a development team(s) that has designed, built and
