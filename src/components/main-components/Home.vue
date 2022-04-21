@@ -55,6 +55,9 @@
         Microsoft third party affiliate) for a "safe sender verification", or
         too bad for you sucker.
       </p>
+    </div>
+    <hr class="hr-tag-2" />
+    <div class="highlight-p-tag">
       <p style="text-indent: 0; position: relative; top: -1rem">
         Yea really and I quote from (about half way down the page):
       </p>

@@ -163,7 +163,7 @@ p {
   max-width: 45rem;
   text-indent: 3rem;
   padding: 1rem 1rem !important;
-  line-height: 300% !important;
+  line-height: 200% !important;
 }
 
 .images {
@@ -182,6 +182,7 @@ p {
 
 .a-tag-style-two {
   font-weight: bold;
+  word-wrap: break-word;
 }
 .a-tag-style-two:hover {
   font-weight: bold;
@@ -190,7 +191,7 @@ p {
 
 .hr-tag-2 {
   margin: 2rem auto;
-  width: 45rem;
+  max-width: 45rem;
   line-height: 1.5rem;
   border: none;
   height: 0.125rem;
