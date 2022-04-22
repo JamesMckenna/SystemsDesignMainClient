@@ -6,11 +6,17 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onBeforeMount, onMounted } from "vue";
 import { Engine, Scene, SceneLoader, Color4 } from "babylonjs";
 let canvas: HTMLCanvasElement;
 let engine: Engine;
 let scene: Scene;
+
+const emits = defineEmits(["renderHeader"]);
+onBeforeMount(() => {
+  emits("renderHeader", false);
+});
+
 onMounted(() => {
   canvas = document.getElementById("render-canvas")! as HTMLCanvasElement;
   engine = new Engine(canvas);
@@ -40,7 +46,7 @@ canvas {
   height: 90vh;
 }
 .body-container {
-  margin-top: 6rem;
+  margin-top: 10rem;
   width: 100%;
   height: 100vh;
 }

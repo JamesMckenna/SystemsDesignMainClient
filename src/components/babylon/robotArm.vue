@@ -3,17 +3,16 @@
   <div class="body-container">
     <h2>3D in a Web Browser</h2>
     <canvas id="render-canvas"></canvas>
-
   </div>
 </template>
 
 <script setup>
 import { onMounted, onBeforeMount, onUnmounted, defineEmits } from "vue";
-const emits = defineEmits(['renderHeader'])
+const emits = defineEmits(["renderHeader"]);
 onBeforeMount(() => {
-  emits('renderHeader', true)
+  emits("renderHeader", false);
   //older project, use older BABYLON version
-  if(!document.getElementById("custom")){
+  if (!document.getElementById("custom")) {
     const headtag = document.getElementsByTagName("head")[0];
     const babylonLibrary = document.createElement("script");
     babylonLibrary.setAttribute("id", "custom");
@@ -24,12 +23,12 @@ onBeforeMount(() => {
 onMounted(() => {
   if (typeof RobotArm === "undefined") {
     //older project, use older BABYLON version - bone parenting isn't the same
-    if(!window.BABYLON){
+    if (!window.BABYLON) {
       setTimeout(() => {
         const robot = document.createElement("script");
         robot.setAttribute("type", "text/javascript");
         robot.setAttribute("src", "robotArm/robotarm.js");
-        robot.setAttribute("id", "robotarm");    
+        robot.setAttribute("id", "robotarm");
         const can = document.getElementById("render-canvas");
         can.insertAdjacentElement("afterend", robot);
       }, 1000);
@@ -41,9 +40,13 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  if(document.getElementById("robotarm")) document.getElementById("robotarm").remove();
-  if(document.getElementById("custom")) document.getElementById("custom").remove();
-})
+  if (document.getElementById("robotarm")) {
+    document.getElementById("robotarm").remove();
+  }
+  if (document.getElementById("custom")) {
+    document.getElementById("custom").remove();
+  }
+});
 </script>
 
 <style scoped>
@@ -52,7 +55,7 @@ canvas {
   height: 100vh;
 }
 .body-container {
-  margin-top: 6rem;
+  margin-top: 10rem;
   width: 100%;
 }
 </style>
