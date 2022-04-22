@@ -17,7 +17,7 @@ onBeforeMount(() => {
     const headtag = document.getElementsByTagName("head")[0];
     const babylonLibrary = document.createElement("script");
     babylonLibrary.setAttribute("id", "custom");
-    babylonLibrary.setAttribute("src", "./babylon.custom.js");
+    babylonLibrary.setAttribute("src", "./js/babylon.custom.js");
     headtag.append(babylonLibrary);
   }
 });
@@ -28,8 +28,8 @@ onMounted(() => {
       setTimeout(() => {
         const robot = document.createElement("script");
         robot.setAttribute("type", "text/javascript");
-        robot.setAttribute("src", "./robotarm.js");
-        robot.setAttribute("id", "robotarm");
+        robot.setAttribute("src", "robotArm/robotarm.js");
+        robot.setAttribute("id", "robotarm");    
         const can = document.getElementById("render-canvas");
         can.insertAdjacentElement("afterend", robot);
       }, 1000);
@@ -41,8 +41,8 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  document.getElementById("robotarm").remove();
-  document.getElementById("custom").remove();
+  if(document.getElementById("robotarm")) document.getElementById("robotarm").remove();
+  if(document.getElementById("custom")) document.getElementById("custom").remove();
 })
 </script>
 
