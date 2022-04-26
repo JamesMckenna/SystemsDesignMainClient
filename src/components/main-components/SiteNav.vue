@@ -49,7 +49,7 @@
               class="title_img"
               src="@/assets/images/sdr-title-ani-hdri150.gif"
           /></router-link>
-          <span class="filter-brightness">
+          <span id="logo-parent" class="filter-brightness">
             <img
               id="logo"
               class="logo"
@@ -287,7 +287,7 @@ const resizeListener = (evt: Event): void => {
     !login.hasAttribute("data-mobile")
   ) {
     login.setAttribute("data-mobile", "false");
-    document.getElementById("wrapTitle")!.appendChild(logoImg);
+    document.getElementById("logo-parent")!.appendChild(logoImg);
     const loginLinks = document.getElementById("loginLinks")!;
     loginLinks.appendChild(loginBtn);
     loginLinks.classList.remove("filter-brightness");
