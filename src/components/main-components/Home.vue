@@ -17,6 +17,17 @@
       </p>
     </section>
     <hr class="hr-tag-2" />
+    <figure class="figure-images">
+      <img
+        src="@/assets/images/mountaintop-jacques-holst-flickr-creativecommons.webp"
+        class="images"
+      />
+      <figcaption>
+        Adding creative commons image so visitors to this site have something to
+        look at. <br />Search term: coolest creative commons images
+      </figcaption>
+    </figure>
+    <hr class="hr-tag-2" />
     <section class="highlight-p-tag">
       <p>
         This site is a practical demonstration of full-stack developer skills.
@@ -37,6 +48,14 @@
         want to explore, so I'll leave the STS as a nice little portfolio piece.
       </p>
     </section>
+    <hr class="hr-tag-2" />
+    <figure class="figure-images">
+      <img src="@/assets/images/pexels-snapwire-730896.jpg" class="images" />
+      <figcaption>
+        Adding creative commons image so visitors to this site have something to
+        look at. <br />Search term: coolest creative commons images
+      </figcaption>
+    </figure>
     <hr class="hr-tag-2" />
     <section class="highlight-p-tag">
       <p>
@@ -122,7 +141,16 @@
       </p>
       <p style="text-indent: 0">All in all, it sucks to be the little guy.</p>
     </section>
+    <hr class="hr-tag-2" />
+    <figure class="figure-images">
+      <img src="@/assets/images/article148538.jpg" class="images" />
+      <figcaption>
+        Adding creative commons image so visitors to this site have something to
+        look at. <br />Search term: coolest creative commons images
+      </figcaption>
+    </figure>
   </div>
+  <hr class="hr-tag-2" />
 </template>
 
 <script lang="ts" setup>

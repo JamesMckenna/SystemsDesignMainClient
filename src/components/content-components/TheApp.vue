@@ -22,6 +22,17 @@
     </p>
   </section>
   <hr class="hr-tag-2" />
+  <figure class="figure-images">
+    <img
+      src="@/assets/images/1407150941568288-innovation1.jpg"
+      class="images"
+    />
+    <figcaption>
+      Adding creative commons image so visitors to this site have something to
+      look at. <br />Search term: coolest creative commons images
+    </figcaption>
+  </figure>
+  <hr class="hr-tag-2" />
   <section class="highlight-p-tag">
     <h4>TODO</h4>
     <h6>the (unordered) backlog, that never seems to end</h6>
