@@ -1,7 +1,7 @@
 <template>
   <h4>A Porfolio Project (and a developer's playground)</h4>
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <p>
       The current project is a
       <a
@@ -20,9 +20,9 @@
       used for the OIDC compliant token server, the identity management and the
       backend apps/APIs.
     </p>
-  </div>
+  </section>
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <h4>TODO</h4>
     <h6>the (unordered) backlog, that never seems to end</h6>
     <ul class="text-indent">
@@ -67,11 +67,11 @@
         redis)
       </li>
     </ul>
-  </div>
+  </section>
   <hr class="hr-tag-2" />
   <img src="@/assets/images/html.jpg" class="images" />
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <h4>The Frameworks and Libraries</h4>
     <ul class="center-text">
       <li class="this-pages-li-class">
@@ -92,9 +92,9 @@
         .NET Core, WebApi for the backend RESTful API.
       </li>
     </ul>
-  </div>
+  </section>
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <h4>Software on the Server</h4>
     <ul class="center-text">
       <li class="this-pages-li-class">Running Windows Server 2019</li>
@@ -103,7 +103,7 @@
       <li class="this-pages-li-class">HmailServer Smtp Server</li>
       <li class="this-pages-li-class">Running on a VPS in Eastern Europe</li>
     </ul>
-  </div>
+  </section>
 </template>
 
 <script lang="ts" setup>

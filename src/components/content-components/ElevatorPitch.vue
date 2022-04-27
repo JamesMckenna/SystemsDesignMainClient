@@ -1,7 +1,7 @@
 <template>
   <h4>A Bit About Me - the elevator pitch</h4>
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <p>
       I studied Information Systems Technology with a major in Information
       Systems - so I design and build enterprise software. Professionally, I am
@@ -12,9 +12,9 @@
       widespread use, I want to become an expert on VR/XR apps running in a web
       browser and will use this domain as a experimenting ground.
     </p>
-  </div>
+  </section>
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <p>
       The first language I learnt was JavaScript (ECMAScript 5). I went on to
       learn PHP 5, the CodeIgniter Framework, Wordpress and started with
@@ -23,11 +23,11 @@
       gained more experience, I started to focus on ASP.NET and built apps with
       .NET 4.x and ASP.NET Webforms.
     </p>
-  </div>
+  </section>
   <hr class="hr-tag-2" />
   <img src="@/assets/images/VSSS.png" class="images" />
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <p>
       I took a look at Node.Js and played with a very early version of
       <a
@@ -40,9 +40,9 @@
       introduction into NOSQL databases. I won't say it was a career changing
       project, in fact it was a throw away project, but I did learn from it.
     </p>
-  </div>
+  </section>
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <p>
       Along the way, I took a side road and built a couple of small Android
       apps; I learnt much more than I thought I would about building for a
@@ -54,11 +54,11 @@
       but about how to design and structure the code, how to think about the
       app's behavior and the importance of structuring data.
     </p>
-  </div>
+  </section>
   <hr class="hr-tag-2" />
   <img src="@/assets/images/VueSS.png" class="images" />
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <p>
       When .NET Core came out I started learning the new framework. I did this
       by implementing an OpenID Connect compliant middleware (<a
@@ -76,14 +76,14 @@
       Event Logging and Error Logging as a legit use-case for NOSQL databases;
       yes believe it or not, I do.
     </p>
-  </div>
+  </section>
   <hr class="hr-tag-2" />
-  <div class="highlight-p-tag">
+  <section class="highlight-p-tag">
     <p>
       I have been part of a development team(s) that has designed, built and
       shipped Electron apps, Vue.js client apps and .NET WebAPI to production.
     </p>
-  </div>
+  </section>
 </template>
 
 <script lang="ts" setup>
