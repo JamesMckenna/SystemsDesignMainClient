@@ -45,10 +45,25 @@
             class="title-anchor"
             title="Link to Systems Design DOT rocks Homepage"
             to="/"
-            ><img
-              class="title_img"
-              src="@/assets/images/sdr-title-ani-hdri150.gif"
-          /></router-link>
+          >
+            <video
+              id="title-media"
+              class="title-media"
+              autoplay
+              muted
+              playsinline
+            >
+              <source
+                src="@/assets/images/sdr-title-ani300x156.webm"
+                type="video/webm"
+              />
+              <source
+                src="@/assets/images/sdr-title-ani300x156.mp4"
+                type="video/mp4"
+              />
+              <img src="@/assets/images/sdr-title-ani300x156.png" />
+            </video>
+          </router-link>
           <span id="logo-parent" class="filter-brightness">
             <img
               id="logo"
@@ -238,6 +253,8 @@ let navLinksWrap: HTMLElement;
 let loginBtn: HTMLElement;
 let navLinks: HTMLElement;
 let scrollLastStopped: number = window.scrollY;
+let titleMediaTimer: number;
+const titleMediaReplay = 30000;
 const name = ref("");
 const registerAccount = process.env.VUE_APP_REGISTER_ACCOUNT;
 
@@ -464,6 +481,13 @@ onMounted(() => {
   navBtn.addEventListener("click", openCloseNav, true);
   navLinks.addEventListener("click", nddOpenClose, false);
   loginBtn.addEventListener("click", nddOpenClose, false);
+
+  titleMediaTimer = setInterval(() => {
+    const videoPlayer = document.getElementById(
+      "title-media"
+    )! as HTMLVideoElement;
+    videoPlayer.play();
+  }, titleMediaReplay);
 });
 
 onUnmounted(() => {
@@ -473,6 +497,7 @@ onUnmounted(() => {
   navBtn.removeEventListener("click", openCloseNav, true);
   navLinks.removeEventListener("click", nddOpenClose, false);
   loginBtn.removeEventListener("click", nddOpenClose, false);
+  clearInterval(titleMediaTimer);
 });
 </script>
 
