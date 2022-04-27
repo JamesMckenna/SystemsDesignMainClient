@@ -150,11 +150,12 @@ onUpdated(() => {
   width: 95%;
   margin: 1rem auto;
   padding: 1rem 0.25rem 1rem 0.25rem;
-  transition: background-color 0.5s ease-in;
+  transition: background-color, box-shadow 0.5s ease-in;
 }
 .highlight-p-tag__observer {
   background-color: var(--bgcolor2);
   border-radius: 0.1875rem;
+  box-shadow: 0 0 0.5rem var(--bgcolor3);
 }
 
 p {
@@ -162,8 +163,10 @@ p {
   max-width: 45rem;
   text-indent: 3rem;
   padding: 1rem 1rem !important;
+  line-height: 200% !important;
 }
 
+.figure-images,
 .images {
   display: block;
   width: 100%;
@@ -172,10 +175,32 @@ p {
   margin: 2rem auto;
   border-radius: 0.1875rem;
 }
+.images {
+  box-shadow: 0 0 0.5rem var(--bgcolor3);
+}
 
 .router-link-active,
 .router-link-exact-active {
   color: var(--bgcolor3);
+}
+
+.a-tag-style-two {
+  font-weight: bold;
+  word-wrap: break-word;
+}
+.a-tag-style-two:hover {
+  font-weight: bold;
+  color: var(--bgcolor1);
+}
+
+.hr-tag-2 {
+  margin: 2rem auto;
+  max-width: 45rem;
+  line-height: 1.5rem;
+  border: none;
+  height: 0.125rem;
+  color: var(--bgcolor1);
+  background-color: var(--bgcolor1);
 }
 
 footer {

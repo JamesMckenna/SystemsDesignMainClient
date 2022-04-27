@@ -45,11 +45,26 @@
             class="title-anchor"
             title="Link to Systems Design DOT rocks Homepage"
             to="/"
-            ><img
-              class="title_img"
-              src="@/assets/images/sdr-title-ani-hdri150.gif"
-          /></router-link>
-          <span class="filter-brightness">
+          >
+            <video
+              id="title-media"
+              class="title-media"
+              autoplay
+              muted
+              playsinline
+            >
+              <source
+                src="@/assets/images/sdr-title-ani300x156.webm"
+                type="video/webm"
+              />
+              <source
+                src="@/assets/images/sdr-title-ani300x156.mp4"
+                type="video/mp4"
+              />
+              <img src="@/assets/images/sdr-title-ani300x156.png" />
+            </video>
+          </router-link>
+          <span id="logo-parent" class="filter-brightness">
             <img
               id="logo"
               class="logo"
@@ -236,9 +251,10 @@ const isLoggedIn = ref(false);
 let navBtn: HTMLElement;
 let navLinksWrap: HTMLElement;
 let loginBtn: HTMLElement;
-let login: HTMLElement;
 let navLinks: HTMLElement;
 let scrollLastStopped: number = window.scrollY;
+let titleMediaTimer: number;
+const titleMediaReplay = 30000;
 const name = ref("");
 const registerAccount = process.env.VUE_APP_REGISTER_ACCOUNT;
 
@@ -268,14 +284,16 @@ const showHideNav = (evt: Event): void => {
 
 const resizeListener = (evt: Event): void => {
   const logoImg = document.getElementById("logo")!;
-
+  const login = document.getElementById("login")!;
   // if less than 40em (640px)
   if (
     !window.matchMedia("(min-width: 40em)")!.matches &&
     login.hasAttribute("data-mobile")
   ) {
     login.removeAttribute("data-mobile");
-    document.getElementById("loginLinks")!.appendChild(logoImg);
+    const loginLinks = document.getElementById("loginLinks")!;
+    loginLinks.appendChild(logoImg);
+    loginLinks.classList.add("filter-brightness");
     navLinksWrap.style.display = "none";
     navLinks.prepend(loginBtn);
   }
@@ -286,8 +304,10 @@ const resizeListener = (evt: Event): void => {
     !login.hasAttribute("data-mobile")
   ) {
     login.setAttribute("data-mobile", "false");
-    document.getElementById("wrapTitle")!.appendChild(logoImg);
-    document.getElementById("loginLinks")!.appendChild(loginBtn);
+    document.getElementById("logo-parent")!.appendChild(logoImg);
+    const loginLinks = document.getElementById("loginLinks")!;
+    loginLinks.appendChild(loginBtn);
+    loginLinks.classList.remove("filter-brightness");
   }
 
   evt.stopPropagation();
@@ -453,7 +473,6 @@ onMounted(() => {
   navBtn = document.getElementById("navBtn")!;
   navLinksWrap = document.getElementById("navLinksWrap")!;
   loginBtn = document.getElementById("loginBtn")!;
-  login = document.getElementById("login")!;
   navLinks = document.getElementById("navLinks")!;
 
   window.addEventListener("scroll", showHideNav, true);
@@ -462,6 +481,13 @@ onMounted(() => {
   navBtn.addEventListener("click", openCloseNav, true);
   navLinks.addEventListener("click", nddOpenClose, false);
   loginBtn.addEventListener("click", nddOpenClose, false);
+
+  titleMediaTimer = setInterval(() => {
+    const videoPlayer = document.getElementById(
+      "title-media"
+    )! as HTMLVideoElement;
+    videoPlayer.play();
+  }, titleMediaReplay);
 });
 
 onUnmounted(() => {
@@ -471,6 +497,7 @@ onUnmounted(() => {
   navBtn.removeEventListener("click", openCloseNav, true);
   navLinks.removeEventListener("click", nddOpenClose, false);
   loginBtn.removeEventListener("click", nddOpenClose, false);
+  clearInterval(titleMediaTimer);
 });
 </script>
 
