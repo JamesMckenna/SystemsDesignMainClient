@@ -23,37 +23,46 @@
   </div>
   <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
-    <h4>TODO - the (unordered) backlog</h4>
+    <h4 class="this-pages-h4-class">TODO</h4>
+    <h6>the (unordered) backlog, that never seems to end</h6>
     <ul class="text-indent">
-      <li class="temp-li-class">- Lease two more virtual private servers</li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
+        - Lease two more virtual private servers
+      </li>
+      <li class="this-pages-li-class">
         - Set up CI/CD for all client and server-side apps
       </li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
         - Containerize all client and server-side apps
       </li>
-      <li class="temp-li-class">- Experiment with WebXR and WebGL 3D engine</li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
+        - Experiment with WebXR and WebGL 3D engine
+      </li>
+      <li class="this-pages-li-class">
         - Migrate backend, token server and identity management apps to LTS
         version
       </li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
         - Implement an email contact endpoint for Contact page
       </li>
-      <li class="temp-li-class">- Unifiy style across all the client apps</li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
+        - Unifiy style across all the client apps
+      </li>
+      <li class="this-pages-li-class">
         - Add external identity providers (Microsoft Account and Google Account)
         for login
       </li>
-      <li class="temp-li-class">- A Guest Book say "Hello, I was here"</li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
+        - A Guest Book say "Hello, I was here"
+      </li>
+      <li class="this-pages-li-class">
         - Add Role Manager to the identity management app
       </li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
         - Add UI to STS to dynamically add client apps and apis (Multi-Tenant
         STS)
       </li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
         - Change STS to store config and operational data to database (postgres,
         redis)
       </li>
@@ -65,21 +74,21 @@
   <div class="highlight-p-tag">
     <h4>The Frameworks and Libraries</h4>
     <ul class="center-text">
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
         VueJs 3 for a browser client application, Vue/Cli v5.4, Vue Router v4,
         VueX v4
       </li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
         Identity Server 4 for Token Signing and Token Management.
       </li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
         ASP.NET Identity Core for User Management, Email verification and
         password reset, 2FA functionality with TOTP
       </li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
         Entity Framework Core ORM to communicate with the database.
       </li>
-      <li class="temp-li-class">
+      <li class="this-pages-li-class">
         .NET Core, WebApi for the backend RESTful API.
       </li>
     </ul>
@@ -88,11 +97,11 @@
   <div class="highlight-p-tag">
     <h4>Software on the Server</h4>
     <ul class="center-text">
-      <li class="temp-li-class">Running Windows Server 2019</li>
-      <li class="temp-li-class">SQL Server 2019 Express</li>
-      <li class="temp-li-class">Thunderbird Email Client</li>
-      <li class="temp-li-class">HmailServer Smtp Server</li>
-      <li class="temp-li-class">Running on a VPS in Eastern Europe</li>
+      <li class="this-pages-li-class">Running Windows Server 2019</li>
+      <li class="this-pages-li-class">SQL Server 2019 Express</li>
+      <li class="this-pages-li-class">Thunderbird Email Client</li>
+      <li class="this-pages-li-class">HmailServer Smtp Server</li>
+      <li class="this-pages-li-class">Running on a VPS in Eastern Europe</li>
     </ul>
   </div>
 </template>
@@ -124,9 +133,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.temp-li-class {
+.this-pages-li-class {
   margin: 1rem auto;
   max-width: 45rem;
+}
+
+.this-pages-h4-class {
 }
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
