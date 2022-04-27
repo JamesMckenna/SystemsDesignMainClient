@@ -65,11 +65,10 @@
 .logo-flip {
   filter: drop-shadow(0.0625rem 0.0625rem 0.0625rem black);
 }
-.title_img {
-  max-width: 150px;
+.title-media {
   filter: drop-shadow(0.0625rem 0.0625rem 0.0625rem var(--h-tag-colour));
 }
-.title_img:hover {
+.title-media:hover {
   filter: brightness(150%);
 }
 
@@ -310,9 +309,14 @@ a:hover {
   .nav-links_li_a {
     margin: 0rem auto 2rem auto;
   }
+
+  .title-media {
+    width: 10rem;
+  }
 }
 /*-------------------------420px------------------------*/
 @media (min-width: 26.25rem) {
+
 }
 /*--- Nav from desktop to mobile -640px- login links moved with js-------------------*/
 @media (min-width: 40rem) {
@@ -391,9 +395,21 @@ a:hover {
       opacity: 0;
     }
   }
+
+  .title-media {
+    width: 13rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 }
 /*---------------------728px-----------------------------*/
-@media (min-width: 45.5rem) {}
+@media (min-width: 45.5rem) {
+  .title-media {
+    width: 15rem;
+    margin-top: 0.625rem;
+    margin-bottom: 0.25rem;
+  }
+}
 /*-------------------------960 px-----------------------*/
 @media (min-width: 60rem) {
 
