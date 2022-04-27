@@ -23,7 +23,7 @@
   </div>
   <hr class="hr-tag-2" />
   <div class="highlight-p-tag">
-    <h4 class="this-pages-h4-class">TODO</h4>
+    <h4>TODO</h4>
     <h6>the (unordered) backlog, that never seems to end</h6>
     <ul class="text-indent">
       <li class="this-pages-li-class">
@@ -136,9 +136,6 @@ onUnmounted(() => {
 .this-pages-li-class {
   margin: 1rem auto;
   max-width: 45rem;
-}
-
-.this-pages-h4-class {
 }
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
