@@ -165,6 +165,7 @@ p {
   line-height: 200% !important;
 }
 
+.figure-images,
 .images {
   display: block;
   width: 100%;
@@ -172,6 +173,9 @@ p {
   height: auto;
   margin: 2rem auto;
   border-radius: 0.1875rem;
+}
+.images {
+  box-shadow: 0 0 0.5rem var(--bgcolor3);
 }
 
 .router-link-active,

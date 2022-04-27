@@ -81,8 +81,8 @@ module.exports = {
       },
       headers: [
         {
-          key: "Example-Dev-Server-Header",
-          value: "ExampleHeaderValue",
+          key: "Cache-Control",
+          value: "private, max-age=36000",
         },
         {
           key: "Example-Header-two",

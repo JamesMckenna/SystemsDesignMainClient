@@ -1,10 +1,10 @@
 <template>
-  <header id="site-header">
+  <header id="site-header" class="fade--out">
     <div class="wrap-header">
       <div class="terminal-header">
-        <span class="terminal-header-text"></span>
-        <div class="terminal-btn">
-          <button class="terminal theme-border theme-shadow">
+        <span id="terminal-header-text" class="terminal-header-text"></span>
+        <div class="fake-terminal-btn">
+          <button class="fake-terminal__btn theme-border theme-shadow">
             <svg
               class="terminal-svg"
               version="1.1"
@@ -25,7 +25,7 @@
               </g>
             </svg>
           </button>
-          <button class="terminal-search theme-border theme-shadow">
+          <button class="fake-terminal__btn theme-border theme-shadow">
             <svg
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
@@ -45,8 +45,10 @@
               </g>
             </svg>
           </button>
-          <button class="terminal-minimize theme-border theme-shadow">-</button>
-          <button class="terminal-fullscreen theme-border theme-shadow">
+          <button class="fake-terminal__btn theme-border theme-shadow">
+            -
+          </button>
+          <button class="fake-terminal__btn theme-border theme-shadow">
             <svg
               width="16px"
               height="16px"
@@ -61,7 +63,7 @@
               />
             </svg>
           </button>
-          <button class="terminal-close theme-border theme-shadow">
+          <button class="fake-terminal__btn theme-border theme-shadow">
             <svg
               width="16px"
               height="16px"
@@ -77,11 +79,73 @@
           </button>
         </div>
       </div>
-      <div class="header-image">
-        <img
-          class="header-gif"
-          src="../../assets/images/sdr-title-ani-hdri150.gif"
-        />
+      <div id="header-asset" class="header-asset">
+        <video
+          v-if="play === 'sdr'"
+          id="header__asset"
+          class="header__asset fade--in"
+          preload="auto"
+          muted
+          playsinline
+        >
+          <source
+            rel="preload"
+            src="@/assets/images/sdr-title-ani300x156.webm"
+            type="video/webm"
+          />
+          <source
+            rel="preload"
+            src="@/assets/images/sdr-title-ani300x156.mp4"
+            type="video/mp4"
+          />
+          <img rel="preload" src="@/assets/images/sdr-title-ani300x156.png" />
+        </video>
+
+        <video
+          v-else-if="play === 'gears'"
+          id="header__asset"
+          class="header__asset fade--in"
+          preload="auto"
+          autoplay
+          loop
+          muted
+          playsinline
+        >
+          <source
+            rel="preload"
+            src="@/assets/images/gears300x156.webm"
+            type="video/webm"
+          />
+          <source
+            rel="preload"
+            src="@/assets/images/gears300x156.mp4"
+            type="video/mp4"
+          />
+          <img rel="preload" src="@/assets/images/gears300x156.png" />
+        </video>
+
+        <video
+          v-else
+          id="header__asset"
+          class="header__asset fade--in"
+          preload="auto"
+          autoplay
+          loop
+          muted
+          playsinline
+        >
+          <source
+            rel="preload"
+            src="@/assets/images/planetary300x156.webm"
+            type="video/webm"
+          />
+          <source
+            rel="preload"
+            src="@/assets/images/planetary300x156.mp4"
+            type="video/mp4"
+          />
+          <img rel="preload" src="@/assets/images/planetary300x156.png" />
+        </video>
       </div>
       <div class="black-area">
         <div class="scrollbar">
@@ -99,7 +163,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onBeforeUnmount } from "vue";
+import { onMounted, onBeforeUnmount, ref, watch } from "vue";
 let pageTitle = document.getElementsByTagName("title")[0]!.innerHTML.toString();
 pageTitle = pageTitle.replaceAll(/\s+/g, `-`).toLowerCase();
 const user = `user@computer-name:`;
@@ -146,32 +210,34 @@ const period = [
   ".",
 ];
 const sequnceTwo = "starting sequence two protocol";
-let terminalHeader: HTMLElement;
-let timer: number;
-
+let play = ref("sdr");
+watch(play, () => {
+  return play.value;
+});
 onMounted((): void => {
   runHeaderAnimation();
-  timer = setInterval(() => {
-    runHeaderAnimation();
-  }, 165000);
 });
 
-onBeforeUnmount(() => {
-  clearInterval(timer);
+onBeforeUnmount((): void => {
   clearExisting();
 });
+
+const updatePlay = (value: string) => {
+  play.value = value;
+};
+
 const clearExisting = () => {
   return new Promise<void>((resolve, reject) => {
     try {
       if (document.getElementById("cursor")) {
         document.getElementById("cursor")!.remove();
       }
-      document.getElementById("line-1")!.innerHTML = "";
-      document.getElementById("line-2")!.innerHTML = "";
-      document.getElementById("line-3")!.innerHTML = "";
-      document.getElementById("line-4")!.innerHTML = "";
-      document.getElementById("line-5")!.innerHTML = "";
-      document.getElementById("line-6")!.innerHTML = "";
+      document.getElementById("line-1")!.textContent = "";
+      document.getElementById("line-2")!.textContent = "";
+      document.getElementById("line-3")!.textContent = "";
+      document.getElementById("line-4")!.textContent = "";
+      document.getElementById("line-5")!.textContent = "";
+      document.getElementById("line-6")!.textContent = "";
       resolve();
     } catch {
       reject();
@@ -200,9 +266,7 @@ const printSentence = (
           clearInterval(interval);
           resolve();
         } else {
-          tag.innerHTML === null
-            ? (tag.innerHTML = next.value)
-            : (tag.innerHTML += next.value);
+          tag.textContent = tag.textContent!.concat(next.value);
         }
       } catch (err) {
         reject();
@@ -223,7 +287,11 @@ const buildCursorTag = (): HTMLSpanElement => {
   return output;
 };
 
-const makeBlink = function (delay: number, repetitions: number, tagID: string) {
+const makeBlink = (
+  delay: number,
+  repetitions: number,
+  tagID: string
+): Promise<void> => {
   return new Promise<void>(function (resolve, reject) {
     const tag = document.getElementById(tagID);
     let count = 0;
@@ -243,96 +311,151 @@ const makeBlink = function (delay: number, repetitions: number, tagID: string) {
     }, delay);
   });
 };
+/* kinda violates DRY, but conforms to single responsiblily principle and preserves promise chain timing */
+const fadeOut = (tagID = "header__asset"): Promise<void> => {
+  return new Promise((resolve) => {
+    const tag = document.getElementById(tagID)! as HTMLElement;
+    tag.classList.remove("fade--in");
+    tag.classList.add("fade--out");
+    setTimeout(() => {
+      resolve();
+    }, 2000);
+  });
+};
+/* kinda violates DRY, but conforms to single responsiblily principle and preserves promise chain timing */
+const fadeIn = (tagID = "header__asset"): Promise<void> => {
+  return new Promise((resolve) => {
+    const tag = document.getElementById(tagID)! as HTMLElement;
+    tag.classList.remove("fade--out");
+    tag.classList.add("fade--in");
+    setTimeout(() => {
+      resolve();
+    }, 2000);
+  });
+};
 
 const runHeaderAnimation = () => {
+  let headerGif = document.getElementById("header__asset") as HTMLVideoElement;
+  let cursorTag: HTMLElement;
+  let terminalHeader: HTMLElement;
+
   clearExisting()
     .then(async () => {
-      terminalHeader = document.getElementsByClassName(
+      terminalHeader = document.getElementById(
         "terminal-header-text"
-      )[0]! as HTMLElement;
-      terminalHeader.innerHTML = `${user}~$`;
-      document.getElementById("line-1")!.innerHTML = `${user}~$`;
-      const cursorTag = buildCursorTag();
+      )! as HTMLElement;
+      terminalHeader.textContent = `${user}~$`;
+      await fadeIn("site-header");
+      headerGif!.play();
+    })
+    .then(async () => {
+      document.getElementById("line-1")!.textContent = `${user}~$`;
+      cursorTag = buildCursorTag();
       document
         .getElementById("line-1")!
         .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 6, "cursor");
+      await makeBlink(500, 6, cursorTag.id);
       await printSentence(directoryPath, "line-1", 200);
-      await makeBlink(500, 4, "cursor");
-      document.getElementById("cursor")?.remove();
+      await makeBlink(500, 4, cursorTag.id);
+      document.getElementById(cursorTag.id)?.remove();
     })
     .then(() => {
       document.getElementById(
         "line-2"
-      )!.innerHTML = `${user}~/${documents}$&nbsp;`;
-      terminalHeader.innerHTML = `${user}~/${documents}$&nbsp;`;
+      )!.textContent = `${user}~/${documents}$\u00A0`;
+      terminalHeader.textContent = `${user}~/${documents}$\u00A0`;
     })
     .then(() => {
-      const cursorTag = buildCursorTag();
+      cursorTag = buildCursorTag();
       const line2 = document.getElementById("line-2")!;
       line2.insertAdjacentElement("afterend", cursorTag);
-      line2.innerHTML = line2.innerHTML.toString() + "&nbsp;";
+      line2.textContent = line2.textContent! + "\u00A0";
     })
     .then(async () => {
-      await makeBlink(500, 10, "cursor");
+      headerGif!.play();
+      await makeBlink(500, 10, cursorTag.id);
     })
     .then(async () => {
       await printSentence(list, "line-2", 200);
-      await makeBlink(500, 6, "cursor");
+      await makeBlink(500, 6, cursorTag.id);
     })
     .then(async () => {
-      const cursorTag = buildCursorTag();
-      document.getElementById("cursor")?.remove();
-      document.getElementById("line-3")!.innerHTML = listedContents;
+      cursorTag = buildCursorTag();
+      document.getElementById(cursorTag.id)?.remove();
+      document.getElementById("line-3")!.textContent = listedContents;
       document.getElementById(
         "line-4"
-      )!.innerHTML = `${user}~/${documents}$&nbsp;`;
+      )!.textContent = `${user}~/${documents}$\u00A0`;
       document
         .getElementById("line-4")!
         .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 6, "cursor");
+      await makeBlink(500, 6, cursorTag.id);
+      headerGif!.play();
     })
     .then(async () => {
-      document.getElementById("cursor")?.remove();
+      document.getElementById(cursorTag.id)?.remove();
       await printSentence(action, "line-4", 200);
-      const cursorTag = buildCursorTag();
+      cursorTag = buildCursorTag();
       document
         .getElementById("line-4")!
         .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 6, "cursor");
+      await makeBlink(500, 6, cursorTag.id);
     })
     .then(async () => {
-      document.getElementById("cursor")?.remove();
-      const cursorTag = buildCursorTag();
+      document.getElementById(cursorTag.id)?.remove();
+      cursorTag = buildCursorTag();
       document
         .getElementById("line-5")!
         .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 6, "cursor");
-      document.getElementById("line-5")!.innerHTML = running;
-      await makeBlink(500, 6, "cursor");
-      await printSentence(period, "line-5", 500);
-      await printSentence(period, "line-5", 500);
-      await printSentence(period, "line-5", 500);
-      document.getElementById("cursor")?.remove();
+      await makeBlink(500, 6, cursorTag.id);
+      document.getElementById("line-5")!.textContent = running;
     })
     .then(async () => {
-      const cursorTag = buildCursorTag();
+      makeBlink(500, 8, cursorTag.id);
+      await fadeOut();
+    })
+    .then(async () => {
+      updatePlay("gears");
+      await fadeIn();
+      await makeBlink(500, 6, cursorTag.id);
+      await printSentence(period, "line-5", 500);
+      await printSentence(period, "line-5", 500);
+      await printSentence(period, "line-5", 500);
+      document.getElementById(cursorTag.id)?.remove();
+    })
+    .then(async () => {
+      cursorTag = buildCursorTag();
       document
         .getElementById("line-6")!
         .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 4, "cursor");
-      document.getElementById("line-6")!.innerHTML = sequnceTwo;
+      await makeBlink(500, 4, cursorTag.id);
+      document.getElementById("line-6")!.textContent = sequnceTwo;
+    })
+    .then(async () => {
+      makeBlink(500, 8, cursorTag.id);
+      await fadeOut();
+    })
+    .then(async () => {
+      updatePlay("planetary");
+      await fadeIn();
       await printSentence(period, "line-6", 500);
       await printSentence(period, "line-6", 500);
       await printSentence(period, "line-6", 500);
       await printSentence(period, "line-6", 500);
-      await makeBlink(500, 20, "cursor");
+      await makeBlink(500, 20, cursorTag.id);
+    })
+    .then(async () => {
+      makeBlink(500, 8, cursorTag.id);
+      await fadeOut("site-header");
+      updatePlay("sdr");
+    })
+    .then(() => {
+      runHeaderAnimation();
     })
     .catch((err): void => {
-      //user navigated to page with no header in middle of a promise execution, swallow headerAnimation error
-      //console.info(err);
+      //in middle of a promise execution user navigated to page with no header, swallow headerAnimation error
       // eslint-disable-next-line no-unused-vars
-      var e = err;
+      console.info(err);
     });
 };
 </script>
@@ -368,17 +491,14 @@ const runHeaderAnimation = () => {
   height: 1rem;
   width: 1rem;
 }
-.terminal-btn {
+.fake-terminal-btn {
   position: relative;
   margin: auto 0.325rem auto auto;
   display: flex;
   align-self: baseline;
 }
-.terminal-minimize,
-.terminal-fullscreen,
-.terminal-close,
-.terminal-search,
-.terminal {
+
+.fake-terminal__btn {
   position: relative;
   width: 1.5rem;
   height: 1.5rem;
@@ -403,18 +523,44 @@ const runHeaderAnimation = () => {
   overflow-x: hidden;
   margin-right: 0.325rem;
 }
-.header-image {
+.header-asset {
   position: absolute;
-  margin: auto auto;
-  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
-.header-gif {
+.header__asset {
   position: relative;
   display: block;
+  width: 300px;
+  height: 156px;
   margin-left: auto;
   margin-right: auto;
 }
-
+.fade--out {
+  animation: fadeOut 2s ease-in-out;
+}
+.fade--in {
+  animation: fadeIn 2s ease-in-out;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 /*--------------------------320px----------------------*/
 @media (min-width: 20rem) {
   .terminal-btn {
