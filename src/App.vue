@@ -194,9 +194,12 @@ p {
 
 .hr-tag-2 {
   margin: 2rem auto;
-  width: 45rem;
+  max-width: 45rem;
   line-height: 1.5rem;
+  border: none;
+  height: 0.125rem;
   color: var(--bgcolor1);
+  background-color: var(--bgcolor1);
 }
 
 footer {
