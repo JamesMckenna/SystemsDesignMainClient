@@ -59,5 +59,8 @@
     "*.{js,jsx,vue,ts,tsx}": [
       "vue-cli-service lint"
     ]
+  },
+  "resolutions": {
+    "memfs": "3.4.12"
   }
 }
