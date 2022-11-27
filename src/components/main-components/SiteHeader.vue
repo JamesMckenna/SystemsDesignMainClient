@@ -164,6 +164,7 @@
 
 <script lang="ts" setup>
 import { onMounted, onBeforeUnmount, ref, watch } from "vue";
+let stopAnimation: boolean;
 let pageTitle = document.getElementsByTagName("title")[0]!.innerHTML.toString();
 pageTitle = pageTitle.replaceAll(/\s+/g, `-`).toLowerCase();
 const user = `user@computer-name:`;
@@ -215,10 +216,12 @@ watch(play, () => {
   return play.value;
 });
 onMounted((): void => {
+  stopAnimation = false;
   runHeaderAnimation();
 });
 
 onBeforeUnmount((): void => {
+  stopAnimation = true;
   clearExisting();
 });
 
@@ -341,121 +344,212 @@ const runHeaderAnimation = () => {
 
   clearExisting()
     .then(async () => {
-      terminalHeader = document.getElementById(
-        "terminal-header-text"
-      )! as HTMLElement;
-      terminalHeader.textContent = `${user}~$`;
-      await fadeIn("site-header");
-      headerGif!.play();
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        terminalHeader = document.getElementById(
+          "terminal-header-text"
+        )! as HTMLElement;
+        terminalHeader.textContent = `${user}~$`;
+        await fadeIn("site-header");
+        headerGif!.play();
+      }
     })
     .then(async () => {
-      document.getElementById("line-1")!.textContent = `${user}~$`;
-      cursorTag = buildCursorTag();
-      document
-        .getElementById("line-1")!
-        .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 6, cursorTag.id);
-      await printSentence(directoryPath, "line-1", 200);
-      await makeBlink(500, 4, cursorTag.id);
-      document.getElementById(cursorTag.id)?.remove();
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        document.getElementById("line-1")!.textContent = `${user}~$`;
+        cursorTag = buildCursorTag();
+        document
+          .getElementById("line-1")!
+          .insertAdjacentElement("afterend", cursorTag);
+        await makeBlink(500, 6, cursorTag.id);
+        await printSentence(directoryPath, "line-1", 200);
+        await makeBlink(500, 4, cursorTag.id);
+        document.getElementById(cursorTag.id)?.remove();
+      }
     })
     .then(() => {
-      document.getElementById(
-        "line-2"
-      )!.textContent = `${user}~/${documents}$\u00A0`;
-      terminalHeader.textContent = `${user}~/${documents}$\u00A0`;
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        document.getElementById(
+          "line-2"
+        )!.textContent = `${user}~/${documents}$\u00A0`;
+        terminalHeader.textContent = `${user}~/${documents}$\u00A0`;
+      }
     })
     .then(() => {
-      cursorTag = buildCursorTag();
-      const line2 = document.getElementById("line-2")!;
-      line2.insertAdjacentElement("afterend", cursorTag);
-      line2.textContent = line2.textContent! + "\u00A0";
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        cursorTag = buildCursorTag();
+        const line2 = document.getElementById("line-2")!;
+        line2.insertAdjacentElement("afterend", cursorTag);
+        line2.textContent = line2.textContent! + "\u00A0";
+      }
     })
     .then(async () => {
-      headerGif!.play();
-      await makeBlink(500, 10, cursorTag.id);
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        headerGif!.play();
+        await makeBlink(500, 10, cursorTag.id);
+      }
     })
     .then(async () => {
-      await printSentence(list, "line-2", 200);
-      await makeBlink(500, 6, cursorTag.id);
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        await printSentence(list, "line-2", 200);
+        await makeBlink(500, 6, cursorTag.id);
+      }
     })
     .then(async () => {
-      cursorTag = buildCursorTag();
-      document.getElementById(cursorTag.id)?.remove();
-      document.getElementById("line-3")!.textContent = listedContents;
-      document.getElementById(
-        "line-4"
-      )!.textContent = `${user}~/${documents}$\u00A0`;
-      document
-        .getElementById("line-4")!
-        .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 6, cursorTag.id);
-      headerGif!.play();
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        cursorTag = buildCursorTag();
+        document.getElementById(cursorTag.id)?.remove();
+        document.getElementById("line-3")!.textContent = listedContents;
+        document.getElementById(
+          "line-4"
+        )!.textContent = `${user}~/${documents}$\u00A0`;
+        document
+          .getElementById("line-4")!
+          .insertAdjacentElement("afterend", cursorTag);
+        await makeBlink(500, 6, cursorTag.id);
+        headerGif!.play();
+      }
     })
     .then(async () => {
-      document.getElementById(cursorTag.id)?.remove();
-      await printSentence(action, "line-4", 200);
-      cursorTag = buildCursorTag();
-      document
-        .getElementById("line-4")!
-        .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 6, cursorTag.id);
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        document.getElementById(cursorTag.id)?.remove();
+        await printSentence(action, "line-4", 200);
+        cursorTag = buildCursorTag();
+        document
+          .getElementById("line-4")!
+          .insertAdjacentElement("afterend", cursorTag);
+        await makeBlink(500, 6, cursorTag.id);
+      }
     })
     .then(async () => {
-      document.getElementById(cursorTag.id)?.remove();
-      cursorTag = buildCursorTag();
-      document
-        .getElementById("line-5")!
-        .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 6, cursorTag.id);
-      document.getElementById("line-5")!.textContent = running;
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        document.getElementById(cursorTag.id)?.remove();
+        cursorTag = buildCursorTag();
+        document
+          .getElementById("line-5")!
+          .insertAdjacentElement("afterend", cursorTag);
+        await makeBlink(500, 6, cursorTag.id);
+        document.getElementById("line-5")!.textContent = running;
+      }
     })
     .then(async () => {
-      makeBlink(500, 8, cursorTag.id);
-      await fadeOut();
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        makeBlink(500, 8, cursorTag.id);
+        await fadeOut();
+      }
     })
     .then(async () => {
-      updatePlay("gears");
-      await fadeIn();
-      await makeBlink(500, 6, cursorTag.id);
-      await printSentence(period, "line-5", 500);
-      await printSentence(period, "line-5", 500);
-      await printSentence(period, "line-5", 500);
-      document.getElementById(cursorTag.id)?.remove();
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        updatePlay("gears");
+        await fadeIn();
+        await makeBlink(500, 6, cursorTag.id);
+        await printSentence(period, "line-5", 500);
+        await printSentence(period, "line-5", 500);
+        await printSentence(period, "line-5", 500);
+        document.getElementById(cursorTag.id)?.remove();
+      }
     })
     .then(async () => {
-      cursorTag = buildCursorTag();
-      document
-        .getElementById("line-6")!
-        .insertAdjacentElement("afterend", cursorTag);
-      await makeBlink(500, 4, cursorTag.id);
-      document.getElementById("line-6")!.textContent = sequnceTwo;
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        cursorTag = buildCursorTag();
+        document
+          .getElementById("line-6")!
+          .insertAdjacentElement("afterend", cursorTag);
+        await makeBlink(500, 4, cursorTag.id);
+        document.getElementById("line-6")!.textContent = sequnceTwo;
+      }
     })
     .then(async () => {
-      makeBlink(500, 8, cursorTag.id);
-      await fadeOut();
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        makeBlink(500, 8, cursorTag.id);
+        await fadeOut();
+      }
     })
     .then(async () => {
-      updatePlay("planetary");
-      await fadeIn();
-      await printSentence(period, "line-6", 500);
-      await printSentence(period, "line-6", 500);
-      await printSentence(period, "line-6", 500);
-      await printSentence(period, "line-6", 500);
-      await makeBlink(500, 20, cursorTag.id);
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        updatePlay("planetary");
+        await fadeIn();
+        await printSentence(period, "line-6", 500);
+        await printSentence(period, "line-6", 500);
+        await printSentence(period, "line-6", 500);
+        await printSentence(period, "line-6", 500);
+        await makeBlink(500, 20, cursorTag.id);
+      }
     })
     .then(async () => {
-      makeBlink(500, 8, cursorTag.id);
-      await fadeOut("site-header");
-      updatePlay("sdr");
+      if (stopAnimation === true) {
+        headerGif!.pause();
+        headerGif!.remove();
+        return;
+      } else {
+        makeBlink(500, 8, cursorTag.id);
+        await fadeOut("site-header");
+        updatePlay("sdr");
+      }
     })
     .then(() => {
-      runHeaderAnimation();
+      if (stopAnimation === false) runHeaderAnimation();
+      else return;
     })
     .catch((err): void => {
       //in middle of a promise execution user navigated to page with no header, swallow headerAnimation error
       // eslint-disable-next-line no-unused-vars
-      console.info(err);
+      console.log(err);
     });
 };
 </script>
