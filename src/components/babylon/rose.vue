@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, onMounted } from "vue";
+import { onBeforeMount, onMounted, onBeforeUnmount } from "vue";
 import { Engine, Scene, SceneLoader, Color4 } from "babylonjs";
 let canvas: HTMLCanvasElement;
 let engine: Engine;
@@ -34,6 +34,13 @@ onMounted(() => {
   window.addEventListener("resize", () => {
     engine.resize();
   });
+});
+
+onBeforeUnmount(() => {
+  canvas.remove();
+  scene.dispose();
+  engine.stopRenderLoop();
+  engine.dispose();
 });
 </script>
 

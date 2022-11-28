@@ -999,4 +999,4 @@ class RobotArm {
         this.uiContainer.addControl(popUp);
     }
 }
-const robotarm = new RobotArm();
+var robotarm = new RobotArm();

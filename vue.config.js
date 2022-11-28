@@ -82,7 +82,7 @@ module.exports = {
       headers: [
         {
           key: "Cache-Control",
-          value: "private, max-age=36000",
+          value: "public, max-age=31536000, immutable",
         },
         {
           key: "Example-Header-two",

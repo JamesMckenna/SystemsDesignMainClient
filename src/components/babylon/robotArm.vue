@@ -2,42 +2,44 @@
 <template>
   <div class="body-container">
     <h2>3D in a Web Browser</h2>
+    <h5 v-if="!loaded">
+      On slower network speeds, it can take up to 5 minutes to load all assets.
+      Once loaded and depending on what browser you use, most the assets should
+      be cached in your browser.
+    </h5>
     <canvas id="render-canvas"></canvas>
   </div>
 </template>
 
 <script setup>
-import { onMounted, onBeforeMount, onUnmounted, defineEmits } from "vue";
+import { onBeforeMount, onUnmounted, defineEmits } from "vue";
 const emits = defineEmits(["renderHeader"]);
+const loaded = window.robotarm;
 onBeforeMount(() => {
+  if (window.robotarm) location.reload();
   emits("renderHeader", false);
-  //older project, use older BABYLON version
-  if (!document.getElementById("custom")) {
-    const headtag = document.getElementsByTagName("head")[0];
-    const babylonLibrary = document.createElement("script");
-    babylonLibrary.setAttribute("id", "custom");
-    babylonLibrary.setAttribute("src", "./js/babylon.custom.js");
-    headtag.append(babylonLibrary);
-  }
+  loadBabylonjs();
 });
-onMounted(() => {
-  if (typeof RobotArm === "undefined") {
-    //older project, use older BABYLON version - bone parenting isn't the same
-    if (!window.BABYLON) {
-      setTimeout(() => {
-        const robot = document.createElement("script");
-        robot.setAttribute("type", "text/javascript");
-        robot.setAttribute("src", "robotArm/robotarm.js");
-        robot.setAttribute("id", "robotarm");
-        const can = document.getElementById("render-canvas");
-        can.insertAdjacentElement("afterend", robot);
-      }, 1000);
-    }
-  } else {
-    //Uncaught SyntaxError: redeclaration of let RobotArm, so hack-it and hard reload page
-    window.location.reload();
-  }
-});
+
+const loadRobArm = () => {
+  const robot = document.createElement("script");
+  robot.setAttribute("type", "text/javascript");
+  robot.setAttribute("src", "robotArm/robotarm.js");
+  robot.setAttribute("id", "robotarm");
+  const can = document.getElementById("render-canvas");
+  can.insertAdjacentElement("afterend", robot);
+};
+
+const loadBabylonjs = () => {
+  const headtag = document.getElementsByTagName("head")[0];
+  const babylonLibrary = document.createElement("script");
+  babylonLibrary.setAttribute("id", "custom");
+  babylonLibrary.setAttribute("src", "./js/babylon.custom.js");
+  headtag.append(babylonLibrary);
+  babylonLibrary.addEventListener("load", () => {
+    loadRobArm();
+  });
+};
 
 onUnmounted(() => {
   if (document.getElementById("robotarm")) {
